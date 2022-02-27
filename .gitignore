@@ -1,4 +1,1 @@
-.env
-
-backend/data
-backend/src/logs.txt
+**/.env

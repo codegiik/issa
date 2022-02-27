@@ -1,3 +1,0 @@
-{"common":"Test","level":"error","msg":"dial tcp :5432: connect: connection refused","time":"2022-02-27T21:59:41Z"}
-{"common":"Test","level":"error","msg":"dial tcp :5432: connect: connection refused","time":"2022-02-27T21:59:42Z"}
-{"common":"Test","level":"error","msg":"dial tcp :5432: connect: connection refused","time":"2022-02-27T21:59:43Z"}
