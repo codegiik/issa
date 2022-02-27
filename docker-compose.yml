@@ -7,3 +7,13 @@ services:
     volumes:
       - ./backend/src:/app
     env_file: ./backend/.env
+    restart: always
+
+  db:
+    image: postgres:14
+    ports:
+      - 5432:5432
+    volumes:
+      - ./backend/data:/var/lib/postgresql/data
+    env_file: ./backend/.env
+    restart: always
