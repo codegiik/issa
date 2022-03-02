@@ -1,16 +1,11 @@
-import Main from 'layouts/Main'
-
-import { Hero } from 'components'
+import Main from 'layouts/Main';
 
 /* Style */
 import style from 'styles/pages/index.module.css'
 
-
 export default function Home() {
   return (
-    <>
-      <Hero className={style.hero} />
-    </>
+    <h1>Ciao</h1>
   )
 };
 

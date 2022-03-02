@@ -1,7 +1,11 @@
 .title {
-  @apply text-white text-6xl font-sans;
+  @apply font-sans text-6xl text-white;
 }
 
 .main {
-  @apply bg-warmGray-800 h-screen flex items-center justify-center;
+  @apply flex items-center justify-center h-screen bg-warmGray-800;
+}
+
+.hero {
+  @apply pt-6;
 }

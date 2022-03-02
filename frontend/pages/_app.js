@@ -1,15 +1,12 @@
 import Head from 'next/head'
 import 'styles/globals.css'
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      <Head>
-        <title>codegiik</title>
-      </Head>
+function Issa({ Component, pageProps }) {
+  const getLayout = Component.getLayout || (v => v)
+
+  return getLayout(
       <Component {...pageProps} />
-    </>
   )
 }
 
-export default MyApp
+export default Issa
