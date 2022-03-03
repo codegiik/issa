@@ -15,7 +15,7 @@ body,
 
 
 body {
-  @apply font-body bg-stark-white-300;
+  @apply font-body bg-stark-white-500;
   @apply text-warmGray-800;
 }
 
