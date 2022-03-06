@@ -5,7 +5,7 @@ import LogoText from 'assets/svgs/LogoText'
 import veliero from 'public/imgs/veliero.png'
 
 import style from 'styles/components/navbar.module.css'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 const LINKS = [
   {
@@ -35,7 +35,7 @@ export function Navbar() {
         <Image src={veliero} alt="Veliero" width={50} height={50} className={style.logoVeliero} />
         <LogoText className={style.logoText} />
       </div>
-      <div className={style.links}> 
+      <div className={style.links}>
         {LINKS.map((v, i) => (
           <Link href={v.href} key={i} passHref>
             <p className={[style.link, router.pathname == v.href ? style.selected : null].join(' ')}>

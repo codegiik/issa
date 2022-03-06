@@ -1,6 +1,6 @@
 import style from 'styles/components/heading.module.css'
 
-export function Heading({ children, type, className }){
+export function Heading({ children, type, className }) {
   const HeadingType = type
 
   return (
