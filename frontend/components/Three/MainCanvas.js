@@ -1,10 +1,10 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState, useMemo, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useCursor, MeshReflectorMaterial, Image, Text, Environment } from '@react-three/drei'
+import { useCursor, Image } from '@react-three/drei'
 import { fromString } from 'uuidv4'
 import { lorempics } from 'lib/utils'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 const GOLDENRATIO = 1.61803398875
 
