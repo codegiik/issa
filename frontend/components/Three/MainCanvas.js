@@ -1,49 +1,26 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState, useMemo, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useCursor, Image, MeshReflectorMaterial, Environment } from '@react-three/drei'
+import { useCursor, Image, MeshReflectorMaterial, Environment, OrbitControls } from '@react-three/drei'
 import { fromString } from 'uuidv4'
 import { lorempics } from 'lib/utils'
 import { useRouter } from 'next/router'
+import colors from 'styles/colors'
 
 const GOLDENRATIO = 1.61803398875
 
-export function MainCanvas() {
+export function MainCanvas({ images }) {
   const router = useRouter()
-
-  const images = useMemo(() =>
-    Array.from({ length: 10 },
-      (v, k) => ({ 
-        url: lorempics(k, 500, 500),
-        position: [(-10 + k * 2), 0, -2],
-        rotation: [0, 0, 0]
-      })
-    ))
 
   return (
     <Canvas gl={{ alpha: false }} dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
-      <color attach="background" args={['#191920']} />
+      <color attach="background" args={[colors['stark-white'][500]]} />
       <fog attach="fog" args={['#191920', 0, 15]} />
       <Suspense fallback={null}>
         <Environment preset="city" />
       </Suspense>
       <group position={[0, -0.5, 0]}>
           <Frames images={images} router={router}/>
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-            <planeGeometry args={[50, 50]} />
-            <MeshReflectorMaterial
-              blur={[300, 100]}
-              resolution={2048}
-              mixBlur={1}
-              mixStrength={40}
-              roughness={1}
-              depthScale={1.2}
-              minDepthThreshold={0.4}
-              maxDepthThreshold={1.4}
-              color="#101010"
-              metalness={0.5}
-            />
-          </mesh>
       </group>
     </Canvas>
   )
