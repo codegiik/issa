@@ -23,7 +23,7 @@ const LINKS = [
   },
   {
     href: '/gallery',
-    label: 'Premio Issa'
+    label: 'Premio ISSA'
   }
 ]
 
