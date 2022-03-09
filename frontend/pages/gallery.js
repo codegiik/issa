@@ -29,7 +29,7 @@ export function HelpBox({ edition, active }) {
       <p className={style.helpBoxTip}>Scegli uno dei quadri per visionare un lavoro</p>
       {edition?.patrons && (
         <div className={style.patronsWrapper}>
-          <p>Patrocinato da:</p>
+          <p>Patrocinio di</p>
           <div className={style.patrons}>
             {edition?.patrons.map((v, i) => (
               <img className={style.patron} src={v.image} alt={v.name} title={v.name} key={i}/>

@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import LogoText from 'assets/svgs/LogoText'
 import veliero from 'public/imgs/veliero.png'
+import velieroDark from 'public/imgs/velierodark.png'
 
 import style from 'styles/components/navbar.module.css'
 import { useRouter } from 'next/router'
@@ -28,24 +29,42 @@ const LINKS = [
 ]
 
 export function Navbar({ className, theme }) {
+  const [menuActive, setMenuActive] = useState(false)
   const router = useRouter()
 
   return (
-    <nav id="mainNavbar" className={[style.mainNavbar, theme == "dark" ? style.dark : style.light, className].join(' ')}>
-      <div className={style.logo}>
-        <Image src={veliero} alt="Veliero" width={50} height={50} className={style.logoVeliero} />
-        <LogoText className={style.logoText} />
-      </div>
-      <div className={style.links}>
+    <>
+      <nav id="mainNavbar" className={[style.mainNavbar, theme == "dark" ? style.dark : style.light, className].join(' ')}>
+        <div className={style.logo}>
+          <Image src={theme == "dark" ? veliero : velieroDark} alt="Veliero" width={50} height={50} className={style.logoVeliero} />
+          <LogoText className={style.logoText} />
+        </div>
+        <div className={style.links}>
+          {LINKS.map((v, i) => (
+            <Link href={v.href} key={i} passHref>
+              <p className={[style.link, router.asPath == v.href ? style.selected : null].join(' ')}>
+                {v.label}
+              </p>
+            </Link>
+          ))}
+          <span className={["material-icons", style.hamburgerIcon].join(' ')} onClick={() => setMenuActive(true)}>
+            menu
+          </span>
+        </div>
+      </nav>
+      <div className={[style.hamburgerMenu, menuActive ? style.open : null].join(' ')}>
+        <span className={["material-icons", style.closeIcon].join(' ')} onClick={() => setMenuActive(false)}>
+          close
+        </span>
         {LINKS.map((v, i) => (
           <Link href={v.href} key={i} passHref>
-            <p className={[style.link, router.asPath == v.href ? style.selected : null].join(' ')}>
+            <p className={[style.link, router.asPath == v.href ? style.selected : null].join(' ')} onClick={() => setMenuActive(false)}>
               {v.label}
             </p>
           </Link>
         ))}
       </div>
-    </nav>
+    </>
   )
 }
 

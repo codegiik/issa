@@ -1,8 +1,8 @@
 export default function LogoText (props) {
   return (
     <svg
-      width={182}
-      height={27}
+      width={212}
+      height={32}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 212 32"
       {...props}
