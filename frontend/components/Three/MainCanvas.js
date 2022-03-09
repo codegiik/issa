@@ -1,15 +1,16 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState, useMemo, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useCursor, Image, MeshReflectorMaterial, Environment, OrbitControls } from '@react-three/drei'
+import { useCursor, Image, Text, MeshReflectorMaterial, Environment, OrbitControls } from '@react-three/drei'
 import { fromString } from 'uuidv4'
 import { lorempics } from 'lib/utils'
+import { Language, NumeralForm, convertNumberToNumeralForm } from 'numerals';
 import { useRouter } from 'next/router'
 import colors from 'styles/colors'
 
 const GOLDENRATIO = 1.61803398875
 
-export function MainCanvas({ data, className }) {
+export function MainCanvas({ data, edition, className }) {
   const router = useRouter()
   const images = useMemo(() => data ? Array.from(data, (v, k) => ({
     ...v,
@@ -23,6 +24,26 @@ export function MainCanvas({ data, className }) {
       <fog attach="fog" args={['#191920', 0, 15]} />
       <Suspense fallback={null}>
         <Environment preset="city" />
+        <Text
+          color={colors['cedar'][600]}
+          font="/fonts/LibreBaskerville-Regular.ttf"
+          fontSize={0.8}
+          anchorX="center"
+          anchorY="middle"
+          position={[0, 2.5, 0]}
+        >
+          {edition?.name}
+        </Text>
+        <Text
+          color={colors['cedar'][400]}
+          font="/fonts/LibreBaskerville-Regular.ttf"
+          fontSize={0.25}
+          anchorX="center"
+          anchorY="middle"
+          position={[0, 1.8, 0]}
+        >
+          {edition?.type} - Edizione {convertNumberToNumeralForm(edition?.number, NumeralForm.Roman, NumeralForm.English)} 
+        </Text>
       </Suspense>
       <group position={[0, -0.5, 0]}>
           <Frames images={images} router={router}/>
@@ -48,7 +69,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), r
       }
     } else {
       clicked.current = null
-      p.set(0, 0, 5.5)
+      p.set(0, 0.5, 5.5)
       q.identity()
     }
   })

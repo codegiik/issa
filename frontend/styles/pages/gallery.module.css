@@ -2,6 +2,29 @@
   @apply font-sans text-6xl text-white;
 }
 
+.helpBox {
+  @apply absolute z-[15] text-center bottom-20 left-1/2;
+  transform: translateX(-50%);
+
+  .patronsWrapper {
+    p {
+      @apply mb-2 font-bold text-cedar-500;
+    }
+
+    .patrons {
+      @apply flex items-center justify-center gap-4;
+
+      .patron {
+        @apply w-12 h-12;
+      }
+    }
+  }
+
+  .helpBoxTip {
+    @apply mb-4 opacity-50;
+  }
+}
+
 .mainCanvas {
   @apply z-10 h-full;
 }

@@ -6,6 +6,7 @@ import veliero from 'public/imgs/veliero.png'
 
 import style from 'styles/components/navbar.module.css'
 import { useRouter } from 'next/router'
+import {useEffect, useState} from 'react'
 
 const LINKS = [
   {
@@ -13,7 +14,7 @@ const LINKS = [
     label: 'Home'
   },
   {
-    href: '/about',
+    href: '/#about',
     label: 'Chi Siamo'
   },
   {
@@ -26,11 +27,11 @@ const LINKS = [
   }
 ]
 
-export function Navbar() {
+export function Navbar({ className, theme }) {
   const router = useRouter()
 
   return (
-    <nav id="mainNavbar" className={style.mainNavbar}>
+    <nav id="mainNavbar" className={[style.mainNavbar, theme == "dark" ? style.dark : style.light, className].join(' ')}>
       <div className={style.logo}>
         <Image src={veliero} alt="Veliero" width={50} height={50} className={style.logoVeliero} />
         <LogoText className={style.logoText} />
@@ -38,7 +39,7 @@ export function Navbar() {
       <div className={style.links}>
         {LINKS.map((v, i) => (
           <Link href={v.href} key={i} passHref>
-            <p className={[style.link, router.pathname == v.href ? style.selected : null].join(' ')}>
+            <p className={[style.link, router.asPath == v.href ? style.selected : null].join(' ')}>
               {v.label}
             </p>
           </Link>
