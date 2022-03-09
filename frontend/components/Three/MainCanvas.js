@@ -9,11 +9,16 @@ import colors from 'styles/colors'
 
 const GOLDENRATIO = 1.61803398875
 
-export function MainCanvas({ images }) {
+export function MainCanvas({ data, className }) {
   const router = useRouter()
+  const images = useMemo(() => data ? Array.from(data, (v, k) => ({
+    ...v,
+    position: [(-10 + k * 2), 0, -2],
+    rotation: [0, 0, 0]
+  })) : [], [data])
 
   return (
-    <Canvas gl={{ alpha: false }} dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
+    <Canvas gl={{ alpha: false }} dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }} className={className}>
       <color attach="background" args={[colors['stark-white'][500]]} />
       <fog attach="fog" args={['#191920', 0, 15]} />
       <Suspense fallback={null}>
@@ -35,7 +40,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), r
       clicked.current = ref.current.getObjectByName(router.query.id)
 
       clicked.current.parent.updateWorldMatrix(true, true)
-      clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 1.25))
+      clicked.current.parent.localToWorld(p.set(1.5, GOLDENRATIO / 2, 2))
       clicked.current.parent.getWorldQuaternion(q)
     } else {
       clicked.current = null
@@ -63,19 +68,22 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), r
       ref={ref}
       onClick={(e) => (e.stopPropagation(), clicked.current === e.object ? setLocation() : setLocation(e.object.name) )}
       onPointerMissed={() => setLocation()}>
-      {images.map((props) => (
-            <Frame key={props.url} {...props} /> 
-        ))}
+      {images.map((data, i) => {
+        const PADDING = -images.length + 1
+        return (
+            <Frame key={data.id} data={data} clicked={clicked} url={data.preview} position={[(PADDING + i * 2), 0, -2]} rotation={[0, 0, 0]} /> 
+        )
+      })}
     </group>
   ) : null
 }
 
-function Frame({ url, c = new THREE.Color(), ...props }) {
+function Frame({ url, clicked, c = new THREE.Color(), data, ...props }) {
   const [hovered, hover] = useState(false)
   const [rnd] = useState(() => Math.random())
   const image = useRef()
   const frame = useRef()
-  const name = fromString(url)
+  const name = data.id
 
   useCursor(hovered)
   useFrame((state) => {
@@ -85,8 +93,13 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
       image.current.scale.y = THREE.MathUtils.lerp(image.current.scale.y, 0.9 * (hovered ? 0.905 : 1), 0.1)
     }
 
-    frame.current.material.color.lerp(c.set(hovered ? 'orange' : 'white').convertSRGBToLinear(), 0.1)
+    frame.current.material.color.lerp(c.set(hovered ? colors['stark-white'][800] : 'white').convertSRGBToLinear(), 0.1)
   })
+
+  const getFrameColor = () => {
+    if (clicked.current && clicked.current.name == name) return colors['cedar'][600]
+    else return colors['stark-white'][700]
+  }
 
   return (
     <group {...props}>
@@ -95,9 +108,10 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
         onPointerOver={(e) => (e.stopPropagation(), hover(true))}
         onPointerOut={() => hover(false)}
         scale={[1, GOLDENRATIO, 0.05]}
-        position={[0, GOLDENRATIO / 2, 0]}>
+        position={[0, GOLDENRATIO / 2, 0]}
+      >
         <boxGeometry />
-        <meshStandardMaterial color="#151515" metalness={0.5} roughness={0.5} envMapIntensity={2} />
+        <meshStandardMaterial color={getFrameColor()} metalness={0.5} roughness={0.5} envMapIntensity={2} />
         <mesh ref={frame} raycast={() => null} scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>
           <boxGeometry />
           <meshBasicMaterial toneMapped={false} fog={false} />

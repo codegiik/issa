@@ -1,0 +1,15 @@
+.workInfoBox {
+  @apply p-8;
+
+  .workTitle {
+    @apply font-serif text-3xl font-bold;
+  }
+
+  .workAuthor {
+    @apply opacity-50;
+  }
+
+  .workDesc {
+    @apply mt-3 text-lg text-warmGray-600; 
+  }
+}

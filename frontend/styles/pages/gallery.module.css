@@ -1,7 +1,42 @@
 .title {
-  @apply text-white text-6xl font-sans;
+  @apply font-sans text-6xl text-white;
+}
+
+.mainCanvas {
+  @apply z-10 h-full;
 }
 
 .main {
-  @apply bg-warmGray-800 h-screen flex items-center justify-center;
+  height: calc(100vh - 90px) !important;
+  @apply relative bg-warmGray-800 transition-all;
+}
+
+.workInfoBox {
+  height: 85%;
+  width: 100%;
+  max-width: 600px;
+  @apply z-20 shadow-xl opacity-0 bg-stark-white-100 transition-all;
+  @apply absolute top-1/2 right-10;
+  transform: translateY(-50%);
+  pointer-events: none;
+
+  &.active {
+    @apply opacity-100;
+    pointer-events: unset;
+  }
+}
+
+.workSelector {
+  @apply absolute z-20 bottom-10 left-[25%];
+  @apply flex items-center justify-center font-serif bg-white;
+  transform: translateX(-50%);
+  user-select: none;
+
+  &Button {
+    @apply p-2 cursor-pointer bg-stark-white-200;
+  }
+
+  &Title {
+    @apply px-2 pointer-events-none bg-stark-white-100;
+  }
 }
