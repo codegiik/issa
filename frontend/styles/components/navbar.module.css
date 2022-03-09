@@ -1,6 +1,26 @@
 .mainNavbar {
   @apply font-serif bg-cedar-500 text-stark-white;
   @apply flex px-4 py-5 shadow-lg md:px-6 lg:px-16;
+
+  &.light {
+    @apply bg-stark-white-500 border-b-[1px] border-cedar;
+
+    svg {
+      @apply text-cedar-400;
+    }
+
+    .link {
+      @apply opacity-50 text-cedar hover:opacity-100 hover:!text-cedar;
+
+      &.selected::before {
+        @apply !bg-cedar-400;
+      }
+    }
+  }
+
+  svg {
+    @apply fill-current text-stark-white-300;
+  }
   
   .logo {
     @apply flex items-center mr-auto gap-2;

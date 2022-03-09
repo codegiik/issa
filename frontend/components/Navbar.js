@@ -22,8 +22,8 @@ const LINKS = [
     label: 'Corsi'
   },
   {
-    href: '/competitions',
-    label: 'Competizioni'
+    href: '/gallery',
+    label: 'Premio Issa'
   }
 ]
 
@@ -47,4 +47,8 @@ export function Navbar({ className, theme }) {
       </div>
     </nav>
   )
+}
+
+Navbar.defaultProps = {
+  theme: 'dark'
 }

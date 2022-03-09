@@ -21,7 +21,7 @@ export function MainCanvas({ data, edition, className }) {
   return (
     <Canvas gl={{ alpha: false }} dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }} className={className}>
       <color attach="background" args={[colors['stark-white'][500]]} />
-      <fog attach="fog" args={['#191920', 0, 15]} />
+      <fog attach="fog" args={[colors['cedar'][800], 0, 15]} />
       <Suspense fallback={null}>
         <Environment preset="city" />
         <Text
