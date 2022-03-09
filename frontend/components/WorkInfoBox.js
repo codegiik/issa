@@ -1,7 +1,6 @@
 import style from 'styles/components/workinfobox.module.css'
 
 export function WorkInfoBox({ work, className }) {
-  console.log(work)
   return (
     <div className={[style.workInfoBox, className].join(' ')}>
       {work && (

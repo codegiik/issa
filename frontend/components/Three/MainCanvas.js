@@ -37,11 +37,15 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), r
 
   useEffect(() => {
     if (router.query.id) {
-      clicked.current = ref.current.getObjectByName(router.query.id)
-
-      clicked.current.parent.updateWorldMatrix(true, true)
-      clicked.current.parent.localToWorld(p.set(1.5, GOLDENRATIO / 2, 2))
-      clicked.current.parent.getWorldQuaternion(q)
+      try {
+        clicked.current = ref.current.getObjectByName(router.query.id)
+      
+        clicked.current.parent.updateWorldMatrix(true, true)
+        clicked.current.parent.localToWorld(p.set(1.5, GOLDENRATIO / 2, 2))
+        clicked.current.parent.getWorldQuaternion(q)
+      } catch (e) {
+        console.log('Something went horribly wrong', e)
+      }
     } else {
       clicked.current = null
       p.set(0, 0, 5.5)

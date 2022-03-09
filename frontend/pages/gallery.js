@@ -28,9 +28,6 @@ export default function Gallery() {
   useEffect(() => {
     if(works) {
       const id = router.query?.id
-      console.log(id)
-      console.log(works.findIndex(v => v.id == id))
-      console.log(works[works.findIndex(v => v.id == id)])
       if(id) setClicked(works.find(v => v.id == id))
       else setClicked(null)
     }
@@ -42,7 +39,6 @@ export default function Gallery() {
     if(!diff) return
     let index = (works.findIndex(v => v.id == clicked.id) + diff) % (works.length)
     if (index == -1) index = (works.length) - 1
-    console.log("new index", index)
 
     router.push({
       pathname: '/gallery',
