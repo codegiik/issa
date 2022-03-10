@@ -1,5 +1,5 @@
 // Components
-import { MainCanvas, WorkInfoBox } from 'components'
+import { MainCanvas, WorkInfoBox, WorkSelector } from 'components'
 import Main from 'layouts/Main'
 
 // Hooks
@@ -26,7 +26,7 @@ const useWorks = query => {
 export function HelpBox({ edition, active }) {
   return (
     <div className={[style.helpBox, 'animate__animated animate__slower animate__delay-2s', active ? 'animate__fadeIn' : 'hidden'].join(' ')}>
-      <p className={style.helpBoxTip}>Scegli uno dei quadri per visionare un lavoro</p>
+      <p className={[style.helpBoxTip, 'animate__animated animate__delay-5s animate__pulse'].join(' ')}>Clicca su uno dei quadri per visionarlo</p>
       {edition?.patrons && (
         <div className={style.patronsWrapper}>
           <p>Patrocinio di</p>
@@ -54,7 +54,6 @@ export default function Gallery() {
     }
   }, [router.query, works])
 
-  const getCroppedTitle = title => title?.length > 20 ? title.substr(0, 15) + "..." : title
 
   const switchByIndexDiff = diff => {
     if(!diff) return
@@ -68,25 +67,30 @@ export default function Gallery() {
       }
     }, undefined, { shallow: true })
   }
+
+  const switchTo = id => {
+    if(!id) return
+    router.push({
+      pathname: '/gallery',
+      query: {
+        id
+      }
+    }, undefined, { shallow: true })
+  }
   
   return (
     <main className={style.main}>
       <MainCanvas className={style.mainCanvas} data={works} edition={edition} />
       <WorkInfoBox work={clicked} className={[style.workInfoBox, clicked ? style.active : null].join(' ')} />
       <HelpBox active={!clicked} edition={edition} />
-      {clicked && (
-        <div className={[style.workSelector, clicked ? style.active : null].join(' ')}>
-          <span className={["material-icons", style.workSelectorButton].join(' ')} onClick={() => switchByIndexDiff(-1)}> 
-            chevron_left
-          </span>
-          <div className={style.workSelectorTitle}>
-            {getCroppedTitle(clicked?.title)}
-          </div>
-          <span className={["material-icons", style.workSelectorButton].join(' ')} onClick={() => switchByIndexDiff(+1)}> 
-            chevron_right
-          </span>
-        </div>
-      )}
+      <WorkSelector 
+        clicked={clicked} 
+        works={works} 
+        onNext={() => switchByIndexDiff(+1)} 
+        onPrev={() => switchByIndexDiff(-1)}
+        switchTo={switchTo}
+      />
+      {!clicked && <div className={style.scrollLine} />}
     </main>
   )
 }

@@ -1,0 +1,116 @@
+@keyframes extend {
+  0% {
+    align-items: start;
+    justify-content: start;
+    overflow: hidden;
+    padding: 10px 0;
+  }
+  20% {
+    width: 500px;
+    @apply shadow-md;
+  }
+  40% {
+    height: 85%;
+  }
+  100% {
+    align-items: start;
+    justify-content: start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 85%;
+    width: 500px;
+    padding: 15px 0;
+    @apply shadow-md;
+  }
+}
+
+.workSelector {
+  @apply absolute z-20 bottom-10 left-[25%] transition-all;
+  width: 300px;
+  height: 40px;
+  @apply flex items-center justify-center font-serif bg-stark-white-200;
+  transform: translateX(-50%);
+  user-select: none;
+
+  &Button {
+    @apply p-2 cursor-pointer bg-stark-white-200;
+  }
+
+  &Title {
+    @apply flex-1 p-2 text-center bg-stark-white-100;
+  }
+
+  &.showList {
+    animation: extend 2s ease-in-out 0s 1 forwards;
+    
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 13px;
+    }
+    
+    &::-webkit-scrollbar-button {
+      width: 0px;
+      height: 0px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #5B1B23;
+      border: 0px none #ffffff;
+      border-radius: 0px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #5B1B23;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background: #3C1217;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      border: 0px none transparent;
+      border-radius: 0px;
+    }
+
+    &::-webkit-scrollbar-track:hover {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-track:active {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    .schoolWrapper {
+      .schoolHeading {
+        @apply text-2xl;
+      }
+
+      .schoolProject {
+        @apply px-5 py-2 text-lg cursor-pointer opacity-80;
+        width: 500px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      
+        &:nth-child(odd) {
+          @apply bg-stark-white-300;
+        }
+
+
+        &:nth-child(even) {
+          @apply bg-stark-white-400;
+        }
+
+        &:hover {
+          @apply opacity-100;
+        }
+      }
+    }
+  }
+}
+
