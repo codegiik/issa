@@ -1,7 +1,11 @@
 .heading {
-  @apply relative ml-5 font-serif text-2xl font-bold md:text-3xl md:ml-10;
+  @apply relative font-serif text-2xl font-bold md:text-3xl;
 
-  &::before {
+  &.lineBefore {
+    @apply ml-5 md:ml-10;
+  }
+
+  &.lineBefore::before {
     @apply absolute w-4 h-2 top-1/2 -left-5 md:-left-10 md:w-8 bg-cedar;
     transform: translateY(-50%);
     content: '';
