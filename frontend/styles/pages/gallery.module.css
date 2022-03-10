@@ -49,17 +49,8 @@
   }
 }
 
-.workSelector {
-  @apply absolute z-20 bottom-10 left-[25%];
-  @apply flex items-center justify-center font-serif bg-white;
+.scrollLine {
+  @apply absolute z-20 hidden -bottom-12 left-1/2;
+  @apply w-[1px] h-24 opacity-50 bg-cedar-400;
   transform: translateX(-50%);
-  user-select: none;
-
-  &Button {
-    @apply p-2 cursor-pointer bg-stark-white-200;
-  }
-
-  &Title {
-    @apply px-2 pointer-events-none bg-stark-white-100;
-  }
 }

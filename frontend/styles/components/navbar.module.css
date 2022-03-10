@@ -63,7 +63,7 @@
 }
 
 .hamburgerMenu {
-  @apply fixed top-0 z-50 w-screen h-screen bg-cedar;
+  @apply fixed top-0 z-50 w-screen h-screen bg-cedar md:hidden;
   right: -100%;
   @apply flex flex-col justify-center px-12 gap-6;
   @apply text-stark-white-400;
