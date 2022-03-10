@@ -21,7 +21,7 @@ export function MainCanvas({ data, edition, className }) {
   return (
     <Canvas gl={{ alpha: false }} dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }} className={className}>
       <color attach="background" args={[colors['stark-white'][500]]} />
-      <fog attach="fog" args={[colors['cedar'][800], 0, 15]} />
+      <fog attach="fog" args={[colors['cedar'][500], 0, 15]} />
       <Suspense fallback={null}>
         <Environment preset="city" />
         <Text
@@ -47,6 +47,23 @@ export function MainCanvas({ data, edition, className }) {
       </Suspense>
       <group position={[0, -0.5, 0]}>
           <Frames images={images} router={router}/>
+          
+          {/*<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+              <planeGeometry args={[50, 50]} />
+              <meshBasicMaterial color={colors['cedar']['400']} />
+              {/*<MeshReflectorMaterial
+                blur={[300, 100]}
+                resolution={2048}
+                mixBlur={1}
+                mixStrength={40}
+                roughness={1}
+                depthScale={1.2}
+                minDepthThreshold={0.4}
+                maxDepthThreshold={1.4}
+                color={colors['stark-white'][900]}
+                metalness={0.5}
+              />
+          </mesh>*/}
       </group>
     </Canvas>
   )
@@ -62,7 +79,7 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), r
         clicked.current = ref.current.getObjectByName(router.query.id)
       
         clicked.current.parent.updateWorldMatrix(true, true)
-        clicked.current.parent.localToWorld(p.set(1.5, GOLDENRATIO / 2, 2))
+        clicked.current.parent.localToWorld(p.set(1.3, GOLDENRATIO / 2, 2))
         clicked.current.parent.getWorldQuaternion(q)
       } catch (e) {
         console.log('Something went horribly wrong', e)
