@@ -3,7 +3,7 @@
   @apply flex px-4 py-5 md:px-6 lg:px-16 transition-all;
 
   * {
-    @apply transition-all;
+    transition: all 0.15s ease-out;
   }
 
   &.light {
