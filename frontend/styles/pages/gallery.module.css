@@ -47,6 +47,24 @@
     @apply opacity-100;
     pointer-events: unset;
   }
+
+  &.listOpen {
+    @apply -right-full;
+  }
+}
+
+.listButton {
+  @apply absolute z-20 flex px-[2px] cursor-pointer top-1/2 left-10 transition-all;
+  @apply bg-stark-white-300;
+  transform: translateY(-50%);
+
+  &.close {
+    left: 530px;
+  }
+
+  span {
+    @apply !text-4xl;
+  }
 }
 
 .scrollLine {

@@ -43,6 +43,7 @@ export function HelpBox({ edition, active }) {
 
 export default function Gallery() {
   const [clicked, setClicked] = useState(null)
+  const [listOpen, setListOpen] = useState(null)
   const router = useRouter()
   const {works, edition} = useWorks(router.query)
 
@@ -76,20 +77,31 @@ export default function Gallery() {
         id
       }
     }, undefined, { shallow: true })
+    setListOpen(false)
   }
   
   return (
     <main className={style.main}>
       <MainCanvas className={style.mainCanvas} data={works} edition={edition} />
-      <WorkInfoBox work={clicked} className={[style.workInfoBox, clicked ? style.active : null].join(' ')} />
+      <WorkInfoBox 
+        work={clicked} 
+        className={[style.workInfoBox, clicked ? style.active : null, listOpen ? style.listOpen : null].join(' ')} 
+      />
       <HelpBox active={!clicked} edition={edition} />
       <WorkSelector 
-        clicked={clicked} 
+        active={listOpen}
         works={works} 
         onNext={() => switchByIndexDiff(+1)} 
         onPrev={() => switchByIndexDiff(-1)}
         switchTo={switchTo}
       />
+      {clicked && (
+        <div className={[style.listButton, listOpen ? style.close : null].join(' ')} onClick={() => setListOpen(!listOpen)}>
+          <span className="material-icons">
+          {listOpen ? 'close' : 'list'}
+          </span>
+        </div>
+      )}
       {!clicked && <div className={style.scrollLine} />}
     </main>
   )
