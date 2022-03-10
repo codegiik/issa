@@ -30,12 +30,12 @@
 }
 
 .main {
-  height: calc(100vh - 90px) !important;
+  height: calc(100vh - 91px) !important;
   @apply relative bg-warmGray-800 transition-all;
 }
 
 .workInfoBox {
-  height: 85%;
+  min-height: 85%;
   width: 100%;
   max-width: 600px;
   @apply z-20 shadow-xl opacity-0 bg-stark-white-100 transition-all;

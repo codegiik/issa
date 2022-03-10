@@ -8,7 +8,8 @@ const EXAMPLE_WORKS = Array.from({ length: 20 }, (v, i) => ({
   author: 'Mario Rossi',
   ref: 'Giulia Corona',
   description: loremIpsum({ count: 4 }),
-  preview: lorempics(i + 1)
+  preview: lorempics(i + 1, 480, 600),
+  embed: 'https://www.youtube.com/watch?v=Tyr_HmbAi5E'
 }))
 
 export default async function handler(req, res) {

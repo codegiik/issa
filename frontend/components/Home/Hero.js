@@ -1,12 +1,8 @@
 import {Heading} from 'components'
+import {lorempics} from 'lib/utils'
 import {PureComponent, useState} from 'react';
 import colors from 'styles/colors';
 import style from 'styles/components/hero.module.css'
-
-const randomImage = i => {
-  if(Math.random() <= 0.5) return 'https://picsum.photos/300/500?random=' + i;
-  else return
-}
 
 const NEWS = []
 const MAX_NEWS_TO_SHOW = 4
@@ -15,7 +11,7 @@ for(let i = 0; i< 5; i++)
     NEWS.push({
       title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
       slug: 'lorem-ipsum-kinda-cosa',
-      image: randomImage(i)
+      image: lorempics(i, 1280, 720)
     })
 
 export function Tile({ article, active, setActive, unsetActive, index }) {
