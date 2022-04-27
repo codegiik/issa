@@ -1,15 +1,13 @@
-import Head from 'next/head';
-import 'styles/globals.css';
+import Head from 'next/head'
+import 'styles/globals.css'
+import 'animate.css'
 
-function MyApp({ Component, pageProps }) {
-    return (
-        <>
-            <Head>
-                <title>codegiik</title>
-            </Head>
-            <Component {...pageProps} />
-        </>
-    );
+function Issa({ Component, pageProps }) {
+  const getLayout = Component.getLayout || (v => v)
+
+  return getLayout(
+      <Component {...pageProps} />
+  )
 }
 
-export default MyApp;
+export default Issa
