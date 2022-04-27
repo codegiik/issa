@@ -1,65 +1,65 @@
 .aboutTitle {
-  @apply mt-10;
+    @apply mt-10;
 }
 
 .aboutTextContainer {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  gap: 2rem;
-  @apply py-8;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: 2rem;
+    @apply py-8;
 }
 .aboutText:first-child {
-  margin-left: -15rem;
-  position: relative;
+    margin-left: -15rem;
+    position: relative;
 }
 .aboutText:first-child::before {
-  content: ". . ,";
-  position: absolute;
-  right: -10rem;
-  color: rgba(102, 0, 0, 1);
-  font-size: 5rem;
-  line-height: 1rem;
+    content: '. . ,';
+    position: absolute;
+    right: -10rem;
+    color: rgba(102, 0, 0, 1);
+    font-size: 5rem;
+    line-height: 1rem;
 }
 
 .aboutText:nth-child(2) {
-  margin-right: -15rem;
-  position: relative;
+    margin-right: -15rem;
+    position: relative;
 }
 .aboutText:nth-child(2)::before {
-  content: "#";
-  position: absolute;
-  left: -10rem;
-  top: 30%;
-  color: rgba(102, 0, 0, 1);
-  font-size: 5rem;
-  line-height: 1rem;
+    content: '#';
+    position: absolute;
+    left: -10rem;
+    top: 30%;
+    color: rgba(102, 0, 0, 1);
+    font-size: 5rem;
+    line-height: 1rem;
 }
-.aboutText{
-  width: max(55%, 30rem);
-  @apply text-2xl;
+.aboutText {
+    width: max(55%, 30rem);
+    @apply text-2xl;
 }
 .scopriContainer {
-  margin-top:5rem;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  gap: 2rem;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: 2rem;
 }
 .scopri {
-  width:max(45%, 30rem);
-  margin-left:-15rem;
+    width: max(45%, 30rem);
+    margin-left: -15rem;
 }
-.scopriButtonContainer{
-  width:max(45%, 30rem);
-  margin-left:-15rem;
-  display:flex;
-  gap:2rem
+.scopriButtonContainer {
+    width: max(45%, 30rem);
+    margin-left: -15rem;
+    display: flex;
+    gap: 2rem;
 }
-.scopriButton{
-  width:fit-content;
-  padding-inline:1.5rem;
-  background-color: rgba(60, 18, 23, 1);
-  color:white;
-  line-height: 2rem;
+.scopriButton {
+    width: fit-content;
+    padding-inline: 1.5rem;
+    background-color: rgba(60, 18, 23, 1);
+    color: white;
+    line-height: 2rem;
 }

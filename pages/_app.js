@@ -1,13 +1,10 @@
-import Head from 'next/head'
-import 'styles/globals.css'
-import 'animate.css'
+import 'styles/globals.css';
+import 'animate.css';
 
 function Issa({ Component, pageProps }) {
-  const getLayout = Component.getLayout || (v => v)
+    const getLayout = Component.getLayout || ((v) => v);
 
-  return getLayout(
-      <Component {...pageProps} />
-  )
+    return getLayout(<Component {...pageProps} />);
 }
 
-export default Issa
+export default Issa;

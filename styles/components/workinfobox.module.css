@@ -1,27 +1,27 @@
 .workInfoBox {
-  @apply pb-6;
+    @apply pb-6;
 
-  .infoWrapper {
-    @apply overflow-y-auto;
-  }
-
-  .workTitle {
-    @apply px-6 mt-4 font-serif text-3xl font-bold;
-  }
-
-  .workAuthor {
-    @apply px-6 opacity-50;
-  }
-
-  .workDesc {
-    @apply px-6 mt-3 text-lg text-warmGray-600; 
-  }
-
-  .reactPlayerWrapper {
-    @apply relative h-72;
-
-    .reactPlayer {
-      @apply absolute top-0 left-0;
+    .infoWrapper {
+        @apply overflow-y-auto;
     }
-  }
+
+    .workTitle {
+        @apply px-6 mt-4 font-serif text-3xl font-bold;
+    }
+
+    .workAuthor {
+        @apply px-6 opacity-50;
+    }
+
+    .workDesc {
+        @apply px-6 mt-3 text-lg text-warmGray-600;
+    }
+
+    .reactPlayerWrapper {
+        @apply relative h-72;
+
+        .reactPlayer {
+            @apply absolute top-0 left-0;
+        }
+    }
 }
