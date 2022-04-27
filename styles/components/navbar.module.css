@@ -1,0 +1,92 @@
+.mainNavbar {
+  @apply font-serif bg-cedar-500 text-stark-white;
+  @apply flex px-4 py-5 md:px-6 lg:px-16 transition-all;
+
+  * {
+    transition: all 0.15s ease-out;
+  }
+
+  &.light {
+    @apply bg-stark-white-500 border-b-[1px] border-cedar text-cedar;
+
+    svg {
+      @apply text-cedar-400;
+    }
+
+    .link {
+      @apply opacity-50 hover:opacity-100 hover:!text-cedar;
+
+      &.selected::before {
+        @apply !bg-cedar-400;
+      }
+    }
+  }
+
+  svg {
+    @apply fill-current text-stark-white-300;
+  }
+  
+  .logo {
+    @apply flex items-center mr-auto gap-2;
+
+    .logoVeliero {
+      @apply !h-10 !w-10 object-cover;
+    }
+
+    .logoText {
+      @apply w-auto h-6;
+    }
+  }
+
+  .links {
+    @apply flex items-center gap-8;
+
+    .link {
+      @apply text-xl hover:text-stark-white-300;
+      @apply hidden cursor-pointer md:block;
+
+      &.selected {
+        @apply relative;
+
+        &::before {
+          @apply absolute left-0 w-full h-1 bg-stark-white -bottom-1;
+          content: '';
+        }
+      }
+    }
+
+    .hamburgerIcon {
+      @apply text-3xl cursor-pointer md:hidden;
+      user-select: none;
+    }
+  }
+}
+
+.hamburgerMenu {
+  @apply fixed top-0 z-50 w-screen h-screen bg-cedar md:hidden;
+  right: -100%;
+  @apply flex flex-col justify-center px-12 gap-6;
+  @apply text-stark-white-400;
+  transition: all 0.5s ease-in-out;
+
+  &.open {
+    right: 0;
+  }
+
+  .closeIcon {
+    @apply absolute text-4xl cursor-pointer top-10 right-10;
+  }
+
+  .link {
+    @apply font-serif text-4xl font-bold cursor-pointer w-max;
+
+    &.selected {
+      @apply relative;
+
+      &::before {
+        @apply absolute left-0 w-full h-1 bg-stark-white -bottom-1;
+        content: '';
+      }
+    }
+  }
+}

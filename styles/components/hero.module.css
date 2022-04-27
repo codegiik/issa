@@ -1,0 +1,49 @@
+.heroCarousel {
+  @apply flex mt-8 md:w-full;
+  @apply overflow-auto;
+
+  @media screen and (min-width: 640px) {
+    & {
+      overflow: unset;
+    }
+
+    .carouselTile {
+      &.tileActive {
+        @apply flex-[3] z-20 shadow-xl;
+        transform: scale(1.05);
+
+        &:first-child {
+          transform: scale(1.05) translateX(2.5%);
+        }
+
+        &:last-child {
+          transform: scale(1.05) translateX(-2.5%);
+        }
+
+        .tileTitle {
+          @apply md:text-2xl;
+        }
+      }
+    }
+  }
+
+  .carouselTile {
+    @apply md:flex-1 w-screen md:w-auto h-[60vh] lg:h-[70vh] cursor-pointer;
+    @apply p-5 bg-cedar-600;
+    @apply relative z-10 flex flex-col justify-end gap-y-4;
+    @apply transition-all;
+
+    &:nth-child(odd) {
+      @apply bg-cedar-500;
+    }
+
+    .tileTitle {
+      @apply w-11/12 font-serif text-xl font-bold md:text-xl;
+      @apply relative text-white opacity-80 transition-all;
+    }
+
+    .tileLine {
+      @apply w-9/12 h-2 bg-stark-white-200;
+    }
+  }
+}

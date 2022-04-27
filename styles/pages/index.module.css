@@ -1,14 +1,11 @@
+.title {
+  @apply font-sans text-6xl text-white;
+}
+
 .main {
-    @apply bg-warmGray-100 dark:bg-[#112] h-screen flex items-center justify-center flex-col;
+  @apply flex items-center justify-center h-screen bg-warmGray-800;
+}
 
-    .title {
-        @apply text-6xl font-sans tracking-tight font-bold text-transparent bg-clip-text bg-gradient-to-br from-pink-400 to-purple-600 dark:from-white dark:to-[#11e];
-    }
-
-    .button {
-        @apply dark:text-white tracking-wider text-lg;
-        @apply border-b-2 dark:border-white border-dashed;
-        @apply mt-2;
-        @apply opacity-30 hover:opacity-70;
-    }
+.hero {
+  @apply pt-6;
 }
