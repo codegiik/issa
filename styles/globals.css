@@ -13,6 +13,10 @@ body,
     width: 100%;
 }
 
+html {
+    scroll-padding-top: calc(50px + 2.5em);
+}
+
 body {
     @apply font-body bg-stark-white-500;
     @apply text-warmGray-800;

@@ -8,7 +8,7 @@ import style from 'styles/components/navbar.module.css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-export function Link({ href, block, children }) {
+export function Link({ href, children }) {
     const router = useRouter();
 
     return (
@@ -17,7 +17,7 @@ export function Link({ href, block, children }) {
                 try {
                     document.querySelector(href).scrollIntoView({
                         behavior: 'smooth',
-                        block,
+                        block: 'center',
                     });
                 } catch (e) {
                     console.log(e);
@@ -34,22 +34,18 @@ const LINKS = [
     {
         href: '#hero',
         label: 'Home',
-        block: 'end',
     },
     {
         href: '#about',
         label: 'Chi Siamo',
-        block: 'center',
     },
     {
         href: '#courses',
         label: 'Corsi',
-        block: 'center',
     },
     {
         href: '#gallery',
         label: 'Premio ISSA',
-        block: 'end',
     },
 ];
 
@@ -79,7 +75,7 @@ export function Navbar({ className, theme }) {
                 </div>
                 <div className={style.links}>
                     {LINKS.map((v, i) => (
-                        <Link href={v.href} block={v.block} key={i} passHref>
+                        <Link href={v.href} {...v} key={i} passHref>
                             <p
                                 className={[
                                     style.link,
@@ -115,7 +111,7 @@ export function Navbar({ className, theme }) {
                     close
                 </span>
                 {LINKS.map((v, i) => (
-                    <Link href={v.href} key={i} passHref>
+                    <Link href={v.href} {...v} key={i} passHref>
                         <p
                             className={[
                                 style.link,

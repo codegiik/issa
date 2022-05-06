@@ -1,7 +1,7 @@
 .mainNavbar {
     @apply font-serif bg-cedar-500 text-stark-white;
     @apply flex px-4 py-5 md:px-6 lg:px-16 transition-all;
-    @apply fixed left-0 right-0 top-0 z-[90];
+    @apply sticky left-0 right-0 top-0 z-[90];
 
     * {
         transition: all 0.15s ease-out;
