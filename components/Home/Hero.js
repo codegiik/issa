@@ -108,6 +108,7 @@ export function Hero({ className }) {
                 Array.isArray(className) ? className.join(' ') : className,
                 style.hero,
             ].join(' ')}
+            id="hero"
         >
             <Heading className={style.heroHeading}>Ultime Notizie</Heading>
             <Carousel news={NEWS} />

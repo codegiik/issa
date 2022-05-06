@@ -17,15 +17,15 @@
         "@react-three/drei": "^9.5.3",
         "@react-three/fiber": "^8.0.12",
         "animate.css": "^4.1.1",
+        "axios": "^0.26.0",
         "next": "12.1.5",
+        "numerals": "^0.1.3",
         "react": "18.0.0",
         "react-dom": "18.0.0",
-        "three": "^0.139.2",
-        "uuidv4": "^6.2.13",
-        "numerals": "^0.1.3",
-        "swr": "^1.2.2",
         "react-player": "^2.9.0",
-        "axios": "^0.26.0"
+        "swr": "^1.2.2",
+        "three": "^0.139.2",
+        "uuidv4": "^6.2.13"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.5",
@@ -35,11 +35,11 @@
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-unused-imports": "^2.0.0",
         "husky": "^7.0.4",
+        "lorem-ipsum": "^2.0.4",
         "postcss": "^8.4.12",
         "prettier": "^2.6.2",
         "pretty-quick": "^3.1.3",
         "start-server-and-test": "^1.14.0",
-        "tailwindcss": "^3.0.24",
-        "lorem-ipsum": "^2.0.4"
+        "tailwindcss": "^3.0.24"
     }
 }

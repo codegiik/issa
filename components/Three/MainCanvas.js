@@ -29,7 +29,7 @@ export function MainCanvas({ data, edition, className }) {
             camera={{ fov: 70, position: [0, 2, 15] }}
             className={className}
         >
-            <color attach="background" args={[colors['stark-white'][500]]} />
+            <color attach="background" args={[colors['stark-white'][300]]} />
             <fog attach="fog" args={[colors['cedar'][500], 0, 15]} />
             <Suspense fallback={null}>
                 <Environment preset="city" />
@@ -93,9 +93,11 @@ function Frames({
     const clicked = useRef();
 
     useEffect(() => {
-        if (router.query.id) {
+        if (router.query.gallery_id) {
             try {
-                clicked.current = ref.current.getObjectByName(router.query.id);
+                clicked.current = ref.current.getObjectByName(
+                    router.query.gallery_id
+                );
 
                 clicked.current.parent.updateWorldMatrix(true, true);
                 clicked.current.parent.localToWorld(
@@ -119,16 +121,11 @@ function Frames({
 
     const setLocation = (id) => {
         router.push(
-            id
-                ? {
-                      pathname: '/gallery',
-                      query: {
-                          id,
-                      },
-                  }
-                : '/gallery',
+            id ? `/?gallery_id=${id}#gallery` : '/#gallery',
             undefined,
-            { shallow: true }
+            {
+                shallow: true,
+            }
         );
     };
 

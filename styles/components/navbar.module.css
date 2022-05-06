@@ -1,6 +1,7 @@
 .mainNavbar {
     @apply font-serif bg-cedar-500 text-stark-white;
     @apply flex px-4 py-5 md:px-6 lg:px-16 transition-all;
+    @apply fixed left-0 right-0 top-0 z-[90];
 
     * {
         transition: all 0.15s ease-out;
@@ -64,7 +65,7 @@
 
 .hamburgerMenu {
     @apply fixed top-0 z-50 w-screen h-screen bg-cedar md:hidden;
-    right: -100%;
+    right: calc(-100% - 40px);
     @apply flex flex-col justify-center px-12 gap-6;
     @apply text-stark-white-400;
     transition: all 0.5s ease-in-out;
