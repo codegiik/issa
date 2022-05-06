@@ -1,0 +1,32 @@
+.footerNavbar,
+.footer {
+    @apply w-full;
+}
+
+.footerNavbar {
+    @apply flex bg-cedar-400 text-stark-white-300;
+    @apply justify-center items-center;
+    @apply py-5 sm:py-10;
+    @apply flex-wrap;
+
+    .linksSection:not(:last-child) {
+        @apply border-b-2 sm:border-b-0 sm:border-r-2 border-stark-white-200 border-opacity-30;
+    }
+
+    .linksSection {
+        @apply sm:px-24 sm:mx-0 w-full mx-10 py-5 sm:py-0;
+
+        h5 {
+            @apply font-serif text-stark-white-200 uppercase;
+        }
+
+        .link {
+            @apply opacity-80 hover:opacity-100 cursor-pointer;
+        }
+    }
+}
+
+.footer {
+    @apply flex items-center justify-center text-center text-sm sm:text-base;
+    @apply bg-cedar-600 text-stark-white-200 text-opacity-80 py-2;
+}
