@@ -1,13 +1,13 @@
 .heading {
-    @apply relative font-serif text-2xl font-bold md:text-3xl;
+    @apply font-serif text-2xl font-bold md:text-3xl;
 
     &.lineBefore {
-        @apply ml-5 md:ml-10;
+        @apply ml-[var(--heading-distance)] sm:ml-[var(--heading-distance-sm)] md:ml-[var(--heading-distance-md)] lg:ml-[var(--heading-distance-lg)];
     }
 
     &.lineBefore::before {
-        @apply absolute w-4 h-2 top-1/2 -left-5 md:-left-10 md:w-8 bg-cedar;
-        transform: translateY(-50%);
+        @apply absolute sm:w-[calc(var(--heading-distance-sm)-10px)] md:w-[calc(var(--heading-distance-md)-10px)] lg:w-[calc(var(--heading-distance-lg)-10px)] w-[calc(var(--heading-distance)-10px)] h-2 left-0 bg-cedar;
+        transform: translateY(0.5em);
         content: '';
     }
 }

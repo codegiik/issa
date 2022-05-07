@@ -1,65 +1,27 @@
 .aboutTitle {
-    @apply mt-10;
+    @apply mt-20 lg:-mb-10;
+    --heading-distance-lg: 7rem;
 }
 
-.aboutTextContainer {
-    display: flex;
-    flex-direction: column;
-    place-items: center;
-    gap: 2rem;
-    @apply py-8;
-}
-.aboutText:first-child {
-    margin-left: -15rem;
-    position: relative;
-}
-.aboutText:first-child::before {
-    content: '. . ,';
-    position: absolute;
-    right: -10rem;
-    color: rgba(102, 0, 0, 1);
-    font-size: 5rem;
-    line-height: 1rem;
-}
+.aboutSection {
+    @apply flex lg:h-[calc(100vh-50px-10rem)] overflow-hidden;
+    @apply justify-center lg:justify-start items-center;
+    @apply relative;
 
-.aboutText:nth-child(2) {
-    margin-right: -15rem;
-    position: relative;
-}
-.aboutText:nth-child(2)::before {
-    content: '#';
-    position: absolute;
-    left: -10rem;
-    top: 30%;
-    color: rgba(102, 0, 0, 1);
-    font-size: 5rem;
-    line-height: 1rem;
-}
-.aboutText {
-    width: max(55%, 30rem);
-    @apply text-2xl;
-}
-.scopriContainer {
-    margin-top: 5rem;
-    display: flex;
-    flex-direction: column;
-    place-items: center;
-    gap: 2rem;
-}
-.scopri {
-    width: max(45%, 30rem);
-    margin-left: -15rem;
-}
-.scopriButtonContainer {
-    width: max(45%, 30rem);
-    margin-left: -15rem;
-    display: flex;
-    gap: 2rem;
-}
-.scopriButton {
-    width: fit-content;
-    padding-inline: 1.5rem;
-    background-color: rgba(60, 18, 23, 1);
-    color: white;
-    line-height: 2rem;
+    .veliero {
+        @apply absolute top-1/2 h-full right-0;
+        transform: translate(20%, -50%);
+        @apply hidden lg:block;
+        @apply text-cedar-500;
+        fill: currentColor;
+    }
+
+    .aboutTextContainer {
+        @apply text-xl md:text-2xl;
+        @apply w-11/12 lg:w-1/2 lg:ml-28;
+
+        p {
+            @apply my-10;
+        }
+    }
 }

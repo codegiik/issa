@@ -39,3 +39,10 @@ h5,
 h6 {
     @apply text-cedar;
 }
+
+:root {
+    --heading-distance: 30px;
+    --heading-distance-sm: 40px;
+    --heading-distance-md: 50px;
+    --heading-distance-lg: 50px;
+}
