@@ -1,5 +1,6 @@
 import { Heading } from 'components';
 import { lorempics } from 'lib/utils';
+import { useRouter } from 'next/router';
 import { PureComponent, useState } from 'react';
 import colors from 'styles/colors';
 import style from 'styles/components/hero.module.css';
@@ -12,6 +13,7 @@ for (let i = 0; i < 5; i++)
         title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
         slug: 'lorem-ipsum-kinda-cosa',
         image: lorempics(i, 1280, 720),
+        href: 'https://google.com',
     });
 
 export function Tile({ article, active, setActive, unsetActive, index }) {
@@ -102,6 +104,12 @@ export class Carousel extends PureComponent {
 }
 
 export function Hero({ className }) {
+    const router = useRouter();
+
+    const openNews = (i) => {
+        router.push(NEWS[i].href, undefined, { shallow: true });
+    };
+
     return (
         <section
             className={[
@@ -110,8 +118,28 @@ export function Hero({ className }) {
             ].join(' ')}
             id="hero"
         >
-            <Heading className={style.heroHeading}>Ultime Notizie</Heading>
-            <Carousel news={NEWS} />
+            <div
+                onClick={() => openNews(0)}
+                style={{
+                    '--bg-image': `url(${NEWS[0].image})`,
+                }}
+                className={style.bigTile}
+            >
+                <div className={style.overlay} />
+                <h3>{NEWS[0].title}</h3>
+            </div>
+            <div className={style.otherNews}>
+                <Heading>Ultime Notizie</Heading>
+                {NEWS.slice(1).map((v, i) => (
+                    <h4
+                        className={style.articleTitle}
+                        key={i}
+                        onClick={() => openNews(i)}
+                    >
+                        {v.title}
+                    </h4>
+                ))}
+            </div>
         </section>
     );
 }
