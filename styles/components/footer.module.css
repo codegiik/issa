@@ -26,11 +26,11 @@
         }
 
         &:first-child {
-            @apply text-left;
+            @apply md:text-left;
         }
 
         &:last-child {
-            @apply text-right;
+            @apply md:text-right;
         }
     }
 }
