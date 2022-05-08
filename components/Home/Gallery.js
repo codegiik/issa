@@ -122,7 +122,6 @@ export function Gallery() {
                 onPrev={() => switchByIndexDiff(-1)}
                 switchTo={switchTo}
             />
-            (
             <div
                 className={[
                     style.listButton,
@@ -134,7 +133,7 @@ export function Gallery() {
                     {listOpen ? 'close' : 'list'}
                 </span>
             </div>
-            ){!clicked && <div className={style.scrollLine} />}
+            {!clicked && <div className={style.scrollLine} />}
         </section>
     );
 }

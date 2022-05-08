@@ -53,7 +53,7 @@
     @apply items-center;
 
     .bigTile {
-        @apply h-[80vh] md:flex-[2] relative cursor-pointer;
+        @apply h-[60vh] sm:h-[80vh] md:flex-[2] relative cursor-pointer;
         @apply flex justify-center items-end;
         @apply px-10;
         background: var(--bg-image);
