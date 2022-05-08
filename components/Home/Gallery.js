@@ -95,16 +95,7 @@ export function Gallery() {
 
     const switchTo = (id) => {
         if (!id) return;
-        router.push(
-            {
-                pathname: '/gallery',
-                query: {
-                    id,
-                },
-            },
-            undefined,
-            { shallow: true }
-        );
+        router.push(`/?gallery_id=${id}#gallery`, undefined, { shallow: true });
         setListOpen(false);
     };
 
@@ -131,20 +122,19 @@ export function Gallery() {
                 onPrev={() => switchByIndexDiff(-1)}
                 switchTo={switchTo}
             />
-            {clicked && (
-                <div
-                    className={[
-                        style.listButton,
-                        listOpen ? style.close : null,
-                    ].join(' ')}
-                    onClick={() => setListOpen(!listOpen)}
-                >
-                    <span className="material-icons">
-                        {listOpen ? 'close' : 'list'}
-                    </span>
-                </div>
-            )}
-            {!clicked && <div className={style.scrollLine} />}
+            (
+            <div
+                className={[
+                    style.listButton,
+                    listOpen ? style.close : null,
+                ].join(' ')}
+                onClick={() => setListOpen(!listOpen)}
+            >
+                <span className="material-icons">
+                    {listOpen ? 'close' : 'list'}
+                </span>
+            </div>
+            ){!clicked && <div className={style.scrollLine} />}
         </section>
     );
 }

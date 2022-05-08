@@ -1,5 +1,5 @@
 .aboutTitle {
-    @apply mt-20 lg:-mb-10;
+    @apply mt-12 lg:-mb-10;
     --heading-distance-lg: 7rem;
 }
 

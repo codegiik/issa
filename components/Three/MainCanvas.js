@@ -10,6 +10,7 @@ const GOLDENRATIO = 1.61803398875;
 
 export function MainCanvas({ data, edition, className }) {
     const router = useRouter();
+    const [windowSize, setWindowSize] = useState(1024);
     const images = useMemo(
         () =>
             data
@@ -21,6 +22,20 @@ export function MainCanvas({ data, edition, className }) {
                 : [],
         [data]
     );
+
+    useEffect(() => {
+        const textSizeInterval = setInterval(() => {
+            if (!window) return;
+            const windowSize = window.innerWidth;
+            setWindowSize(windowSize);
+        }, 1000);
+
+        return () => clearInterval(textSizeInterval);
+    }, []);
+
+    const getTextSize = () => windowSize / edition?.name?.length / 50;
+
+    const getTextOffset = () => getTextSize() * 0.2;
 
     return (
         <Canvas
@@ -36,20 +51,24 @@ export function MainCanvas({ data, edition, className }) {
                 <Text
                     color={colors['cedar'][600]}
                     font="/fonts/LibreBaskerville-Regular.ttf"
-                    fontSize={0.8}
+                    fontSize={getTextSize()}
                     anchorX="center"
                     anchorY="middle"
-                    position={[0, 2.5, 0]}
+                    position={[0, 2.5 - getTextOffset() * 0.5, 0]}
                 >
                     {edition?.name}
                 </Text>
                 <Text
                     color={colors['cedar'][400]}
                     font="/fonts/LibreBaskerville-Regular.ttf"
-                    fontSize={0.25}
+                    fontSize={
+                        0.32 * getTextSize() < 0.15
+                            ? 0.15
+                            : 0.32 * getTextSize()
+                    }
                     anchorX="center"
                     anchorY="middle"
-                    position={[0, 1.8, 0]}
+                    position={[0, 1.8 + getTextOffset() * 0.32, 0]}
                 >
                     {edition?.type} - Edizione{' '}
                     {convertNumberToNumeralForm(
@@ -60,7 +79,11 @@ export function MainCanvas({ data, edition, className }) {
                 </Text>
             </Suspense>
             <group position={[0, -0.5, 0]}>
-                <Frames images={images} router={router} />
+                <Frames
+                    images={images}
+                    router={router}
+                    windowSize={windowSize}
+                />
 
                 {/*<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
               <planeGeometry args={[50, 50]} />
@@ -88,9 +111,15 @@ function Frames({
     q = new THREE.Quaternion(),
     p = new THREE.Vector3(),
     router,
+    windowSize,
 }) {
     const ref = useRef();
     const clicked = useRef();
+
+    const getPositionOffset = () => {
+        console.log(windowSize);
+        return windowSize > 1024 ? 1.3 : 0;
+    };
 
     useEffect(() => {
         if (router.query.gallery_id) {
@@ -101,7 +130,7 @@ function Frames({
 
                 clicked.current.parent.updateWorldMatrix(true, true);
                 clicked.current.parent.localToWorld(
-                    p.set(1.3, GOLDENRATIO / 2, 2)
+                    p.set(getPositionOffset(), GOLDENRATIO / 2, 2)
                 );
                 clicked.current.parent.getWorldQuaternion(q);
             } catch (e) {
