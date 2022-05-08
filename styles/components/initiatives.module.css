@@ -1,0 +1,52 @@
+.heading {
+    --heading-distance-lg: 7rem;
+}
+
+.initiativesContainer {
+    @apply flex justify-evenly items-center flex-wrap md:flex-nowrap;
+    @apply py-10 md:pb-20 md:pt-12 gap-5;
+
+    .initiativeBox {
+        @apply text-center flex justify-center items-center flex-col gap-2;
+        @apply relative;
+        @apply cursor-pointer;
+        @apply border-2 border-cedar-400;
+        @apply overflow-hidden;
+        @apply w-[80vw] h-[80vw];
+        @apply text-stark-white-200;
+        max-width: 250px;
+        max-height: 250px;
+
+        /* &:hover > h5, */
+        /* &:hover > .divider { */
+        /*     @apply text-stark-white-300 fill-current; */
+        /* } */
+
+        &:hover > .triangle {
+            transform: scale(10);
+        }
+
+        .divider {
+            @apply text-stark-white-200 fill-current;
+            mix-blend-mode: difference;
+        }
+
+        .triangle {
+            @apply absolute bottom-0 right-0 text-cedar-400 fill-current;
+            z-index: -1;
+            transform: scale(1);
+            transform-origin: bottom right;
+            transition: 0.3s all cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        }
+
+        h5 {
+            @apply font-serif font-semibold text-2xl text-stark-white-200;
+            mix-blend-mode: difference;
+        }
+
+        p {
+            @apply w-3/4;
+            mix-blend-mode: difference;
+        }
+    }
+}

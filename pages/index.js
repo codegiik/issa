@@ -1,6 +1,6 @@
 import Main from 'layouts/Main';
 
-import { About, Hero, Gallery } from 'components';
+import { About, Hero, Gallery, Initiatives } from 'components';
 
 /* Style */
 import style from 'styles/pages/index.module.css';
@@ -35,6 +35,7 @@ export default function Home({ switchTheme }) {
             <Hero className={style.hero} />
             <About />
             <Gallery />
+            <Initiatives />
         </>
     );
 }

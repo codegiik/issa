@@ -7,3 +7,4 @@ export { Heading } from './Heading';
 export { WorkSelector } from './WorkSelector';
 export { WorkInfoBox } from './WorkInfoBox';
 export { Footer } from './Footer';
+export { Initiatives } from './Home/Initiatives';

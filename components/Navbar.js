@@ -40,12 +40,12 @@ const LINKS = [
         label: 'Chi Siamo',
     },
     {
-        href: '#courses',
-        label: 'Corsi',
-    },
-    {
         href: '#gallery',
         label: 'Premio ISSA',
+    },
+    {
+        href: '#initiatives',
+        label: 'Iniziative',
     },
 ];
 
