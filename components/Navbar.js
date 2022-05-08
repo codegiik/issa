@@ -92,9 +92,9 @@ export function Navbar({ className, theme }) {
                         className={['material-icons', style.hamburgerIcon].join(
                             ' '
                         )}
-                        onClick={() => setMenuActive(true)}
+                        onClick={() => setMenuActive(!menuActive)}
                     >
-                        menu
+                        {menuActive ? 'close' : 'menu'}
                     </span>
                 </div>
             </nav>
@@ -104,12 +104,6 @@ export function Navbar({ className, theme }) {
                     menuActive ? style.open : null,
                 ].join(' ')}
             >
-                <span
-                    className={['material-icons', style.closeIcon].join(' ')}
-                    onClick={() => setMenuActive(false)}
-                >
-                    close
-                </span>
                 {LINKS.map((v, i) => (
                     <Link href={v.href} {...v} key={i} passHref>
                         <p
