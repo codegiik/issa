@@ -15,6 +15,7 @@
 
     .linksSection {
         @apply md:px-24 md:mx-0 w-full mx-10 py-5 md:py-0;
+        @apply text-center;
 
         h5 {
             @apply font-serif text-stark-white-200 uppercase;
@@ -22,6 +23,14 @@
 
         .link {
             @apply opacity-80 hover:opacity-100 cursor-pointer;
+        }
+
+        &:first-child {
+            @apply text-left;
+        }
+
+        &:last-child {
+            @apply text-right;
         }
     }
 }
