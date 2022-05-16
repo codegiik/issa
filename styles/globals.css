@@ -46,3 +46,14 @@ h6 {
     --heading-distance-md: 50px;
     --heading-distance-lg: 50px;
 }
+
+input,
+textarea {
+    &:focus {
+        @apply outline-none;
+    }
+}
+
+.button {
+    @apply px-2 py-1 bg-cedar-500 text-stark-white-100;
+}

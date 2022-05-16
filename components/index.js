@@ -8,3 +8,8 @@ export { WorkSelector } from './WorkSelector';
 export { WorkInfoBox } from './WorkInfoBox';
 export { Footer } from './Footer';
 export { Initiatives } from './Home/Initiatives';
+export { Link } from './Link';
+export { Loader } from './Loader';
+export { ErrorPage } from './ErrorPage';
+export { AdminHeading } from './Admin/AdminHeading';
+export { TableEditor } from './Admin/TableEditor';

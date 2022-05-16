@@ -1,0 +1,25 @@
+.adminLayout {
+    @apply flex h-[calc(100%-1.75em)] gap-3;
+    @apply bg-stark-white-500;
+
+    .sidebar {
+        @apply flex flex-col py-5 gap-2;
+        @apply bg-cedar-600;
+
+        .sidebarLink {
+            @apply flex sm:gap-5 items-center justify-center sm:justify-start;
+            @apply bg-cedar-400;
+            @apply px-7 py-1;
+            @apply opacity-70 hover:opacity-100;
+            @apply text-stark-white-100;
+
+            .name {
+                @apply hidden sm:block;
+            }
+        }
+    }
+
+    .content {
+        @apply flex-1 py-5 ml-2 mr-4;
+    }
+}
