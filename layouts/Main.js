@@ -12,7 +12,7 @@ export default function Main({ children, className, navbarProps }) {
         const fetchInfo = async () => {
             const { data, error } = await supabase.from('info').select();
             if (error) return message.error(error.message);
-            let incInfo = {};
+            const incInfo = {};
             data.forEach((v) => (incInfo[v.id] = v.value));
             return setInfo(incInfo);
         };
@@ -42,7 +42,11 @@ export default function Main({ children, className, navbarProps }) {
             <Head>
                 <title>ReteISSA</title>
             </Head>
-            <Navbar theme={navbarTheme} {...navbarProps} />
+            <Navbar
+                theme={navbarTheme}
+                links={info.NAVBAR_LINKS}
+                {...navbarProps}
+            />
             {childrenWithProps}
             <Footer />
         </main>

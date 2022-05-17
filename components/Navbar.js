@@ -9,30 +9,7 @@ import style from 'styles/components/navbar.module.css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-const LINKS = [
-    {
-        href: '#hero',
-        label: 'Home',
-        scrollTo: true,
-    },
-    {
-        href: '#about',
-        label: 'Chi Siamo',
-        scrollTo: true,
-    },
-    {
-        href: '#gallery',
-        label: 'Premio ISSA',
-        scrollTo: true,
-    },
-    {
-        href: '#initiatives',
-        label: 'Iniziative',
-        scrollTo: true,
-    },
-];
-
-export function Navbar({ className, theme }) {
+export function Navbar({ className, theme, links }) {
     const [menuActive, setMenuActive] = useState(false);
     const router = useRouter();
 
@@ -57,7 +34,7 @@ export function Navbar({ className, theme }) {
                     <LogoText className={style.logoText} />
                 </div>
                 <div className={style.links}>
-                    {LINKS.map((v, i) => (
+                    {links.map((v, i) => (
                         <Link href={v.href} {...v} key={i} passHref>
                             <p
                                 className={[
@@ -87,7 +64,7 @@ export function Navbar({ className, theme }) {
                     menuActive ? style.open : null,
                 ].join(' ')}
             >
-                {LINKS.map((v, i) => (
+                {links.map((v, i) => (
                     <Link href={v.href} {...v} key={i} passHref>
                         <p
                             className={[
