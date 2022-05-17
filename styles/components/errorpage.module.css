@@ -1,0 +1,32 @@
+.wrapper {
+    @apply relative h-full;
+
+    .error h2 {
+        @apply font-serif font-bold text-8xl text-cedar-600;
+    }
+
+    .error p {
+        @apply font-body text-xl w-[55ch];
+    }
+
+    .error {
+        @apply absolute top-[calc(50%-200px)] left-52;
+
+        .backHome {
+            @apply italic opacity-80 hover:opacity-100;
+        }
+
+        button {
+            @apply mt-5 font-serif;
+        }
+    }
+
+    .box {
+        @apply absolute bottom-0 inset-x-0;
+        @apply h-[20vh] md:h-[15rem] bg-cedar-500;
+
+        .veliero {
+            @apply h-[20rem] md:h-[30rem] text-cedar-500 fill-current mx-auto md:ml-auto md:mr-12 -translate-y-[calc(100%-60px)] md:-translate-y-[calc(100%-90px)];
+        }
+    }
+}

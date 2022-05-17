@@ -141,7 +141,16 @@ export function AdminLayout({ children }) {
     });
 
     if (session == 'notAllowed')
-        return <ErrorPage error={{ message: 'Non sei un admin' }} />;
+        return (
+            <ErrorPage
+                error={{
+                    message:
+                        "Sembra che tu non sia autorizzato ad accedere a questa pagina, se credi sia un errore, contatta l'amministratore del sistema. Grazie.",
+                    code: 400,
+                }}
+                logout={logout}
+            />
+        );
     else if (session == 'init') {
         return <Loader />;
     } else if (session)
