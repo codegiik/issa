@@ -13,5 +13,6 @@ export { Loader } from './Loader';
 export { ErrorPage } from './ErrorPage';
 export { AdminHeading } from './Admin/AdminHeading';
 export { TableEditor } from './Admin/TableEditor';
+export { CourseTile } from './Courses/CourseTile';
 export { CompetitionTile } from './Competitions/CompetitionTile';
 export { Podium } from './Competitions/Podium';
