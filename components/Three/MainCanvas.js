@@ -33,9 +33,14 @@ export function MainCanvas({ data, edition, className }) {
         return () => clearInterval(textSizeInterval);
     }, []);
 
-    const getTextSize = () => windowSize / edition?.name?.length / 150;
-    const editionNameOffset = getTextSize() > 0.5 ? 2.75 : 2.25;
-    const editionIdOffset = editionNameOffset - getTextSize() * 1.25;
+    const getTextSize = () =>
+        windowSize / edition?.name?.length / (windowSize < 1250 ? 65 : 150);
+    const getTitleOffset = () => {
+        if (getTextSize() < 0.2) return 1.75;
+        else if (getTextSize() > 0.5) return 2.75;
+        return 2.25;
+    };
+    const editionIdOffset = getTitleOffset() - getTextSize() * 1.25;
 
     return (
         <Canvas
@@ -55,7 +60,7 @@ export function MainCanvas({ data, edition, className }) {
                     anchorX="center"
                     anchorY="middle"
                     // position={[0, 2.5 - getTextOffset() * 0.5, 0]}
-                    position={[0, editionNameOffset, 0]}
+                    position={[0, getTitleOffset(), 0]}
                 >
                     {edition?.name}
                 </Text>
