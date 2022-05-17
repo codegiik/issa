@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { JsonForms } from '@jsonforms/react';
+
+import { vanillaRenderers, vanillaCells } from '@jsonforms/vanilla-renderers';
 
 import style from 'styles/components/admin.createpopup.module.css';
 
@@ -8,44 +11,31 @@ export function CreatePopup({
     visible,
     close,
     schema,
+    uischema,
+    renderers,
+    cells,
     name,
 }) {
     const [data, setData] = useState(initialData);
 
-    const changeData = (id, value) => {
-        setData({
-            ...data,
-            [id]: value,
-        });
-    };
-
-    const getValue = (id) => (data ? (id in data ? data[id] : null) : null);
-
+    if (!visible) return;
     return (
-        visible && (
-            <div className={style.wrapper}>
-                <div className={style.closer} onClick={close} />
-                <div className={style.popup}>
-                    <h3>{name}</h3>
-                    {schema.map((v, i) => (
-                        <div className={style.input} key={i}>
-                            <label htmlFor={v.id}>{v.name}</label>
-                            <input
-                                type={v.type || 'string'}
-                                name={v.id}
-                                id={v.id}
-                                onChange={(e) =>
-                                    changeData(v.id, e.target.value)
-                                }
-                                value={getValue(v.id)}
-                            />
-                        </div>
-                    ))}
-                    <button onClick={() => insert(data)} className="button">
-                        Aggiungi
-                    </button>
-                </div>
+        <div className={style.wrapper}>
+            <div className={style.closer} onClick={close} />
+            <div className={style.popup}>
+                <h3>{name}</h3>
+                <JsonForms
+                    schema={schema}
+                    renderers={renderers || vanillaRenderers}
+                    cells={cells || vanillaCells}
+                    uischema={uischema}
+                    data={data}
+                    onChange={({ data, _errors }) => setData(data)}
+                />
+                <button onClick={() => insert(data)} className="button">
+                    Aggiungi
+                </button>
             </div>
-        )
+        </div>
     );
 }
