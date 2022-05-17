@@ -6,8 +6,6 @@ import Head from 'next/head';
 
 export function Auth({ setError }) {
     const [loading, setLoading] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
 
     const handleLogin = async () => {
         try {
@@ -33,17 +31,17 @@ export function Auth({ setError }) {
     return (
         <div className={style.auth_wrapper}>
             <Head>
-                <title>StudentsWeek - Login</title>
+                <title>ReteISSA - Login</title>
             </Head>
             <div className={style.auth_box}>
                 <h1 className={style.header}>Accesso</h1>
                 <p className={style.description}>
-                    Accedi con il tuo account istituzionale
+                    Accedi con il tuo account google
                 </p>
                 <button
                     onClick={(e) => {
                         e.preventDefault();
-                        handleLogin(email, password);
+                        handleLogin();
                     }}
                     className={style.button}
                     disabled={loading}
