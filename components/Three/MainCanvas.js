@@ -34,7 +34,9 @@ export function MainCanvas({ data, comp, className }) {
     }, []);
 
     const getTextSize = () =>
-        windowSize / comp?.name?.length / (windowSize < 1250 ? 65 : 150);
+        windowSize /
+        comp?.name?.length /
+        (windowSize < 1250 ? 65 : windowSize > 2000 ? 180 : 80);
     const getTitleOffset = () => {
         if (getTextSize() < 0.2) return 1.75;
         else if (getTextSize() > 0.5) return 2.75;
