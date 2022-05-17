@@ -61,7 +61,7 @@ export function HelpBox({ edition, active }) {
     );
 }
 
-export function Gallery() {
+export function Gallery({ className }) {
     const [clicked, setClicked] = useState(null);
     const [listOpen, setListOpen] = useState(null);
     const router = useRouter();
@@ -100,7 +100,7 @@ export function Gallery() {
     };
 
     return (
-        <section className={style.main} id="gallery">
+        <section className={[style.main, className].join(' ')} id="gallery">
             <MainCanvas
                 className={style.mainCanvas}
                 data={works}
