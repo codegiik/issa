@@ -15,10 +15,16 @@ export function Link({
     const router = useRouter();
     const Element = as;
 
+    const getHash = () => /\#(.*)/g.exec(href)[0];
+
+    const getPathname = () => /\/?(.*)[#/]?/.exec(href)[0];
+
+    const checkSamePage = () => router.pathname == getPathname();
+
     const goTo = () => {
-        if (scrollTo) {
+        if (scrollTo && checkSamePage()) {
             try {
-                document.querySelector(href).scrollIntoView({
+                document.querySelector(getHash()).scrollIntoView({
                     behavior,
                     block,
                 });

@@ -8,7 +8,7 @@ import colors from 'styles/colors';
 
 const GOLDENRATIO = 1.61803398875;
 
-export function MainCanvas({ data, edition, className }) {
+export function MainCanvas({ data, comp, className }) {
     const router = useRouter();
     const [windowSize, setWindowSize] = useState(1024);
     const images = useMemo(
@@ -33,9 +33,16 @@ export function MainCanvas({ data, edition, className }) {
         return () => clearInterval(textSizeInterval);
     }, []);
 
-    const getTextSize = () => windowSize / edition?.name?.length / 50;
-
-    const getTextOffset = () => getTextSize() * 0.2;
+    const getTextSize = () =>
+        windowSize /
+        comp?.name?.length /
+        (windowSize < 1250 ? 65 : windowSize > 2000 ? 180 : 80);
+    const getTitleOffset = () => {
+        if (getTextSize() < 0.2) return 1.75;
+        else if (getTextSize() > 0.5) return 2.75;
+        return 2.25;
+    };
+    const editionIdOffset = getTitleOffset() - getTextSize() * 1.25;
 
     return (
         <Canvas
@@ -54,25 +61,23 @@ export function MainCanvas({ data, edition, className }) {
                     fontSize={getTextSize()}
                     anchorX="center"
                     anchorY="middle"
-                    position={[0, 2.5 - getTextOffset() * 0.5, 0]}
+                    // position={[0, 2.5 - getTextOffset() * 0.5, 0]}
+                    position={[0, getTitleOffset(), 0]}
                 >
-                    {edition?.name}
+                    {comp?.name}
                 </Text>
                 <Text
                     color={colors['cedar'][400]}
                     font="/fonts/LibreBaskerville-Regular.ttf"
-                    fontSize={
-                        0.32 * getTextSize() < 0.15
-                            ? 0.15
-                            : 0.32 * getTextSize()
-                    }
+                    fontSize={getTextSize() * (windowSize > 3250 ? 0.5 : 0.6)}
                     anchorX="center"
                     anchorY="middle"
-                    position={[0, 1.8 + getTextOffset() * 0.32, 0]}
+                    // position={[0, 1.8 + getTextOffset() * 0.32, 0]}
+                    position={[0, editionIdOffset, 0]}
                 >
-                    {edition?.type} - Edizione{' '}
+                    Premio ISSA - Edizione{' '}
                     {convertNumberToNumeralForm(
-                        edition?.number,
+                        comp?.id,
                         NumeralForm.Roman,
                         NumeralForm.English
                     )}
@@ -176,7 +181,7 @@ function Frames({
                         key={data.id}
                         data={data}
                         clicked={clicked}
-                        url={data.preview}
+                        url={data.data.preview}
                         position={[PADDING + i * 2, 0, -2]}
                         rotation={[0, 0, 0]}
                     />
