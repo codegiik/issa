@@ -1,20 +1,12 @@
-import { Heading } from 'components';
+import { Heading, Loader } from 'components';
+import supabase from 'lib/supabase';
 import { lorempics } from 'lib/utils';
 import { useRouter } from 'next/router';
-import { PureComponent, useState } from 'react';
+import { PureComponent, useEffect, useState } from 'react';
 import colors from 'styles/colors';
 import style from 'styles/components/hero.module.css';
 
-const NEWS = [];
 const MAX_NEWS_TO_SHOW = 4;
-
-for (let i = 0; i < 5; i++)
-    NEWS.push({
-        title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-        slug: 'lorem-ipsum-kinda-cosa',
-        image: lorempics(i, 1280, 720),
-        href: 'https://google.com',
-    });
 
 export function Tile({ article, active, setActive, unsetActive, index }) {
     const [gradientColor, setGradientColor] = useState('#00000044');
@@ -105,12 +97,27 @@ export class Carousel extends PureComponent {
 
 export function Hero({ className }) {
     const router = useRouter();
+    const [news, setNews] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data, error } = await supabase
+                .from('news')
+                .select()
+                .limit(5)
+                .order('created_at', { ascending: false });
+            if (error) return message.error(error.message);
+            setNews(data);
+        };
+
+        fetchData();
+    }, []);
 
     const openNews = (i) => {
-        router.push(NEWS[i].href, undefined, { shallow: true });
+        router.push(news[i].href, undefined, { shallow: true });
     };
 
-    return (
+    return news ? (
         <section
             className={[
                 Array.isArray(className) ? className.join(' ') : className,
@@ -121,16 +128,16 @@ export function Hero({ className }) {
             <div
                 onClick={() => openNews(0)}
                 style={{
-                    '--bg-image': `url(${NEWS[0].image})`,
+                    '--bg-image': `url(${news[0].preview}) no-repeat center center / cover`,
                 }}
                 className={style.bigTile}
             >
                 <div className={style.overlay} />
-                <h3>{NEWS[0].title}</h3>
+                <h3>{news[0].title}</h3>
             </div>
             <div className={style.otherNews}>
                 <Heading>Ultime Notizie</Heading>
-                {NEWS.slice(1).map((v, i) => (
+                {news.slice(1).map((v, i) => (
                     <h4
                         className={style.articleTitle}
                         key={i}
@@ -141,5 +148,7 @@ export function Hero({ className }) {
                 ))}
             </div>
         </section>
+    ) : (
+        <Loader space />
     );
 }

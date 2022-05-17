@@ -3,49 +3,32 @@ import Image from 'next/image';
 import LogoText from 'assets/svgs/LogoText';
 import veliero from 'public/imgs/veliero.png';
 import velieroDark from 'public/imgs/velierodark.png';
+import { Link } from './Link';
 
 import style from 'styles/components/navbar.module.css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-export function Link({ href, children }) {
-    const router = useRouter();
-
-    return (
-        <a
-            onClick={() => {
-                try {
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center',
-                    });
-                } catch (e) {
-                    console.log(e);
-                }
-                window.history.pushState(href, '', href);
-            }}
-        >
-            {children}
-        </a>
-    );
-}
-
 const LINKS = [
     {
         href: '#hero',
         label: 'Home',
+        scrollTo: true,
     },
     {
         href: '#about',
         label: 'Chi Siamo',
+        scrollTo: true,
     },
     {
         href: '#gallery',
         label: 'Premio ISSA',
+        scrollTo: true,
     },
     {
         href: '#initiatives',
         label: 'Iniziative',
+        scrollTo: true,
     },
 ];
 
