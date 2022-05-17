@@ -61,7 +61,7 @@ export default function Home({ switchTheme, info }) {
                     </p>
                 </Link>
             </div>
-            <Initiatives />
+            <Initiatives data={info.INITIATIVES_DATA} />
         </>
     );
 }
