@@ -1,4 +1,4 @@
-import { Loader } from '../Loader';
+// import { Loader } from '../Loader';
 import supabase from 'lib/supabase';
 import React, { useState, useRef, useEffect, Fragment } from 'react';
 import { message } from 'react-message-popup';
