@@ -2,21 +2,21 @@ import { Heading } from 'components';
 
 import style from 'styles/components/workselector.module.css';
 
-export function WorkSelector({ onNext, onPrev, active, works, switchTo }) {
+export function WorkSelector({ onNext, onPrev, active, entries, switchTo }) {
     const getCroppedTitle = (title) =>
         title?.length > 20 ? title.substr(0, 15) + '...' : title;
 
     const getSchoolsList = () => {
-        if (!works) return [];
+        if (!entries) return [];
         const schools = [];
-        works.forEach((v) =>
-            schools.includes(v.school) ? null : schools.push(v.school)
+        entries.forEach((v) =>
+            schools.includes(v.school_name) ? null : schools.push(v.school_name)
         );
         return schools;
     };
 
     const getWorksBySchool = (school) => {
-        return works.filter((v) => v.school == school);
+        return entries.filter((v) => v.school_name == school);
     };
 
     return (
@@ -42,7 +42,7 @@ export function WorkSelector({ onNext, onPrev, active, works, switchTo }) {
                                 onClick={() => switchTo(va.id)}
                                 key={ix}
                             >
-                                <span>◆</span> {va.title}
+                                <span>◆</span> {va.data.title}
                             </p>
                         ))}
                     </div>

@@ -1,4 +1,4 @@
-import { Gallery, Heading, Podium } from 'components';
+import { Gallery, Heading, Podium, Embed } from 'components';
 import Main from 'layouts/Main';
 import supabase from 'lib/supabase';
 import { useRouter } from 'next/router';
@@ -6,7 +6,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { message } from 'react-message-popup';
 
 import style from 'styles/pages/competitions.shower.module.css';
-import Embed from 'react-embed';
 
 export function PodiumShower({ id }) {
     const [categories, setCategories] = useState(null);
@@ -52,11 +51,13 @@ export default function CompetitionShower() {
             const { data, error } = await supabase
                 .from('competitions')
                 .select()
-                .eq('id', router.query.id);
+                .eq('id', router.query.id)
+                .limit(1)
+                .single();
+
             if (error) return message.error(error.message);
-            else if (data.length <= 0)
-                return message.error('Competizione non trovata');
-            return setData(data[0]);
+            else if (!data) return message.error('Competizione non trovata');
+            return setData(data);
         };
 
         if (router.query.id) fetchData();
@@ -84,7 +85,7 @@ export default function CompetitionShower() {
     const getSelected = () => {
         switch (selected) {
             case 'gallery':
-                return <Gallery className={style.gallery} />;
+                return <Gallery className={style.gallery} comp={data} />;
             case 'podium':
                 return <PodiumShower id={data.id} />;
             default:
@@ -93,7 +94,11 @@ export default function CompetitionShower() {
                         {data.info &&
                             Array.isArray(data.info) &&
                             data.info.map((v, i) => (
-                                <Embed url={v.href} key={i} />
+                                <Embed
+                                    url={v.href}
+                                    key={i}
+                                    className="w-full min-h-[80vh]"
+                                />
                             ))}
                     </div>
                 );

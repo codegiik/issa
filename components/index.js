@@ -5,7 +5,7 @@ export { Hero } from './Home/Hero';
 export { About } from './Home/About';
 export { Heading } from './Heading';
 export { WorkSelector } from './WorkSelector';
-export { WorkInfoBox } from './WorkInfoBox';
+export { WorkInfoBox, Embed } from './WorkInfoBox';
 export { Footer } from './Footer';
 export { Initiatives } from './Home/Initiatives';
 export { Link } from './Link';

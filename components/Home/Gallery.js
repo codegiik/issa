@@ -1,28 +1,13 @@
 /* Components */
-import { MainCanvas, WorkInfoBox, WorkSelector } from 'components';
+import { Loader, MainCanvas, WorkInfoBox, WorkSelector } from 'components';
+import supabase from 'lib/supabase';
 
 /* Hooks */
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-/* Libs */
-import useSWR from 'swr';
-import axios from 'axios';
-
 /* Gallery */
 import style from 'styles/pages/gallery.module.css';
-
-const useWorks = (query) => {
-    const edition = query?.edition || new Date().getFullYear();
-    const { data } = useSWR(`/api/gallery?edition=${edition}`, (url) =>
-        axios.get(url).then((r) => r.data)
-    );
-
-    return {
-        works: data?.works || [],
-        edition: data?.edition,
-    };
-};
 
 export function HelpBox({ edition, active }) {
     return (
@@ -61,31 +46,45 @@ export function HelpBox({ edition, active }) {
     );
 }
 
-export function Gallery({ className }) {
+export function Gallery({ className, comp }) {
     const [clicked, setClicked] = useState(null);
+    const [entries, setEntries] = useState(null);
     const [listOpen, setListOpen] = useState(null);
     const router = useRouter();
-    const { works, edition } = useWorks(router.query);
 
     useEffect(() => {
-        if (works) {
+        const fetchData = async () => {
+            const { data, error } = await supabase
+                .from('competition_entries')
+                .select()
+                .eq('competition', comp.id);
+            if (error) return message.error(error.message);
+            return setEntries(data);
+        };
+
+        if (comp) fetchData();
+    }, [comp]);
+
+    useEffect(() => {
+        if (entries) {
             const id = router.query?.gallery_id;
-            if (id) setClicked(works.find((v) => v.id == id));
+            if (id) setClicked(entries.find((v) => v.id == id));
             else setClicked(null);
         }
-    }, [router.query, works]);
+    }, [router.query, entries]);
 
     const switchByIndexDiff = (diff) => {
         if (!diff) return;
         let index =
-            (works.findIndex((v) => v.id == clicked.id) + diff) % works.length;
-        if (index == -1) index = works.length - 1;
+            (entries.findIndex((v) => v.id == clicked.id) + diff) %
+            entries.length;
+        if (index == -1) index = entries.length - 1;
 
         router.push(
             {
                 pathname: '/gallery',
                 query: {
-                    id: works[index]?.id,
+                    id: entries[index]?.id,
                 },
             },
             undefined,
@@ -99,25 +98,25 @@ export function Gallery({ className }) {
         setListOpen(false);
     };
 
-    return (
+    return comp ? (
         <section className={[style.main, className].join(' ')} id="gallery">
             <MainCanvas
                 className={style.mainCanvas}
-                data={works}
-                edition={edition}
+                data={entries}
+                comp={comp}
             />
             <WorkInfoBox
-                work={clicked}
+                entry={clicked}
                 className={[
                     style.workInfoBox,
                     clicked ? style.active : null,
                     listOpen ? style.listOpen : null,
                 ].join(' ')}
             />
-            <HelpBox active={!clicked} edition={edition} />
+            <HelpBox active={!clicked} edition={comp} />
             <WorkSelector
                 active={listOpen}
-                works={works}
+                entries={entries}
                 onNext={() => switchByIndexDiff(+1)}
                 onPrev={() => switchByIndexDiff(-1)}
                 switchTo={switchTo}
@@ -135,5 +134,7 @@ export function Gallery({ className }) {
             </div>
             {!clicked && <div className={style.scrollLine} />}
         </section>
+    ) : (
+        <Loader space />
     );
 }
