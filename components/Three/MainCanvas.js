@@ -33,9 +33,9 @@ export function MainCanvas({ data, edition, className }) {
         return () => clearInterval(textSizeInterval);
     }, []);
 
-    const getTextSize = () => windowSize / edition?.name?.length / 50;
-
-    const getTextOffset = () => getTextSize() * 0.2;
+    const getTextSize = () => windowSize / edition?.name?.length / 150;
+    const editionNameOffset = getTextSize() > 0.5 ? 2.75 : 2.25;
+    const editionIdOffset = editionNameOffset - getTextSize() * 1.25;
 
     return (
         <Canvas
@@ -54,21 +54,19 @@ export function MainCanvas({ data, edition, className }) {
                     fontSize={getTextSize()}
                     anchorX="center"
                     anchorY="middle"
-                    position={[0, 2.5 - getTextOffset() * 0.5, 0]}
+                    // position={[0, 2.5 - getTextOffset() * 0.5, 0]}
+                    position={[0, editionNameOffset, 0]}
                 >
                     {edition?.name}
                 </Text>
                 <Text
                     color={colors['cedar'][400]}
                     font="/fonts/LibreBaskerville-Regular.ttf"
-                    fontSize={
-                        0.32 * getTextSize() < 0.15
-                            ? 0.15
-                            : 0.32 * getTextSize()
-                    }
+                    fontSize={getTextSize() * (windowSize > 3250 ? 0.5 : 0.6)}
                     anchorX="center"
                     anchorY="middle"
-                    position={[0, 1.8 + getTextOffset() * 0.32, 0]}
+                    // position={[0, 1.8 + getTextOffset() * 0.32, 0]}
+                    position={[0, editionIdOffset, 0]}
                 >
                     {edition?.type} - Edizione{' '}
                     {convertNumberToNumeralForm(
