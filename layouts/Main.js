@@ -1,10 +1,24 @@
-import { Navbar, Footer } from 'components';
+import { Navbar, Footer, Loader } from 'components';
+import supabase from 'lib/supabase';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from 'styles/layouts/main.module.css';
 
 export default function Main({ children, className, navbarProps }) {
     const [navbarTheme, setNavbarTheme] = useState('dark');
+    const [info, setInfo] = useState(null);
+
+    useEffect(() => {
+        const fetchInfo = async () => {
+            const { data, error } = await supabase.from('info').select();
+            if (error) return message.error(error.message);
+            const incInfo = {};
+            data.forEach((v) => (incInfo[v.id] = v.value));
+            return setInfo(incInfo);
+        };
+
+        fetchInfo();
+    }, []);
 
     const switchTheme = (theme) => {
         setNavbarTheme(theme);
@@ -12,12 +26,12 @@ export default function Main({ children, className, navbarProps }) {
 
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-            return React.cloneElement(child, { switchTheme });
+            return React.cloneElement(child, { switchTheme, info });
         }
         return child;
     });
 
-    return (
+    return info ? (
         <main
             id="mainWrapper"
             className={[
@@ -28,9 +42,15 @@ export default function Main({ children, className, navbarProps }) {
             <Head>
                 <title>ReteISSA</title>
             </Head>
-            <Navbar theme={navbarTheme} {...navbarProps} />
+            <Navbar
+                theme={navbarTheme}
+                links={info.NAVBAR_LINKS}
+                {...navbarProps}
+            />
             {childrenWithProps}
             <Footer />
         </main>
+    ) : (
+        <Loader />
     );
 }

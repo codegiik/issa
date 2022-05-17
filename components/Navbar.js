@@ -3,53 +3,13 @@ import Image from 'next/image';
 import LogoText from 'assets/svgs/LogoText';
 import veliero from 'public/imgs/veliero.png';
 import velieroDark from 'public/imgs/velierodark.png';
+import { Link } from './Link';
 
 import style from 'styles/components/navbar.module.css';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-export function Link({ href, children }) {
-    const router = useRouter();
-
-    return (
-        <a
-            onClick={() => {
-                try {
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center',
-                    });
-                } catch (e) {
-                    console.log(e);
-                }
-                window.history.pushState(href, '', href);
-            }}
-        >
-            {children}
-        </a>
-    );
-}
-
-const LINKS = [
-    {
-        href: '#hero',
-        label: 'Home',
-    },
-    {
-        href: '#about',
-        label: 'Chi Siamo',
-    },
-    {
-        href: '#gallery',
-        label: 'Premio ISSA',
-    },
-    {
-        href: '#initiatives',
-        label: 'Iniziative',
-    },
-];
-
-export function Navbar({ className, theme }) {
+export function Navbar({ className, theme, links }) {
     const [menuActive, setMenuActive] = useState(false);
     const router = useRouter();
 
@@ -74,7 +34,7 @@ export function Navbar({ className, theme }) {
                     <LogoText className={style.logoText} />
                 </div>
                 <div className={style.links}>
-                    {LINKS.map((v, i) => (
+                    {links.map((v, i) => (
                         <Link href={v.href} {...v} key={i} passHref>
                             <p
                                 className={[
@@ -104,7 +64,7 @@ export function Navbar({ className, theme }) {
                     menuActive ? style.open : null,
                 ].join(' ')}
             >
-                {LINKS.map((v, i) => (
+                {links.map((v, i) => (
                     <Link href={v.href} {...v} key={i} passHref>
                         <p
                             className={[

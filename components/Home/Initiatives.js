@@ -2,33 +2,16 @@ import Divider from 'assets/svgs/Divider';
 import { Heading } from '../Heading';
 import style from 'styles/components/initiatives.module.css';
 import { useRouter } from 'next/router';
+import { Loader } from 'components';
 
-const INITIATIVES = [
-    {
-        title: 'Corsi',
-        href: '/courses',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-        title: 'Seminari',
-        href: '/seminars',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-        title: 'Premio Issa',
-        href: '/premioissa',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-];
-
-export function Initiatives() {
+export function Initiatives({ data }) {
     const router = useRouter();
 
-    return (
+    return data ? (
         <section id="initiatives" className={style.main}>
             <Heading className={style.heading}>Iniziative</Heading>
             <div className={style.initiativesContainer}>
-                {INITIATIVES.map((v, i) => (
+                {data.map((v, i) => (
                     <div
                         className={style.initiativeBox}
                         key={i}
@@ -50,5 +33,7 @@ export function Initiatives() {
                 ))}
             </div>
         </section>
+    ) : (
+        <Loader space />
     );
 }

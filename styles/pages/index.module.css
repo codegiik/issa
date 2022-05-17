@@ -9,3 +9,18 @@
 .hero {
     /* @apply pt-6; */
 }
+
+.otherComps {
+    @apply text-center text-warmGray-900 opacity-50 hover:opacity-70;
+    @apply relative cursor-pointer;
+
+    &:hover:after {
+        @apply h-[2px];
+    }
+
+    &:after {
+        content: ' ';
+        @apply absolute bottom-0 inset-x-0 bg-warmGray-900 h-[1px];
+        @apply transition-all;
+    }
+}

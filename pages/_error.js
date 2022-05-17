@@ -1,10 +1,14 @@
+import { ErrorPage } from 'components';
+
 function Error({ statusCode }) {
     return (
-        <p>
-            {statusCode
-                ? `An error ${statusCode} occurred on server`
-                : 'An error occurred on client'}
-        </p>
+        <ErrorPage
+            error={{
+                message:
+                    "Ti sei perso nel mare di ReteISSA? Non c'è problema, torna a casa cliccando qui sotto.",
+                code: statusCode,
+            }}
+        />
     );
 }
 
