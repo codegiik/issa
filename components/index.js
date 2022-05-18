@@ -16,3 +16,4 @@ export { TableEditor } from './Admin/TableEditor';
 export { CourseTile } from './Courses/CourseTile';
 export { CompetitionTile } from './Competitions/CompetitionTile';
 export { Podium } from './Competitions/Podium';
+export { CreatePopup } from './Admin/CreatePopup';

@@ -32,7 +32,11 @@
             @apply flex justify-center items-center;
 
             & > * {
-                @apply flex-1;
+                @apply flex-[2];
+
+                &.buttonCell {
+                    @apply flex-[0.5] flex justify-center items-center cursor-pointer;
+                }
             }
         }
 
@@ -42,7 +46,7 @@
             @apply border-[1px] border-cedar-700;
 
             p {
-                @apply border-l-[1px] border-cedar-700 px-2 font-semibold;
+                @apply border-l-[1px] border-cedar-700 px-3 font-semibold;
 
                 &:first-child {
                     @apply border-l-0;

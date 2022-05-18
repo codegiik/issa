@@ -108,7 +108,6 @@ export function AdminLayout({ children }) {
                 .from('users')
                 .select()
                 .eq('email', s?.user?.email);
-            console.log(s);
             if (userData?.data?.length > 0) setSession(s);
             else setSession('notAllowed');
         } else setSession(false);

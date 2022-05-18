@@ -57,3 +57,27 @@ textarea {
 .button {
     @apply px-2 py-1 bg-cedar-500 text-stark-white-100;
 }
+
+/* json-forms */
+.vertical-layout-item > div {
+    @apply flex flex-col w-full my-2;
+
+    label {
+        @apply opacity-60;
+    }
+
+    input,
+    select,
+    textarea {
+        @apply bg-stark-white-100 border-[1px] border-cedar;
+        @apply px-2 py-1;
+    }
+
+    .validation {
+        @apply text-sm opacity-50;
+
+        &.validation_error {
+            @apply text-red-700;
+        }
+    }
+}

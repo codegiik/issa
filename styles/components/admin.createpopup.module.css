@@ -8,7 +8,7 @@
     .popup {
         @apply bg-white flex flex-col;
         @apply py-4 px-5;
-        @apply w-full sm:w-[500px];
+        @apply w-full sm:w-[500px] max-h-[500px] overflow-auto;
 
         h3 {
             @apply font-bold w-full text-2xl sm:text-3xl;

@@ -19,7 +19,7 @@ export function DataPopup({ insert }) {
     return <div className={style.dataPopup}></div>;
 }
 
-export function TableRow({ data, update, schema, getId }) {
+export function TableRow({ data, edit, remove, update, schema, getId, index }) {
     const [editing, setEditing] = useState(null);
     const inputEl = useRef(null);
     const editingRef = useRef(null);
@@ -52,27 +52,73 @@ export function TableRow({ data, update, schema, getId }) {
 
     return (
         <div className={[style.row, editing && style.editing].join(' ')}>
-            {Object.entries(schema.properties).map(([id, v]) => (
+            {Object.entries(schema.properties).map(([id, v]) =>
+                v.type != 'object' ? (
+                    <div
+                        key={id}
+                        onClick={() => setEditing(id)}
+                        className={editing == id ? style.editing : null}
+                        data-ignore-click="true"
+                    >
+                        {editing == id && !v.uneditable ? (
+                            <Input
+                                type={v.type || 'string'}
+                                placeholder={v.name}
+                                value={renderValue(id, v)}
+                                onChange={(e) =>
+                                    changeValue(id, e.target.value)
+                                }
+                                as={v.as}
+                                ref={inputEl}
+                            />
+                        ) : (
+                            renderValue(id, v) || 'No Data'
+                        )}
+                    </div>
+                ) : null
+            )}
+            {edit && (
                 <div
-                    key={id}
-                    onClick={() => setEditing(id)}
-                    className={editing == id ? style.editing : null}
-                    data-ignore-click="true"
+                    onClick={() => edit(data, getId(data), index)}
+                    className={style.buttonCell}
                 >
-                    {editing == id && !v.uneditable ? (
-                        <Input
-                            type={v.type || 'string'}
-                            placeholder={v.name}
-                            value={renderValue(id, v)}
-                            onChange={(e) => changeValue(id, e.target.value)}
-                            as={v.as}
-                            ref={inputEl}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                         />
-                    ) : (
-                        renderValue(id, v) || 'No Data'
-                    )}
+                    </svg>
                 </div>
-            ))}
+            )}
+            {remove && (
+                <div
+                    onClick={() => remove(getId(data))}
+                    className={style.buttonCell}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                    </svg>
+                </div>
+            )}
         </div>
     );
 }
@@ -84,6 +130,8 @@ export function TableEditor({
     finder,
     tablename,
     buttons,
+    edit,
+    remove,
 }) {
     const [query, setQuery] = useState('');
     const [filtered, setFiltered] = useState(null);
@@ -175,18 +223,26 @@ export function TableEditor({
                     <div className={style.table}>
                         <div className={style.header}>
                             {Object.entries(properties).map(
-                                ([key, { label }]) => (
-                                    <p key={key}>{label}</p>
-                                )
+                                ([key, { label, type }]) =>
+                                    type != 'object' ? (
+                                        <p key={key}>{label}</p>
+                                    ) : null
+                            )}
+                            {edit && <p className={style.buttonCell}>Mod.</p>}
+                            {remove && (
+                                <p className={style.buttonCell}>Elim.</p>
                             )}
                         </div>
                         {filtered.map((v, i) => (
                             <TableRow
                                 data={v}
                                 key={i}
+                                index={i}
                                 update={updateCourse}
                                 schema={schema}
                                 getId={getId}
+                                edit={edit}
+                                remove={remove}
                             />
                         ))}
                         <div className={style.footer}>

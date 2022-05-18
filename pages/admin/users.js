@@ -6,6 +6,7 @@ import style from 'styles/pages/admin.users.module.css';
 import { CreatePopup } from 'components/Admin/CreatePopup';
 import { useState, useEffect } from 'react';
 import { message } from 'react-message-popup';
+import { getUiSchema } from 'lib/utils';
 
 const SCHEMA = {
     type: 'object',
@@ -38,44 +39,11 @@ const SCHEMA = {
     },
 };
 
-const UISCHEMA = {
-    type: 'VerticalLayout',
-    elements: [
-        {
-            type: 'Control',
-            scope: '#/properties/name',
-            label: SCHEMA.properties.name.label,
-        },
-        {
-            type: 'Control',
-            label: 'Cognome',
-            scope: '#/properties/surname',
-            label: SCHEMA.properties.surname.label,
-        },
-        {
-            type: 'Control',
-            label: 'Email',
-            scope: '#/properties/email',
-            label: SCHEMA.properties.email.label,
-        },
-        {
-            type: 'Control',
-            label: 'Ruolo',
-            scope: '#/properties/role',
-            label: SCHEMA.properties.role.label,
-        },
-        {
-            type: 'Control',
-            label: 'Membro Dal',
-            scope: '#/properties/joined_in',
-            label: SCHEMA.properties.joined_in.label,
-        },
-    ],
-};
-
 export default function AdminPanel() {
     const [data, setData] = useState(null);
+    const [oldId, setOldId] = useState(null);
     const [initialPopupData, setInitialPopupData] = useState(null);
+    const [updateIndex, setUpdateIndex] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -90,11 +58,36 @@ export default function AdminPanel() {
     }, []);
 
     const insertData = async (incData) => {
+        let errors;
+        const validate = (await import('jsonschema')).validate;
+        if ((errors = validate(incData, SCHEMA).errors).length > 0)
+            return errors.forEach((v) => message.error(v.stack));
+
         const res = await supabase.from('users').insert(incData);
         if (res.error) message.error(res.error.message);
         else {
             message.success('Utente creato con successo');
             setData([...data, ...res.data]);
+            setInitialPopupData(null);
+        }
+    };
+
+    const updateData = async (incData) => {
+        let errors;
+        const validate = (await import('jsonschema')).validate;
+        if ((errors = validate(incData, SCHEMA).errors).length > 0)
+            return errors.forEach((v) => message.error(v.stack));
+
+        const res = await supabase.from('users').update(incData).match(oldId);
+        if (res.error) message.error(res.error.message);
+        else {
+            message.success('Utente modificato con successo');
+            const newData = data;
+            newData[updateIndex] = incData[0];
+
+            setData(newData);
+            setOldId(null);
+            setUpdateIndex(null);
             setInitialPopupData(null);
         }
     };
@@ -106,17 +99,34 @@ export default function AdminPanel() {
             </AdminHeading>
             <CreatePopup
                 visible={initialPopupData != null}
-                close={() => setInitialPopupData(null)}
+                close={() => {
+                    setInitialPopupData(null);
+                    setOldId(null);
+                }}
                 initialData={initialPopupData}
-                name="Nuovo Utente"
+                name={oldId ? 'Modifica Utente' : 'Nuovo Utente'}
                 schema={SCHEMA}
-                uischema={UISCHEMA}
-                insert={insertData}
+                uischema={getUiSchema(SCHEMA)}
+                insert={oldId ? updateData : insertData}
             />
             <TableEditor
                 data={data}
                 tablename="users"
                 schema={SCHEMA}
+                remove={async ({ email }) => {
+                    const { error } = await supabase
+                        .from('users')
+                        .delete()
+                        .match({ email });
+                    setData(data.filter((user) => user.email != email));
+                    if (error) message.error(error.message);
+                    else message.success('Utente rimosso con successo.');
+                }}
+                // edit={(data, id, index) => {
+                //     setInitialPopupData(data);
+                //     setOldId(id);
+                //     setUpdateIndex(index);
+                // }}
                 getId={(data) => ({
                     email: data.email,
                 })}

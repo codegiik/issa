@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { JsonForms } from '@jsonforms/react';
 
-import { vanillaRenderers, vanillaCells } from '@jsonforms/vanilla-renderers';
+// import { vanillaRenderers, vanillaCells } from '@jsonforms/vanilla-renderers';
+import {
+    materialRenderers,
+    materialCells,
+} from '@jsonforms/material-renderers';
 
 import style from 'styles/components/admin.createpopup.module.css';
 
@@ -16,7 +20,11 @@ export function CreatePopup({
     cells,
     name,
 }) {
-    const [data, setData] = useState(initialData);
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        setData(initialData);
+    }, [initialData]);
 
     if (!visible) return;
     return (
@@ -26,8 +34,8 @@ export function CreatePopup({
                 <h3>{name}</h3>
                 <JsonForms
                     schema={schema}
-                    renderers={renderers || vanillaRenderers}
-                    cells={cells || vanillaCells}
+                    renderers={renderers || materialRenderers}
+                    cells={cells || materialCells}
                     uischema={uischema}
                     data={data}
                     onChange={({ data, _errors }) => setData(data)}
