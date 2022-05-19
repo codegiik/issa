@@ -10,8 +10,16 @@ export function Embed({ url, className, width, height }) {
                 ))
         )
             return `https://www.youtube.com/embed/${value[3]}?autoplay=0&origin=${window.location.origin}&controls=0&rel=1`;
-        else return url;
+        else if (
+            (value =
+                /https?:\/\/(www\.)?drive\.google\.com\/file\/(.+)(\/view)/gi.exec(
+                    url
+                ))
+        ) {
+            return `https://drive.google.com/file/${value[2]}/preview`;
+        } else return url;
     };
+
     return (
         <iframe
             className={className}

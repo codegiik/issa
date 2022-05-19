@@ -124,7 +124,10 @@ function Entries({ competition, type }) {
         if ((errors = validate(incData, ENTRY_SCHEMA[type]).errors).length > 0)
             return errors.forEach((v) => message.error(v.stack));
 
-        const res = await supabase.from('competition_entries').insert(incData);
+        const res = await supabase.from('competition_entries').insert({
+            competition,
+            ...incData,
+        });
         if (res.error) message.error(res.error.message);
         else {
             message.success('Partecipante creato con successo');

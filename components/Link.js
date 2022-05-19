@@ -22,7 +22,7 @@ export function Link({
     const checkSamePage = () => router.pathname == getPathname();
 
     const goTo = () => {
-        if (scrollTo && checkSamePage()) {
+        if (scrollTo) {
             try {
                 document.querySelector(getHash()).scrollIntoView({
                     behavior,

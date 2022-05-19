@@ -23,7 +23,7 @@ export function Navbar({ className, theme, links }) {
                     className,
                 ].join(' ')}
             >
-                <div className={style.logo}>
+                <div className={style.logo} onClick={() => router.push('/')}>
                     <Image
                         src={theme == 'dark' ? veliero : velieroDark}
                         alt="Veliero"
