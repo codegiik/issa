@@ -259,7 +259,7 @@ function Frame({ url, clicked, c = new THREE.Color(), data, ...props }) {
                         raycast={() => null}
                         ref={image}
                         position={[0, 0, 0.7]}
-                        url={url}
+                        url={url || 'https://i.ibb.co/fnHShSz/aledime.png'}
                     />
                 </Suspense>
             </mesh>
