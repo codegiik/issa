@@ -12,7 +12,7 @@ export function Embed({ url, className, width, height }) {
             return `https://www.youtube.com/embed/${value[3]}?autoplay=0&origin=${window.location.origin}&controls=0&rel=1`;
         else if (
             (value =
-                /https?:\/\/(www\.)?docs\.google\.com\/(.+)(\/view|edit)/gi.exec(
+                /https?:\/\/(www\.)?docs\.google\.com\/(.+)\/(view|edit)/gi.exec(
                     url
                 ))
         ) {
