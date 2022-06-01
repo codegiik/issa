@@ -54,7 +54,7 @@ export function WorkInfoBox({ entry, className }) {
                     <div className={style.infoWrapper}>
                         <h2 className={style.workTitle}>{entry.data.title}</h2>
                         <p className={style.workAuthor}>
-                            Lavoro di {entry?.author} (Referente: Prof{' '}
+                            Lavoro di {entry?.author} (Referente:{' '}
                             {entry?.referee})
                         </p>
                         <p className={style.workDesc}>{entry.data?.desc}</p>
