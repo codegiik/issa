@@ -16,7 +16,7 @@ export function Embed({ url, className, width, height }) {
                     url
                 ))
         ) {
-            return `https://docs.google.com/${value[2]}/preview`;
+            return `https://docs.google.com/${value[2]}/embed`;
         } else if (
             (value =
                 /https?:\/\/(www\.)?drive\.google\.com\/file\/(.+)(\/view)/gi.exec(
