@@ -94,7 +94,7 @@ export function Gallery({ className, comp }) {
 
     const switchTo = (id) => {
         if (!id) return;
-        router.push(`/?gallery_id=${id}#gallery`, undefined, { shallow: true });
+        router.push(`/gallery?gallery_id=${id}`, undefined, { shallow: true });
         setListOpen(false);
     };
 

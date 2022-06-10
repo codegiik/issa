@@ -154,13 +154,9 @@ function Frames({
     });
 
     const setLocation = (id) => {
-        router.push(
-            id ? `/?gallery_id=${id}#gallery` : '/#gallery',
-            undefined,
-            {
-                shallow: true,
-            }
-        );
+        router.push(id ? `/gallery?gallery_id=${id}` : '/gallery', undefined, {
+            shallow: true,
+        });
     };
 
     return router ? (
