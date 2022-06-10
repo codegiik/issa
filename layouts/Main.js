@@ -4,8 +4,13 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import style from 'styles/layouts/main.module.css';
 
-export default function Main({ children, className, navbarProps }) {
-    const [navbarTheme, setNavbarTheme] = useState('dark');
+export default function Main({
+    children,
+    className,
+    navbarProps,
+    navbarInitialTheme,
+}) {
+    const [navbarTheme, setNavbarTheme] = useState(navbarInitialTheme);
     const [info, setInfo] = useState(null);
 
     useEffect(() => {
@@ -54,3 +59,7 @@ export default function Main({ children, className, navbarProps }) {
         <Loader />
     );
 }
+
+Main.defaultProps = {
+    navbarInitialTheme: 'dark',
+};
