@@ -81,5 +81,5 @@ module.exports = {
             mono: [...defaultFontFamily['mono']],
         },
     },
-    plugins: [],
+    plugins: [require('@tailwindcss/typography')],
 };
