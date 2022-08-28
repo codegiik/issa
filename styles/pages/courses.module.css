@@ -1,7 +1,0 @@
-.heading {
-    @apply my-5;
-}
-
-.wrapper {
-    @apply flex flex-col items-center gap-5 my-5;
-}

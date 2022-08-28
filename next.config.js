@@ -1,6 +1,9 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const withPreact = require('next-plugin-preact');
+
+const nextConfig = withPreact({
     reactStrictMode: true,
-    images: {
-        domains: ['drive.google.com'],
-    },
-};
+    swcMinify: true,
+});
+
+module.exports = nextConfig;
