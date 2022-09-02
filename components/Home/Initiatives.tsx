@@ -23,7 +23,7 @@ const INITIATIVES_DATA = [
     },
     {
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        href: '/competitions',
+        href: '/competizioni',
         title: 'Premio Issa',
     },
 ];

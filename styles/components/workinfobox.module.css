@@ -14,7 +14,7 @@
     }
 
     .workDesc {
-        @apply px-6 mt-3 text-lg text-warmGray-600;
+        @apply px-6 mt-3 text-lg text-zinc-500;
     }
 
     .reactPlayerWrapper {

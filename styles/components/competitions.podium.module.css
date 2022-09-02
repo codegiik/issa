@@ -1,20 +1,26 @@
 .wrapper tr th {
-    @apply bg-cedar-500 text-stark-white-500 border-2 border-stark-white-500 px-4 leading-8;
+    @apply bg-primary text-base-200 border-2 border-base-300 px-4 leading-8;
 }
 .smCell {
     @apply text-center;
 }
 .wrapper td {
     @apply px-2;
+
+    &.class {
+        @apply uppercase;
+    }
 }
 
 .wrapper tr {
+    @apply font-serif;
+
     &:first-child > td:last-child {
         @apply bg-amber-400;
     }
 
     &:nth-child(2) > td:last-child {
-        @apply bg-warmGray-300;
+        @apply bg-zinc-300;
     }
 
     &:nth-child(3) > td:last-child {

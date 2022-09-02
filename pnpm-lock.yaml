@@ -17,6 +17,7 @@ specifiers:
     eslint-plugin-unused-imports: ^2.0.0
     husky: ^8.0.1
     next: 12.2.4
+    numerals: ^0.1.3
     pocketbase: ^0.6.2
     postcss: ^8.4.16
     prettier: ^2.7.1
@@ -33,6 +34,7 @@ dependencies:
     '@jsonforms/react': 2.5.2_jisg3yqtl36erf4yenuf75ntg4
     clsx: 1.2.1
     next: 12.2.4_biqbaboplfbrettd7655fr4n2y
+    numerals: 0.1.3
     pocketbase: 0.6.2
     react: 18.2.0
     react-dom: 18.2.0_react@18.2.0
@@ -3046,6 +3048,13 @@ packages:
         dependencies:
             path-key: 3.1.1
         dev: true
+
+    /numerals/0.1.3:
+        resolution:
+            {
+                integrity: sha512-hwDnOfI5Sm/SJHT8vlPQ+i59OVEXhAoo10hY9tEs2orb4xdH51FhVIdbFOkFKjJylA6XXWAZNKEUu1EIO3ubgQ==,
+            }
+        dev: false
 
     /object-assign/4.1.1:
         resolution:

@@ -17,12 +17,19 @@ export const getCompleteUrl = (uri: string) =>
 export const getFileUrl = (
     record: any,
     param: string,
+    index: number = 0,
     format: undefined | string = undefined
 ) => {
+    const data = record[param]?.data;
     let url;
 
-    if (format) url = record[param]?.data?.attributes?.formats?.[format]?.url;
-    else url = record[param]?.data?.attributes?.url;
+    if (Array.isArray(data)) {
+        if (format) url = data[index]?.attributes?.formats?.[format]?.url;
+        else url = data[index]?.attributes?.url;
+    } else {
+        if (format) url = data?.attributes?.formats?.[format]?.url;
+        else url = data?.attributes?.url;
+    }
 
     return getCompleteUrl(url);
 };

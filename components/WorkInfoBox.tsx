@@ -1,8 +1,15 @@
 import style from 'styles/components/workinfobox.module.css';
 
-export function Embed({ url, className, width, height }) {
+export type EmbedProps = {
+    className?: string;
+    url: string;
+    width: string;
+    height: string;
+};
+
+export function Embed({ url, className, width, height }: EmbedProps) {
     const getSrc = () => {
-        let value;
+        let value: any;
         if (
             (value =
                 /https?:\/\/(www\.)?youtube.(it|com)\/watch\?v\=(.*)&?/.exec(
@@ -38,7 +45,6 @@ export function Embed({ url, className, width, height }) {
 }
 
 export function WorkInfoBox({ entry, className }) {
-    console.log(entry?.data.embed);
     return (
         <div className={[style.workInfoBox, className].join(' ')}>
             {entry && (

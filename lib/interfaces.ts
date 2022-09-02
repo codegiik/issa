@@ -24,6 +24,8 @@ export type CoursesRecord = {
 } & Record;
 
 export type CompetitionsRecord = {
+    attachments: any;
+    edition: number;
     name: string;
     description: string;
     status: string;
