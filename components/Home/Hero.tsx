@@ -39,8 +39,17 @@ export function Hero({ className }: HeroProps) {
             );
     }, []);
 
-    const pushLink = (href: string) => {
-        router.push(href, undefined, { shallow: true });
+    const pushLink = (post: any) => {
+        router.push(
+            {
+                pathname: '/articolo/[id]',
+                query: {
+                    id: post.id,
+                },
+            },
+            undefined,
+            { shallow: true }
+        );
     };
 
     const getTitle = (newsItem: NewsItem) => newsItem.title;
@@ -50,7 +59,7 @@ export function Hero({ className }: HeroProps) {
     return news ? (
         <section className={clsx(className, style.hero)} id="hero">
             <div
-                onClick={() => pushLink(news[0].href)}
+                onClick={() => pushLink(news[0])}
                 style={
                     {
                         '--bg-image': `url(${
@@ -71,7 +80,7 @@ export function Hero({ className }: HeroProps) {
                         href={newsItem.href}
                         onClick={(evt) => {
                             evt.preventDefault();
-                            pushLink(newsItem.href);
+                            pushLink(newsItem);
                         }}
                         key={newsItem.id}
                     >
