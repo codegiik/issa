@@ -1,19 +1,43 @@
-import Divider from 'assets/svgs/Divider';
-import { Heading } from '../Heading';
-import style from 'styles/components/initiatives.module.css';
-import { useRouter } from 'next/router';
-import { Loader } from 'components';
+/* assets */
+import Divider from 'assets/svg/Divider';
 
-export function Initiatives({ data }) {
+/* comp */
+import { Heading } from '../Heading';
+
+/* hooks */
+import { useRouter } from 'next/router';
+
+/* style */
+import style from 'styles/components/initiatives.module.css';
+
+const INITIATIVES_DATA = [
+    {
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        href: '/courses',
+        title: 'Corsi',
+    },
+    {
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        href: '/seminars',
+        title: 'Seminari',
+    },
+    {
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        href: '/competitions',
+        title: 'Premio Issa',
+    },
+];
+
+export function Initiatives() {
     const router = useRouter();
 
-    return data ? (
-        <section id="initiatives" className={style.main}>
+    return (
+        <section id="initiatives" className={style.wrapper}>
             <Heading className={style.heading}>Iniziative</Heading>
-            <div className={style.initiativesContainer}>
-                {data.map((v, i) => (
+            <div className={style.boxes}>
+                {INITIATIVES_DATA.map((v, i) => (
                     <div
-                        className={style.initiativeBox}
+                        className={style.box}
                         key={i}
                         onClick={() => router.push(v.href)}
                     >
@@ -33,7 +57,5 @@ export function Initiatives({ data }) {
                 ))}
             </div>
         </section>
-    ) : (
-        <Loader space />
     );
 }

@@ -1,0 +1,29 @@
+.wrapper {
+    @apply grid grid-cols-1 grid-rows-1 lg:grid-cols-3 h-full;
+
+    .cover {
+        @apply hidden lg:block col-span-2 w-full h-full object-cover;
+    }
+
+    .form,
+    form {
+        @apply flex flex-col items-center justify-center w-full;
+
+        .providerLink,
+        input {
+            @apply w-9/12;
+        }
+
+        .or {
+            @apply my-2 font-serif text-xs opacity-50;
+        }
+
+        input {
+            @apply px-2 py-1 my-2 border-2 border-accent rounded-sm;
+        }
+
+        input[type='submit'] {
+            @apply bg-primary text-base-200 cursor-pointer border-0;
+        }
+    }
+}

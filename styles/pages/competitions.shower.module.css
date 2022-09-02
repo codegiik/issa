@@ -1,0 +1,32 @@
+.heading {
+    @apply my-5;
+}
+
+.wrapper {
+    @apply w-full flex flex-col items-center;
+    @apply min-h-screen;
+
+    .selector {
+        @apply w-full flex gap-2 items-center justify-center;
+    }
+
+    .bandi {
+        @apply h-full flex items-center justify-center flex-col w-full md:w-10/12 my-5;
+    }
+
+    .gallery {
+        @apply my-5 w-full;
+    }
+
+    .podiumWrapper {
+        @apply my-5;
+
+        h3 {
+            @apply text-xl md:text-2xl text-center my-3 font-serif font-semibold;
+
+            span {
+                @apply capitalize;
+            }
+        }
+    }
+}

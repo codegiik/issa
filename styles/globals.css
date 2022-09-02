@@ -1,11 +1,84 @@
+/* Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Generals */
 html,
-body {
+body,
+#__next {
     padding: 0;
     margin: 0;
-    @apply font-sans;
-    @apply font-sans;
+    height: 100%;
+    width: 100%;
+}
+
+html {
+    @apply !bg-base-200;
+    scroll-padding-top: calc(50px + 2.5em);
+}
+
+body {
+    @apply bg-base-200 font-body;
+    @apply text-zinc-800;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply text-primary;
+}
+
+:root {
+    --heading-distance: 40px;
+    --heading-distance-sm: 40px;
+    --heading-distance-md: 50px;
+    --heading-distance-lg: 50px;
+}
+
+input,
+textarea {
+    &:focus {
+        @apply outline-none;
+    }
+}
+
+.button {
+    @apply px-2 py-1 bg-primary text-base-100;
+}
+
+/* json-forms */
+.vertical-layout-item > div {
+    @apply flex flex-col w-full my-2;
+
+    label {
+        @apply opacity-60;
+    }
+
+    input,
+    select,
+    textarea {
+        @apply bg-base-100 border-[1px] border-primary;
+        @apply px-2 py-1;
+    }
+
+    .validation {
+        @apply text-sm opacity-50;
+
+        &.validation_error {
+            @apply text-red-700;
+        }
+    }
 }

@@ -1,0 +1,11 @@
+.compSelector {
+    @apply flex mt-5 w-full gap-2;
+
+    select {
+        @apply flex-1 bg-stark-white-300 border-[1px] border-cedar;
+    }
+}
+
+.divider {
+    @apply h-[1px] w-full border-cedar my-5;
+}

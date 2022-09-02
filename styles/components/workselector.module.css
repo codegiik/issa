@@ -1,0 +1,25 @@
+.workSelector {
+    @apply absolute top-0 bottom-0 z-20 w-full pb-2 -left-full transition-all;
+    @apply bg-stark-white-200;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 500px;
+
+    &.active {
+        @apply left-0;
+    }
+
+    .schoolWrapper {
+        .schoolHeading {
+            @apply mt-5 ml-5 text-xl;
+        }
+
+        .schoolProject {
+            @apply px-4 py-2 text-lg cursor-pointer hover:bg-stark-white-300;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

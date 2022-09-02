@@ -1,5 +1,7 @@
+/* comp */
 import Link from 'next/link';
 
+/* style */
 import style from 'styles/components/footer.module.css';
 
 const FOOTER_LINKS = [
@@ -46,13 +48,13 @@ const FOOTER_LINKS = [
 
 export function FooterNavbar() {
     return (
-        <div className={style.footerNavbar}>
-            {FOOTER_LINKS.map((v, i) => (
-                <div className={style.linksSection} key={i}>
-                    <h5>{v.title}</h5>
-                    {v.links.map((v, i) => (
-                        <Link href={v.href} key={i} passHref>
-                            <p className={style.link}>{v.name}</p>
+        <div className={style.navbar}>
+            {FOOTER_LINKS.map((linkSection) => (
+                <div className={style.linksSection} key={linkSection.title}>
+                    <h5 className={style.title}>{linkSection.title}</h5>
+                    {linkSection.links.map((link) => (
+                        <Link href={link.href} key={link.href}>
+                            <p className={style.link}>{link.name}</p>
                         </Link>
                     ))}
                 </div>
@@ -61,13 +63,13 @@ export function FooterNavbar() {
     );
 }
 
-export function Footer({}) {
+export function Footer() {
     return (
         <>
-            <FooterNavbar />
-            <div className={style.footer}>
-                <p>
-                    Associazione Issa - Pozzuoli (NA) -{' '}
+            <div className={style.wrapper}>
+                <FooterNavbar />
+                <p className={style.copy}>
+                    Associazione Issa - Pozzuoli (NA){' '}
                     <span>&copy; Copyright 2022 codegiik</span>
                 </p>
             </div>

@@ -8,21 +8,30 @@ module.exports = {
     ],
     theme: {
         fontFamily: {
-            sans: ['Poppins', ...defaultTheme.fontFamily.sans],
-            serif: [...defaultTheme.fontFamily.serif],
+            sans: [...defaultTheme.fontFamily.sans],
+            serif: ['Libre Baskerville', ...defaultTheme.fontFamily.serif],
+            body: ['EB Garmond', ...defaultTheme.fontFamily.serif],
             mono: [...defaultTheme.fontFamily.mono],
-            poppins: 'Poppins',
+            'libre-baskerville': 'Libre Baskerville',
+            'eb-garmond': 'EB Garamond',
         },
     },
     daisyui: {
         themes: [
             {
-                mytheme: {
-                    primary: '#A6242C',
-                    secondary: '#DF851B',
-                    accent: '#890A4F',
-                    neutral: '#36312B',
-                    'base-100': '#ffffff',
+                issa: {
+                    primary: '#3A1419',
+                    'primary-focus': '#2b0d10',
+                    'primary-content': '#E5E1DD',
+                    secondary: '#571C24',
+                    'secondary-focus': '#561a21',
+                    'secondary-content': '#E5E1DD',
+                    accent: '#971717',
+                    neutral: '#333',
+                    'neutral-focus': '#222',
+                    'base-100': '#F5ECE2',
+                    'base-200': '#E8D8C3',
+                    'base-300': '#D8BE9A',
                     info: '#3ABFF8',
                     success: '#36D399',
                     warning: '#FBBD23',
@@ -31,5 +40,5 @@ module.exports = {
             },
         ],
     },
-    plugins: [require('daisyui')],
+    plugins: [require('@tailwindcss/typography'), require('daisyui')],
 };

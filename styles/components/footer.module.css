@@ -1,0 +1,38 @@
+.wrapper {
+    @apply text-secondary-content text-center;
+
+    .navbar {
+        @apply flex bg-secondary;
+        @apply justify-center items-center;
+        @apply py-5 md:py-10;
+        @apply flex-wrap md:flex-nowrap;
+
+        .linksSection:not(:last-child) {
+            @apply border-b-2 md:border-b-0 md:border-r-2 border-base-200 border-opacity-30;
+        }
+
+        .linksSection {
+            @apply md:px-24 md:mx-0 w-full mx-10 py-5 md:py-0;
+
+            .title {
+                @apply font-serif text-secondary-content uppercase;
+            }
+
+            .link {
+                @apply opacity-80 hover:opacity-100 cursor-pointer;
+            }
+
+            &.linksSection:first-child {
+                @apply md:text-left;
+            }
+
+            &.linksSection:last-child {
+                @apply md:text-right;
+            }
+        }
+    }
+
+    .copy {
+        @apply text-xs py-2 bg-primary-focus text-secondary-content text-opacity-80 tracking-wider;
+    }
+}

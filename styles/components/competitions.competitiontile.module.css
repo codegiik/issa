@@ -1,0 +1,11 @@
+.wrapper {
+    @apply w-full bg-stark-white-300 cursor-pointer px-4 py-2;
+
+    h3 {
+        @apply font-bold text-xl sm:text-2xl;
+    }
+
+    p {
+        @apply text-lg;
+    }
+}

@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
-const withPreact = require('next-plugin-preact');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+});
 
-const nextConfig = withPreact({
+const nextConfig = withBundleAnalyzer({
     reactStrictMode: true,
     swcMinify: true,
 });

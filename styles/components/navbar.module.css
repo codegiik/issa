@@ -1,0 +1,74 @@
+.navbar {
+    @apply font-serif bg-primary text-base-100;
+    @apply flex px-4 py-5 md:px-6 lg:px-16 transition-all;
+    @apply sticky left-0 right-0 top-0 z-[90];
+
+    & > * {
+        transition: all 0.15s ease-out;
+    }
+
+    .logo {
+        @apply flex items-center mr-auto gap-2 cursor-pointer;
+
+        .logoVeliero {
+            @apply !h-10 !w-10 object-cover;
+        }
+
+        .logoText {
+            @apply fill-current text-base-100;
+            @apply w-auto h-6;
+        }
+    }
+
+    .links {
+        @apply flex items-center gap-8;
+
+        .link {
+            @apply text-xl text-base-200 hover:text-base-100;
+            @apply hidden cursor-pointer md:block;
+
+            &.selected {
+                @apply relative;
+
+                &::before {
+                    @apply absolute left-0 w-full h-1 bg-base-100 -bottom-1;
+                    content: '';
+                }
+            }
+        }
+
+        .hamburgerIcon {
+            @apply text-3xl cursor-pointer md:hidden;
+            user-select: none;
+        }
+    }
+}
+
+.hamburgerMenu {
+    @apply fixed top-0 z-50 w-screen h-screen bg-primary md:hidden;
+    right: calc(-100% - 40px);
+    @apply flex flex-col justify-center px-12 gap-6;
+    @apply text-base-300;
+    transition: all 0.5s ease-in-out;
+
+    &.open {
+        right: 0;
+    }
+
+    .closeIcon {
+        @apply absolute text-4xl cursor-pointer top-10 right-10;
+    }
+
+    .link {
+        @apply font-serif text-4xl font-bold cursor-pointer w-max;
+
+        &.selected {
+            @apply relative;
+
+            &::before {
+                @apply absolute left-0 w-full h-1 bg-base-300 -bottom-1;
+                content: '';
+            }
+        }
+    }
+}

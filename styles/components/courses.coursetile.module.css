@@ -1,0 +1,32 @@
+.wrapper {
+    @apply w-full bg-primary flex justify-between text-base-200 py-4;
+
+    .text {
+        @apply w-2/3 ml-8;
+
+        .name {
+            @apply text-xl font-bold font-serif;
+        }
+
+        .desc {
+            @apply prose text-base-100;
+        }
+
+        .org {
+            @apply mt-2 text-xs;
+        }
+    }
+
+    .icons {
+        @apply h-full my-auto  flex-col justify-center mr-8;
+
+        .typology {
+            @apply mb-4 leading-8 w-[2rem] bg-base-300 text-center text-xl text-primary font-serif font-bold uppercase;
+        }
+
+        .goTo {
+            @apply mt-4 leading-8 w-[2rem] bg-primary text-center text-xl text-base-300 font-bold cursor-pointer;
+            @apply hover:bg-base-200 hover:text-primary;
+        }
+    }
+}

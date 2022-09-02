@@ -1,8 +1,14 @@
+import { About, Hero, Initiatives } from 'components';
 import Main from 'layouts/Main';
-import type { ReactElement } from 'react';
 
 export default function Home() {
-    return 'Home';
+    return (
+        <>
+            <Hero />
+            <About />
+            <Initiatives />
+        </>
+    );
 }
 
-Home.getLayout = (page: ReactElement) => <Main>{page}</Main>;
+Home.getLayout = (page: JSX.Element) => <Main>{page}</Main>;

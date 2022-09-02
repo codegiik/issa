@@ -1,0 +1,28 @@
+.wrapper {
+    @apply bg-base-200 py-12;
+
+    .heading {
+        --heading-distance-lg: 7rem;
+        @apply lg:-mb-16;
+    }
+
+    .content {
+        @apply flex lg:h-[calc(100vh-50px-10rem)] overflow-hidden;
+        @apply justify-center lg:justify-start items-center;
+        @apply relative;
+
+        .veliero {
+            @apply absolute top-1/2 h-full right-0;
+            transform: translate(20%, -50%);
+            @apply hidden lg:block;
+            @apply text-primary;
+            fill: currentColor;
+        }
+
+        .text {
+            @apply text-xl md:text-2xl;
+            @apply w-11/12 lg:w-1/2 lg:ml-28;
+            @apply my-5 lg:my-10;
+        }
+    }
+}

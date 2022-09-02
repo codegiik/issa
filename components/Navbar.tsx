@@ -1,41 +1,36 @@
+/* assets */
 import Image from 'next/image';
+import LogoText from 'assets/svg/LogoText';
+import LogoIcon from 'assets/png/LogoIcon.png';
 
-import LogoText from 'assets/svgs/LogoText';
-import veliero from 'public/imgs/veliero.png';
-import velieroDark from 'public/imgs/velierodark.png';
-import { Link } from './Link';
-
-import style from 'styles/components/navbar.module.css';
+/* hooks */
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-export type CustomLink = {
-    href: string;
-    label: string;
-};
+/* style */
+import style from 'styles/components/navbar.module.css';
+import clsx from 'clsx';
+
+/* @types */
+import { CustomLink, CustomLinkProps } from './CustomLink';
 
 export type NavbarProps = {
     className?: string;
-    links?: CustomLink[];
+    links?: (CustomLinkProps & {
+        label: string;
+    })[];
 };
 
 export function Navbar({ className, links }: NavbarProps) {
-    const [menuActive, setMenuActive]: [false, Function] = useState(false);
+    const [menuActive, setMenuActive] = useState<boolean>(false);
     const router = useRouter();
 
     return (
         <>
-            <nav
-                id="mainNavbar"
-                className={[
-                    style.mainNavbar,
-                    //theme == 'dark' ? style.dark : style.light,
-                    className,
-                ].join(' ')}
-            >
+            <nav id="mainNavbar" className={clsx(style.navbar, className)}>
                 <div className={style.logo} onClick={() => router.push('/')}>
                     <Image
-                        src={veliero}
+                        src={LogoIcon}
                         alt="Veliero"
                         width={50}
                         height={50}
@@ -44,54 +39,81 @@ export function Navbar({ className, links }: NavbarProps) {
                     <LogoText className={style.logoText} />
                 </div>
                 <div className={style.links}>
-                    {links &&
-                        links.map((v, i) => (
-                            <Link href={v.href} {...v} key={i} passHref>
-                                <p
-                                    className={[
-                                        style.link,
-                                        router.asPath == v.href
-                                            ? style.selected
-                                            : null,
-                                    ].join(' ')}
-                                >
-                                    {v.label}
-                                </p>
-                            </Link>
-                        ))}
+                    {links?.map((link) => (
+                        <CustomLink {...link} key={link.label}>
+                            <p
+                                className={clsx(
+                                    style.link,
+                                    typeof window != 'undefined' &&
+                                        window?.location.href ===
+                                            new URL(
+                                                link.href,
+                                                window?.location.origin
+                                            ).href &&
+                                        style.selected
+                                )}
+                            >
+                                {link.label}
+                            </p>
+                        </CustomLink>
+                    ))}
                     <span
-                        className={['material-icons', style.hamburgerIcon].join(
-                            ' '
-                        )}
-                        onClick={() => setMenuActive(!menuActive)}
+                        className={clsx('material-icons', style.hamburgerIcon)}
+                        onClick={() => setMenuActive((prev) => !prev)}
                     >
                         {menuActive ? 'close' : 'menu'}
                     </span>
                 </div>
             </nav>
             <div
-                className={[
-                    style.hamburgerMenu,
-                    menuActive ? style.open : null,
-                ].join(' ')}
+                className={clsx(style.hamburgerMenu, menuActive && style.open)}
             >
                 {links &&
-                    links.map((v, i) => (
-                        <Link href={v.href} {...v} key={i} passHref>
+                    links.map((link) => (
+                        <CustomLink {...link} key={link.label}>
                             <p
-                                className={[
+                                className={clsx(
                                     style.link,
-                                    router.asPath == v.href
-                                        ? style.selected
-                                        : null,
-                                ].join(' ')}
+                                    typeof window != 'undefined' &&
+                                        window?.location.href ===
+                                            new URL(
+                                                link.href,
+                                                window?.location.origin
+                                            ).href &&
+                                        style.selected
+                                )}
                                 onClick={() => setMenuActive(false)}
                             >
-                                {v.label}
+                                {link.label}
                             </p>
-                        </Link>
+                        </CustomLink>
                     ))}
             </div>
         </>
     );
 }
+
+Navbar.defaultProps = {
+    links: [
+        {
+            href: '/#hero',
+            label: 'Home',
+            scrollTo: true,
+        },
+        {
+            href: '/#about',
+            label: 'Chi Siamo',
+            scrollTo: true,
+        },
+        {
+            href: '/#gallery',
+            label: 'Premio ISSA',
+            scrollTo: true,
+        },
+        {
+            href: '/#initiatives',
+            label: 'Iniziative',
+            scrollTo: true,
+        },
+    ],
+};

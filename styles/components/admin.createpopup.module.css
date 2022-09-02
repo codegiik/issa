@@ -1,0 +1,39 @@
+.wrapper {
+    @apply fixed inset-0 overflow-hidden;
+    @apply flex flex-col items-center justify-center;
+    @apply bg-black bg-opacity-40;
+    @apply px-3 sm:px-0;
+    @apply z-[60];
+
+    .popup {
+        @apply bg-white flex flex-col;
+        @apply py-4 px-5;
+        @apply w-full sm:w-[500px] max-h-[500px] overflow-auto;
+
+        h3 {
+            @apply font-bold w-full text-2xl sm:text-3xl;
+        }
+
+        .input {
+            @apply flex flex-col w-full my-2;
+
+            label {
+                @apply opacity-60;
+            }
+
+            input {
+                @apply bg-stark-white-100 border-[1px] border-cedar;
+                @apply px-2 py-1;
+            }
+        }
+
+        button {
+            @apply mt-5;
+        }
+    }
+
+    .closer {
+        z-index: -1;
+        @apply absolute inset-0;
+    }
+}

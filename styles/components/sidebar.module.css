@@ -1,0 +1,18 @@
+.wrapper {
+    @apply flex md:flex-col items-center justify-center md:justify-start gap-10 md:gap-2 text-center md:text-left;
+    @apply py-3 bg-base-100 border-r-[1px] border-accent;
+
+    .link {
+        @apply flex flex-col md:flex-row gap-2 mx-3 px-2 py-1;
+        @apply border-[1px] border-accent rounded-md shadow-sm hover:shadow-md transition-all;
+        @apply hover:bg-primary hover:text-primary-content;
+
+        p {
+            @apply hidden md:text-base text-xs;
+        }
+
+        .icon {
+            @apply flex items-center justify-center;
+        }
+    }
+}

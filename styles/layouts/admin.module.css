@@ -1,0 +1,7 @@
+.wrapper {
+    @apply flex-col-reverse flex md:flex-row w-full h-full;
+
+    .content {
+        @apply flex-1 px-4 py-2;
+    }
+}
