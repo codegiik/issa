@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { Embed } from 'components';
 import { Podium } from 'components/Competitions/Podium';
 import Main from 'layouts/Main';
 import { CompetitionsRecord } from 'lib/interfaces';
@@ -14,11 +13,11 @@ export function ScoreboardTab({
 }: {
     competition: CompetitionsRecord | undefined;
 }) {
-    return (
+    return competition ? (
         <div className={style.details}>
             <Podium competition={competition} />
         </div>
-    );
+    ) : null;
 }
 
 export function GalleryTab({

@@ -1,5 +1,5 @@
 /* lib */
-import strapi, { getCompleteUrl, getFileUrl } from 'lib/strapi';
+import strapi, { getFileUrl } from 'lib/strapi';
 
 /* comp */
 import { Heading } from 'components';

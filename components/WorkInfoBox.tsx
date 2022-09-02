@@ -44,7 +44,7 @@ export function Embed({ url, className, width, height }: EmbedProps) {
     );
 }
 
-export function WorkInfoBox({ entry, className }) {
+export function WorkInfoBox({ entry, className }: any) {
     return (
         <div className={[style.workInfoBox, className].join(' ')}>
             {entry && (

@@ -4,14 +4,12 @@ import { ComponentProps, useContext, useEffect, useState } from 'react';
 /* style */
 import style from 'styles/components/admin.login.module.css';
 import clsx from 'clsx';
-import pocketbase from 'lib/pocketbase';
 import { AuthProvider } from 'lib/interfaces';
 import {
     FacebookLoginButton,
     GithubLoginButton,
     GoogleLoginButton,
 } from 'react-social-login-buttons';
-import { AdminContext } from 'layouts/Admin';
 
 export type LoginProps = {
     className?: string;

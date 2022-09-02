@@ -19,7 +19,7 @@ export function Heading({
     lineBefore,
 }: HeadingProps) {
     return React.createElement(
-        type,
+        type || 'h2',
         {
             className: clsx(
                 className,
