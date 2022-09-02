@@ -1,4 +1,4 @@
-import Strapi, { StrapiResponse } from 'strapi-sdk-js';
+import Strapi from 'strapi-sdk-js';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
 
