@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "reteissa",
+    "private_key_id": "da1232ec90e41abf9a85bb6ed412107da68fb0bd",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDTyohdXxN0NC20\n9dolCbwkqDuQvFRrS5CiBAY3Ug3dCWthYEXAJU+GZW5RE5H9XjRensN0ba5iMw1P\nfbAkgyZ9fGzhhB8QJLaK+dIdyCxDHIJvg0WzZbI2rE0AOnGFE4Df7NceurWH8bpf\nx4NE40o5ezRMTeUdxoFxMfl8xN8rfygKqP7tj4qNpdih0J00wl4If70ypC0Q6Nvs\nlHB6pbamzBWAJlYQMgM9aJeJZCK//IrcworDuUUJH7UawzU8KsHycdC1P2wFXQz3\nD7h8YgY7fgdUJ/Bk73HyMYtc1mlfqpsYGHNYpkZjoyi05TOFAAp57DzjfJpR3432\nt92dqQSFAgMBAAECggEAHdNTlVyei3qOpkGKJTWkAICNlOIkvFBxr5NEAdXlHGfn\nbpjlcbv/YUSW/sV0BXuXAe03RsXsbSlV2kgvvlCW4sybM74MttQIvfUVBTsrmo7h\nAo24yt0LNh5ZIKtaUbyPpVk/6TSvfFPLJJJe9txQV1x1nrpIhgMutu9r/EloSUJX\nHsKeLbSuNNvyNqPLrWwGr+9P7Jd+9M3MjQ9mH/1YguDb2DHmrxM4qu10j98bAk8f\nOH/p6ay0lyzV898qPGOfIg/l6xG3ELEo47Lz3WE5RSPKW90oA0KrVM1GiXdwlocJ\nSgsM0zMm+c7ys0tbyF478pBtB3FingbRefW8BMER8QKBgQDpFg7NEyFdsJgG65CW\nvleldXcASW0Pa9q/lJtvkbBWnnbNxcbkTosBn9ySQ4lEAA4kxm++WmQp0ZA/mNWS\nbNRe0BoingJjNfDiK4z2i0Y75WBkDHFeSzNUb84qYKjIKq5GvLs8ryHjNvD7VkdC\nNkifsRT9UlOj0a3XqK8wAKYjcQKBgQDonI49zJ7tUmGNC1tNuN1C+UMdwrJOL0ek\npQeqMo4NKpJ91hOAWOVY8a31TPcP48ko6jIVhOhWsoSBhOuywfjDqC1Pmj9sTwR+\nmFa3CBgI4BGLS+MmIEovra8g6u0ImA4YAsmfstvHGDMmugE4qfPwfJ7eUlRAzlyC\n+Z1cYFNAVQKBgQDTqGwYXV7XLR1ga1kJCh+c6GX/pK2ca1xgzBm53po6jftkMEzD\n1W71Mq2hRCLJ1SMC0g92065RKzPKDIckSB8xWdfhx4pzfPAY8WM4HpDQoyI8t+/a\nqH8cFcspQE0EN326TnfYS1CCe8mo8lgTECgymyNsRe4dvLIYO92ZwX0cgQKBgF07\nwteKWHkO+AKsdqAkZKsfdYNMMmOcF78qVnQlZ0JnueeuEorzFpob5HnZq302873u\ngLyXVPjK/MldGYvAq5Dgq6ioTpt+4HJNZRRfriKAjQekFxuE/bc2imdLQk6bg6qk\nE2RrMCQQ0w/Gpg6sMBZIHPVHUnXXQMVOf4AzK6sxAoGAQiun6TJUyJ0Fl8wVAcql\nsMy1r3gRMDJbpjaG5HcpS7YBns9y1FGl3RUG4ZKhKhXguzRWS3XbEr1osyw88Svv\nut2nFdjFLWzvnk5cwpAEvjw3ebY7izaCENeIQJOTbUx2OfRcRcY6rJn4bwGyBAn7\nOAM13ZBrqBkbQs8COcZRoyY=\n-----END PRIVATE KEY-----\n",
+    "client_email": "reteissa-upload@reteissa.iam.gserviceaccount.com",
+    "client_id": "112527942367083972034",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/reteissa-upload%40reteissa.iam.gserviceaccount.com"
+}

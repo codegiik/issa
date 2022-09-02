@@ -4,17 +4,27 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useCursor, Image, Text, Environment } from '@react-three/drei';
 import { NumeralForm, convertNumberToNumeralForm } from 'numerals';
 import { useRouter } from 'next/router';
-import colors from 'styles/colors';
+import { CompetitionEntriesRecord } from 'lib/interfaces';
+// import colors from 'styles/colors';
+import tailwindconfig from 'tailwind.config';
+
+const colors = tailwindconfig.daisyui.themes[0].issa;
 
 const GOLDENRATIO = 1.61803398875;
 
-export function MainCanvas({ data, comp, className }) {
+export type MainCanvasProps = {
+    data: any;
+    comp: CompetitionEntriesRecord;
+    className: string;
+};
+
+export function MainCanvas({ data, comp, className }: MainCanvasProps) {
     const router = useRouter();
     const [windowSize, setWindowSize] = useState(1024);
     const images = useMemo(
         () =>
             data
-                ? Array.from(data, (v, k) => ({
+                ? Array.from(data, (v: any, k) => ({
                       ...v,
                       position: [-10 + k * 2, 0, -2],
                       rotation: [0, 0, 0],
@@ -51,35 +61,40 @@ export function MainCanvas({ data, comp, className }) {
             camera={{ fov: 70, position: [0, 2, 15] }}
             className={className}
         >
-            <color attach="background" args={[colors['stark-white'][300]]} />
-            <fog attach="fog" args={[colors['cedar'][500], 0, 15]} />
+            <color attach="background" args={[colors['base-200']]} />
+            <fog attach="fog" args={[colors['primary'], 0, 15]} />
             <Suspense fallback={null}>
                 <Environment preset="city" />
                 <Text
-                    color={colors['cedar'][600]}
-                    font="/fonts/LibreBaskerville-Regular.ttf"
-                    fontSize={getTextSize()}
-                    anchorX="center"
-                    anchorY="middle"
-                    // position={[0, 2.5 - getTextOffset() * 0.5, 0]}
-                    position={[0, getTitleOffset(), 0]}
+                    {...({
+                        color: colors['primary'],
+                        font: '/fonts/LibreBaskerville-Regular.ttf',
+                        fontSize: getTextSize(),
+                        anchorX: 'center',
+                        anchorY: 'middle',
+                        // position={[0, 2.5 - getTextOffset() * 0.5, 0]}
+                        position: [0, getTitleOffset(), 0],
+                    } as any)}
                 >
                     {comp?.name}
                 </Text>
                 <Text
-                    color={colors['cedar'][400]}
-                    font="/fonts/LibreBaskerville-Regular.ttf"
-                    fontSize={getTextSize() * (windowSize > 3250 ? 0.5 : 0.6)}
-                    anchorX="center"
-                    anchorY="middle"
-                    // position={[0, 1.8 + getTextOffset() * 0.32, 0]}
-                    position={[0, editionIdOffset, 0]}
+                    {...({
+                        color: colors['primary'],
+                        font: '/fonts/LibreBaskerville-Regular.ttf',
+                        fontSize:
+                            getTextSize() * (windowSize > 3250 ? 0.5 : 0.6),
+                        anchorX: 'center',
+                        anchorY: 'middle',
+                        // position={[0, 1.8 + getTextOffset() * 0.32, 0]}
+                        position: [0, editionIdOffset, 0],
+                    } as any)}
                 >
                     Premio ISSA - Edizione{' '}
                     {convertNumberToNumeralForm(
                         comp?.id,
                         NumeralForm.Roman,
-                        NumeralForm.English
+                        (NumeralForm as any).English
                     )}
                 </Text>
             </Suspense>
@@ -117,7 +132,7 @@ function Frames({
     p = new THREE.Vector3(),
     router,
     windowSize,
-}) {
+}: any) {
     const ref = useRef();
     const clicked = useRef();
 
@@ -129,20 +144,20 @@ function Frames({
     useEffect(() => {
         if (router.query.gallery_id) {
             try {
-                clicked.current = ref.current.getObjectByName(
+                clicked.current = (ref.current as any).getObjectByName(
                     router.query.gallery_id
                 );
 
-                clicked.current.parent.updateWorldMatrix(true, true);
-                clicked.current.parent.localToWorld(
+                (clicked.current as any).parent.updateWorldMatrix(true, true);
+                (clicked.current as any).parent.localToWorld(
                     p.set(getPositionOffset(), GOLDENRATIO / 2, 2)
                 );
-                clicked.current.parent.getWorldQuaternion(q);
+                (clicked.current as any).parent.getWorldQuaternion(q);
             } catch (e) {
                 console.log('Something went horribly wrong', e);
             }
         } else {
-            clicked.current = null;
+            clicked.current = undefined;
             p.set(0, 0.5, 5.5);
             q.identity();
         }
@@ -153,7 +168,7 @@ function Frames({
         state.camera.quaternion.slerp(q, 0.025);
     });
 
-    const setLocation = (id) => {
+    const setLocation = (id?: number) => {
         router.push(id ? `/gallery?gallery_id=${id}` : '/gallery', undefined, {
             shallow: true,
         });
@@ -164,20 +179,20 @@ function Frames({
             ref={ref}
             onClick={(e) => (
                 e.stopPropagation(),
-                clicked.current === e.object
+                clicked.current === (e as any).object
                     ? setLocation()
-                    : setLocation(e.object.name)
+                    : setLocation((e as any).object.name)
             )}
             onPointerMissed={() => setLocation()}
         >
-            {images.map((data, i) => {
+            {images.map((data: any, i: number) => {
                 const PADDING = -images.length + 1;
                 return (
                     <Frame
                         key={data.id}
                         data={data}
                         clicked={clicked}
-                        url={data.data.preview}
+                        // url={data.data.preview}
                         position={[PADDING + i * 2, 0, -2]}
                         rotation={[0, 0, 0]}
                     />
@@ -187,7 +202,7 @@ function Frames({
     ) : null;
 }
 
-function Frame({ url, clicked, c = new THREE.Color(), data, ...props }) {
+function Frame({ url, clicked, c = new THREE.Color(), data, ...props }: any) {
     const [hovered, hover] = useState(false);
     const [rnd] = useState(() => Math.random());
     const image = useRef();
@@ -197,32 +212,30 @@ function Frame({ url, clicked, c = new THREE.Color(), data, ...props }) {
     useCursor(hovered);
     useFrame((state) => {
         if (image.current) {
-            image.current.material.zoom =
+            (image.current as any).material.zoom =
                 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2;
-            image.current.scale.x = THREE.MathUtils.lerp(
-                image.current.scale.x,
+            (image.current as any).scale.x = THREE.MathUtils.lerp(
+                (image.current as any).scale.x,
                 0.85 * (hovered ? 0.85 : 1),
                 0.1
             );
-            image.current.scale.y = THREE.MathUtils.lerp(
-                image.current.scale.y,
+            (image.current as any).scale.y = THREE.MathUtils.lerp(
+                (image.current as any).scale.y,
                 0.9 * (hovered ? 0.905 : 1),
                 0.1
             );
         }
 
-        frame.current.material.color.lerp(
-            c
-                .set(hovered ? colors['stark-white'][800] : 'white')
-                .convertSRGBToLinear(),
+        (frame.current as any).material.color.lerp(
+            c.set(hovered ? colors['base-200'] : 'white').convertSRGBToLinear(),
             0.1
         );
     });
 
     const getFrameColor = () => {
         if (clicked.current && clicked.current.name == name)
-            return colors['cedar'][600];
-        else return colors['stark-white'][700];
+            return colors['primary'];
+        else return colors['base-200'];
     };
 
     return (
@@ -252,10 +265,12 @@ function Frame({ url, clicked, c = new THREE.Color(), data, ...props }) {
                 </mesh>
                 <Suspense fallback={null}>
                     <Image
-                        raycast={() => null}
-                        ref={image}
-                        position={[0, 0, 0.7]}
-                        url={url || 'https://i.ibb.co/fnHShSz/aledime.png'}
+                        {...({
+                            raycast: () => null,
+                            ref: image,
+                            position: [0, 0, 0.7],
+                            url: url || 'https://i.ibb.co/fnHShSz/aledime.png',
+                        } as any)}
                     />
                 </Suspense>
             </mesh>

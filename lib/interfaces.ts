@@ -23,28 +23,46 @@ export type CoursesRecord = {
     submodule: FileRecordField;
 } & Record;
 
+export enum CompetitionStatus {
+    NOT_STARTED = 'not_started',
+    IN_PROGRESS = 'in_progress',
+    ENDED = 'ended',
+}
+
 export type CompetitionsRecord = {
     attachments: any;
     edition: number;
     name: string;
     description: string;
-    status: string;
+    status: CompetitionStatus;
     sponsors: string;
     type: string;
 } & Record;
 
 export type CompetitionEntriesRecord = {
+    id: number;
     name: string;
     class: string;
     students: string;
     type: string;
     score: number;
     competition: string;
-    school: string;
     attachment: FileRecordField;
     attachment_url: string;
-    local_attachment: boolean;
+    school: SchoolRecord;
 } & Record;
+
+export type SchoolRecord = {
+    name: string;
+    logo?: FileRecordField;
+    motto?: string;
+    competition_entries: CompetitionEntriesRecord[];
+};
+
+export type SponsorRecord = {
+    name: string;
+    logo: FileRecordField;
+};
 
 export const CompetitionJsonSchema = {
     title: 'Person',

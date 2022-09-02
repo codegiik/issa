@@ -41,9 +41,7 @@ export function WorkSelector({ onNext, onPrev, active, entries, switchTo }) {
                                 className={style.schoolProject}
                                 onClick={() => switchTo(va.id)}
                                 key={ix}
-                            >
-                                <span>◆</span> {va.data.title}
-                            </p>
+                            ></p>
                         ))}
                     </div>
                 );

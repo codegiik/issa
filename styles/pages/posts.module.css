@@ -14,7 +14,7 @@
         }
 
         span {
-            @apply text-xs text-warmGray-600 my-0;
+            @apply text-xs text-zinc-600 my-0;
         }
     }
 }

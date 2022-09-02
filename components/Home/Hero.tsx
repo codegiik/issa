@@ -1,5 +1,5 @@
 /* lib */
-import strapi, { getFileUrl } from 'lib/strapi';
+import strapi, { unwrap, getFileUrl } from 'lib/strapi';
 
 /* comp */
 import { Heading } from 'components';
@@ -29,14 +29,7 @@ export function Hero({ className }: HeroProps) {
                 sort: 'createdAt:desc',
                 populate: 'cover',
             })
-            .then(({ data }: { data: any }) =>
-                setNews(
-                    data.map((newsItem: NewsItem) => ({
-                        ...newsItem.attributes,
-                        id: newsItem.id,
-                    }))
-                )
-            );
+            .then(({ data }: { data: any }) => setNews(unwrap(data)));
     }, []);
 
     const pushLink = (post: any) => {
