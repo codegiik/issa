@@ -1,7 +1,6 @@
 import Main from 'layouts/Main';
 import { Gallery } from 'components';
 import { useEffect, useState } from 'react';
-import { CompetitionEntriesRecord, CompetitionStatus } from 'lib/interfaces';
 import strapi, { unwrap } from 'lib/strapi';
 
 export default function GalleryPage() {
