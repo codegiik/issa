@@ -1,4 +1,6 @@
-import { Record, User } from 'pocketbase';
+export type Record = {
+    id: number;
+};
 
 export type FileRecordField = string;
 
@@ -16,6 +18,7 @@ export enum CourseTypes {
 }
 
 export type CoursesRecord = {
+    attachment: string;
     description: string;
     name: string;
     prof: string;
@@ -35,11 +38,12 @@ export type CompetitionsRecord = {
     name: string;
     description: string;
     status: CompetitionStatus;
-    sponsors: string;
+    sponsors: any;
     type: string;
 } & Record;
 
 export type CompetitionEntriesRecord = {
+    referee: string;
     id: number;
     name: string;
     class: string;
@@ -91,10 +95,6 @@ export const CompetitionJsonSchema = {
     },
     required: ['name'],
 };
-
-export type UserRecord = {
-    type: string;
-} & User;
 
 export type AuthProvider = {
     authUrl: string;

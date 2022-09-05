@@ -12,6 +12,7 @@
     "dependencies": {
         "@react-three/drei": "9.25.3",
         "@react-three/fiber": "8.6.2",
+        "@types/three": "^0.144.0",
         "clsx": "^1.2.1",
         "next": "12.2.4",
         "numerals": "^0.1.3",

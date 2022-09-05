@@ -13,8 +13,7 @@ export type CourseTileProps = {
 export function CourseTile({ course }: CourseTileProps) {
     const router = useRouter();
 
-    const getProfName = (course: CoursesRecord) =>
-        course['@expand']?.prof?.name || 'Nome non Registrato';
+    const getProfName = (course: CoursesRecord) => 'Nome non Registrato';
 
     return (
         <div className={style.wrapper}>

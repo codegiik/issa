@@ -4,7 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useCursor, Image, Text, Environment } from '@react-three/drei';
 import { NumeralForm, convertNumberToNumeralForm } from 'numerals';
 import { useRouter } from 'next/router';
-import { CompetitionEntriesRecord } from 'lib/interfaces';
+import { CompetitionsRecord } from 'lib/interfaces';
 // import colors from 'styles/colors';
 import tailwindconfig from 'tailwind.config';
 
@@ -14,7 +14,7 @@ const GOLDENRATIO = 1.61803398875;
 
 export type MainCanvasProps = {
     data: any;
-    comp: CompetitionEntriesRecord;
+    comp: CompetitionsRecord;
     className: string;
 };
 
@@ -133,8 +133,8 @@ function Frames({
     router,
     windowSize,
 }: any) {
-    const ref = useRef();
-    const clicked = useRef();
+    const ref = useRef<any>();
+    const clicked = useRef<any>();
 
     const getPositionOffset = () => {
         console.log(windowSize);
@@ -205,8 +205,8 @@ function Frames({
 function Frame({ url, clicked, c = new THREE.Color(), data, ...props }: any) {
     const [hovered, hover] = useState(false);
     const [rnd] = useState(() => Math.random());
-    const image = useRef();
-    const frame = useRef();
+    const image = useRef<any>();
+    const frame = useRef<any>();
     const name = data.id;
 
     useCursor(hovered);

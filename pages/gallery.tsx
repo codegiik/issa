@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import strapi, { unwrap } from 'lib/strapi';
 
 export default function GalleryPage() {
-    const [latestComp, setLatestComp] = useState(null);
+    const [latestComp, setLatestComp] = useState<any>(null);
 
     useEffect(() => {
         strapi

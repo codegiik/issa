@@ -2,7 +2,7 @@
 import { MainCanvas } from './MainCanvas';
 import { Loader, WorkInfoBox, WorkSelector } from 'components';
 
-import { CompetitionEntriesRecord } from 'lib/interfaces';
+import { CompetitionsRecord } from 'lib/interfaces';
 
 import strapi, { unwrap } from 'lib/strapi';
 
@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import style from 'styles/pages/gallery.module.css';
 
 type HelpBoxProps = {
-    competition: CompetitionEntriesRecord;
+    competition: CompetitionsRecord;
     active: boolean;
 };
 
@@ -60,10 +60,10 @@ export function Gallery({
     comp,
 }: {
     className?: string;
-    comp: CompetitionEntriesRecord;
+    comp: CompetitionsRecord;
 }) {
     const [clicked, setClicked] = useState<number | null>(null);
-    const [entries, setEntries] = useState<CompetitionEntriesRecord[]>([]);
+    const [entries, setEntries] = useState<CompetitionsRecord[]>([]);
     const [listOpen, setListOpen] = useState<boolean>(false);
     const router = useRouter();
 
