@@ -3,8 +3,6 @@ import Strapi from 'strapi-sdk-js';
 const BASE_URL =
     process.env.NEXT_PUBLIC_BASE_URL || 'https://issa-strapi.test.codegiik.com';
 
-console.log(BASE_URL);
-
 const strapi = new Strapi({
     url: BASE_URL,
     prefix: '/api',
