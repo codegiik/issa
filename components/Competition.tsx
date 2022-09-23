@@ -1,7 +1,7 @@
-import { CompetitionsRecord } from 'lib/interfaces';
+import { Competition } from 'lib/interfaces';
 
 export type CompetitonProps = {
-    competition: CompetitionsRecord;
+    competition: Competition;
 };
 
 export function Competition({ competition }: CompetitonProps) {

@@ -1,10 +1,17 @@
 export type Record<T> = {
     id: number;
-    attributes: T;
+    attributes: T & {
+        updatedAt: string;
+        createdAt: string;
+        publishedAt?: string;
+    };
 };
 
 export type StrapiElement = {
     id: number;
+    updatedAt: string;
+    createdAt: string;
+    publishedAt?: string;
     [key: string]: any;
 };
 
