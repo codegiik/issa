@@ -2,7 +2,7 @@
     @apply min-h-[80vh];
 
     .topBar {
-        @apply bg-primary-focus text-primary-content px-5 pt-10;
+        @apply bg-primary-focus text-primary-content px-4 md:px-6 lg:px-16 pt-10;
 
         .title {
             @apply text-primary-content text-4xl font-serif;
@@ -22,7 +22,7 @@
     }
 
     .details {
-        @apply px-5 py-5;
+        @apply px-4 md:px-6 lg:px-16 py-5;
 
         .attachments {
             @apply flex gap-5 mt-5;
