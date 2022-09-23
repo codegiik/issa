@@ -22,7 +22,7 @@ export type NewsItem = {
     href: string;
     post: FileRecordField;
     title: string;
-};
+} & StrapiElement;
 
 export enum CourseTypes {
     A = 'a',
@@ -118,3 +118,13 @@ export type AuthProvider = {
     name: string;
     state: string;
 };
+
+export type FooterLink = {
+    text: string;
+    href: string;
+    section?: string;
+} & StrapiElement;
+
+export type AboutInfo = {
+    about_content: string;
+} & StrapiElement;

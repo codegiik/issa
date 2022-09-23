@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { CompetitionsRecord } from 'lib/interfaces';
+import { Competition } from 'lib/interfaces';
 import Link from 'next/link';
 import { NumeralForm, convertNumberToNumeralForm } from 'numerals';
 import style from 'styles/components/competitions.competitiontile.module.css';
 
 export type CompetitionTileProps = {
-    competition: CompetitionsRecord;
+    competition: Competition;
     className?: string;
 };
 

@@ -3,17 +3,17 @@ import style from 'styles/components/courses.coursetile.module.css';
 import { getFileUrl } from 'lib/strapi';
 
 /* @types */
-import { CoursesRecord } from 'lib/interfaces';
+import { Course } from 'lib/interfaces';
 import { useRouter } from 'next/router';
 
 export type CourseTileProps = {
-    course: CoursesRecord;
+    course: Course;
 };
 
 export function CourseTile({ course }: CourseTileProps) {
     const router = useRouter();
 
-    const getProfName = (course: CoursesRecord) => 'Nome non Registrato';
+    const getProfName = (course: Course) => 'Nome non Registrato';
 
     return (
         <div className={style.wrapper}>

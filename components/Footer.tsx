@@ -1,20 +1,17 @@
 import strapi, { unwrap } from 'lib/strapi';
 
+/* @types */
+import type { FooterLink, Record } from 'lib/interfaces';
+
 /* comp */
 import { useEffect, useState } from 'react';
 
 /* style */
 import style from 'styles/components/footer.module.css';
 
-export type FooterLink = {
-    text: string;
-    href: string;
-    section?: string;
-};
-
 export type FooterSection = {
     title: string;
-    links: FooterLink[];
+    links: Partial<FooterLink>[];
 };
 
 export function FooterNavbar() {
@@ -22,14 +19,14 @@ export function FooterNavbar() {
 
     useEffect(() => {
         strapi
-            .find<FooterLink[]>('footer-links')
-            .then(({ data }) => setLinks(unwrap(data)));
+            .find<Record<FooterLink>[]>('footer-links')
+            .then(({ data }) => setLinks(unwrap(data) as FooterLink[]));
     }, []);
 
     const getSections = (): FooterSection[] | undefined => {
         if (!links) return;
         const sections: {
-            [key: string]: FooterLink[];
+            [key: string]: Partial<FooterLink>[];
         } = {};
 
         links.forEach((value) => {

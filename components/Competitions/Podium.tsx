@@ -1,11 +1,11 @@
-import { CompetitionEntriesRecord, CompetitionsRecord } from 'lib/interfaces';
+import { CompetitionEntry, Competition } from 'lib/interfaces';
 import strapi from 'lib/strapi';
 import { useEffect, useState } from 'react';
 import style from 'styles/components/competitions.podium.module.css';
 
-export function Podium({ competition }: { competition: CompetitionsRecord }) {
+export function Podium({ competition }: { competition: Competition }) {
     const [placements, setPlacements] = useState<
-        CompetitionEntriesRecord[] | undefined
+        CompetitionEntry[] | undefined
     >(undefined);
 
     useEffect(() => {

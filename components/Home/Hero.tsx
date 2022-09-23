@@ -13,7 +13,7 @@ import style from 'styles/components/hero.module.css';
 import clsx from 'clsx';
 
 /* @types */
-import type { NewsItem } from 'lib/interfaces';
+import type { NewsItem, Record } from 'lib/interfaces';
 
 export type HeroProps = {
     className?: string;
@@ -25,11 +25,13 @@ export function Hero({ className }: HeroProps) {
 
     useEffect(() => {
         strapi
-            .find('posts', {
+            .find<Record<NewsItem>[]>('posts', {
                 sort: 'createdAt:desc',
                 populate: 'cover',
             })
-            .then(({ data }: { data: any }) => setNews(unwrap(data)));
+            .then(({ data }: { data: any }) =>
+                setNews(unwrap(data) as NewsItem[])
+            );
     }, []);
 
     const pushLink = (post: any) => {

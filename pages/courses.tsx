@@ -10,10 +10,12 @@ import { useEffect, useState } from 'react';
 
 /* style */
 import style from 'styles/pages/courses.module.css';
-import { CoursesRecord } from 'lib/interfaces';
+
+/* @types */
+import type { Course } from 'lib/interfaces';
 
 export default function Courses() {
-    const [courses, setCourses] = useState<CoursesRecord[]>([]);
+    const [courses, setCourses] = useState<Course[]>([]);
 
     useEffect(() => {
         strapi

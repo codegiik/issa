@@ -10,9 +10,8 @@ import LogoIcon from 'assets/svg/LogoIcon';
 /* style */
 import style from 'styles/components/about.module.css';
 
-export type AboutInfo = {
-    about_content: string;
-};
+/* @types */
+import type { AboutInfo, Record } from 'lib/interfaces';
 
 export function About() {
     const [content, setContent] = useState<
@@ -21,8 +20,10 @@ export function About() {
 
     useEffect(() => {
         strapi
-            .find<AboutInfo>('about-info')
-            .then(({ data }) => setContent(unwrap(data)['about_content']));
+            .find<Record<AboutInfo>>('about-info')
+            .then(({ data }) =>
+                setContent((unwrap(data) as AboutInfo)['about_content'])
+            );
     }, []);
 
     return (
