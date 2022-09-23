@@ -1,10 +1,20 @@
 import * as THREE from 'three';
-import { useEffect, useRef, useState, useMemo, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useCursor, Image, Text, Environment } from '@react-three/drei';
+import { useEffect, useRef, useState, Suspense, MutableRefObject } from 'react';
+import {
+    Canvas,
+    ThreeElements,
+    ThreeEvent,
+    useFrame,
+} from '@react-three/fiber';
+import {
+    useCursor,
+    Image as ThreeImage,
+    Text,
+    Environment,
+} from '@react-three/drei';
 import { NumeralForm, convertNumberToNumeralForm } from 'numerals';
-import { useRouter } from 'next/router';
-import { CompetitionsRecord } from 'lib/interfaces';
+import { NextRouter, useRouter } from 'next/router';
+import { CompetitionEntriesRecord, CompetitionsRecord } from 'lib/interfaces';
 // import colors from 'styles/colors';
 import tailwindconfig from 'tailwind.config';
 
@@ -13,25 +23,20 @@ const colors = tailwindconfig.daisyui.themes[0].issa;
 const GOLDENRATIO = 1.61803398875;
 
 export type MainCanvasProps = {
-    data: any;
+    entries: CompetitionEntriesRecord[];
     comp: CompetitionsRecord;
     className: string;
+    baseUri: string;
 };
 
-export function MainCanvas({ data, comp, className }: MainCanvasProps) {
+export function MainCanvas({
+    entries,
+    comp,
+    className,
+    baseUri,
+}: MainCanvasProps) {
     const router = useRouter();
     const [windowSize, setWindowSize] = useState(1024);
-    const images = useMemo(
-        () =>
-            data
-                ? Array.from(data, (v: any, k) => ({
-                      ...v,
-                      position: [-10 + k * 2, 0, -2],
-                      rotation: [0, 0, 0],
-                  }))
-                : [],
-        [data]
-    );
 
     useEffect(() => {
         const textSizeInterval = setInterval(() => {
@@ -100,11 +105,11 @@ export function MainCanvas({ data, comp, className }: MainCanvasProps) {
             </Suspense>
             <group position={[0, -0.5, 0]}>
                 <Frames
-                    images={images}
                     router={router}
+                    baseUri={baseUri}
+                    entries={entries}
                     windowSize={windowSize}
                 />
-
                 {/*<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
               <planeGeometry args={[50, 50]} />
               <meshBasicMaterial color={colors['cedar']['400']} />
@@ -127,12 +132,20 @@ export function MainCanvas({ data, comp, className }: MainCanvasProps) {
 }
 
 function Frames({
-    images,
-    q = new THREE.Quaternion(),
-    p = new THREE.Vector3(),
+    entries,
     router,
+    baseUri,
     windowSize,
-}: any) {
+    p = new THREE.Vector3(),
+    q = new THREE.Quaternion(),
+}: {
+    entries: CompetitionEntriesRecord[];
+    router: NextRouter;
+    windowSize: number;
+    baseUri: string;
+    q?: any;
+    p?: any;
+}) {
     const ref = useRef<any>();
     const clicked = useRef<any>();
 
@@ -144,15 +157,14 @@ function Frames({
     useEffect(() => {
         if (router.query.gallery_id) {
             try {
-                clicked.current = (ref.current as any).getObjectByName(
+                clicked.current = ref.current.getObjectByName(
                     router.query.gallery_id
                 );
-
-                (clicked.current as any).parent.updateWorldMatrix(true, true);
-                (clicked.current as any).parent.localToWorld(
+                clicked.current.parent.updateWorldMatrix(true, true);
+                clicked.current.parent.localToWorld(
                     p.set(getPositionOffset(), GOLDENRATIO / 2, 2)
                 );
-                (clicked.current as any).parent.getWorldQuaternion(q);
+                clicked.current.parent.getWorldQuaternion(q);
             } catch (e) {
                 console.log('Something went horribly wrong', e);
             }
@@ -168,31 +180,35 @@ function Frames({
         state.camera.quaternion.slerp(q, 0.025);
     });
 
-    const setLocation = (id?: number) => {
-        router.push(id ? `/gallery?gallery_id=${id}` : '/gallery', undefined, {
-            shallow: true,
-        });
+    const setLocation = (id?: string) => {
+        router.push(
+            id ? `${baseUri}?gallery_id=${id}` : '/gallery',
+            undefined,
+            {
+                shallow: true,
+            }
+        );
     };
 
     return router ? (
         <group
             ref={ref}
-            onClick={(e) => (
+            onClick={(e: ThreeEvent<MouseEvent>) => (
                 e.stopPropagation(),
-                clicked.current === (e as any).object
+                typeof clicked.current === typeof e.object
                     ? setLocation()
-                    : setLocation((e as any).object.name)
+                    : setLocation(e.object.name)
             )}
             onPointerMissed={() => setLocation()}
         >
-            {images.map((data: any, i: number) => {
-                const PADDING = -images.length + 1;
+            {entries.map((entry, i: number) => {
+                const PADDING = -entries.length + 1;
                 return (
                     <Frame
-                        key={data.id}
-                        data={data}
+                        key={entry.id}
+                        entry={entry}
                         clicked={clicked}
-                        // url={data.data.preview}
+                        url={entry.preview}
                         position={[PADDING + i * 2, 0, -2]}
                         rotation={[0, 0, 0]}
                     />
@@ -202,12 +218,26 @@ function Frames({
     ) : null;
 }
 
-function Frame({ url, clicked, c = new THREE.Color(), data, ...props }: any) {
+export type FrameProps = {
+    url?: string;
+    clicked: MutableRefObject<ThreeElements['mesh'] | undefined>;
+    c?: THREE.Color;
+    entry: CompetitionEntriesRecord;
+    [key: string]: any;
+};
+
+function Frame({
+    url,
+    clicked,
+    c = new THREE.Color(),
+    entry,
+    ...props
+}: FrameProps) {
     const [hovered, hover] = useState(false);
     const [rnd] = useState(() => Math.random());
     const image = useRef<any>();
     const frame = useRef<any>();
-    const name = data.id;
+    const name = entry.id.toString();
 
     useCursor(hovered);
     useFrame((state) => {
@@ -264,7 +294,7 @@ function Frame({ url, clicked, c = new THREE.Color(), data, ...props }: any) {
                     <meshBasicMaterial toneMapped={false} fog={false} />
                 </mesh>
                 <Suspense fallback={null}>
-                    <Image
+                    <ThreeImage
                         {...({
                             raycast: () => null,
                             ref: image,

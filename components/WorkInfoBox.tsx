@@ -1,3 +1,5 @@
+import { CompetitionEntriesRecord } from 'lib/interfaces';
+import { getFileUrl } from 'lib/strapi';
 import style from 'styles/components/workinfobox.module.css';
 
 export type EmbedProps = {
@@ -44,29 +46,36 @@ export function Embed({ url, className, width, height }: EmbedProps) {
     );
 }
 
-export function WorkInfoBox({ entry, className }: any) {
+export function WorkInfoBox({
+    entry,
+    className,
+}: {
+    entry: CompetitionEntriesRecord;
+    className?: string;
+}) {
     return (
         <div className={[style.workInfoBox, className].join(' ')}>
-            {entry && (
-                <>
-                    <div className={style.reactPlayerWrapper}>
-                        <Embed
-                            className={style.reactPlayer}
-                            url={entry.data.embed}
-                            width="100%"
-                            height="100%"
-                        />
-                    </div>
-                    <div className={style.infoWrapper}>
-                        <h2 className={style.workTitle}>{entry.data.title}</h2>
-                        <p className={style.workAuthor}>
-                            Lavoro di {entry?.author} (Referente:{' '}
-                            {entry?.referee})
-                        </p>
-                        <p className={style.workDesc}>{entry.data?.desc}</p>
-                    </div>
-                </>
-            )}
+            <>
+                <div className={style.reactPlayerWrapper}>
+                    <Embed
+                        className={style.reactPlayer}
+                        url={
+                            entry.attachment
+                                ? (getFileUrl(entry, 'attachment') as string)
+                                : entry.attachment_url || 'Nothing here'
+                        }
+                        width="100%"
+                        height="100%"
+                    />
+                </div>
+                <div className={style.infoWrapper}>
+                    <h2 className={style.workTitle}>{entry.name}</h2>
+                    <p className={style.workAuthor}>
+                        Lavoro di {entry.students} (Referente: {entry.referee})
+                    </p>
+                    {/* <p className={style.workDesc}>{entry?.}</p> */}
+                </div>
+            </>
         </div>
     );
 }

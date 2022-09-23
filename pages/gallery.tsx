@@ -2,9 +2,12 @@ import Main from 'layouts/Main';
 import { Gallery } from 'components';
 import { useEffect, useState } from 'react';
 import strapi, { unwrap } from 'lib/strapi';
+import { CompetitionsRecord } from 'lib/interfaces';
 
 export default function GalleryPage() {
-    const [latestComp, setLatestComp] = useState<any>(null);
+    const [latestComp, setLatestComp] = useState<CompetitionsRecord | null>(
+        null
+    );
 
     useEffect(() => {
         strapi
@@ -15,6 +18,7 @@ export default function GalleryPage() {
             .then(({ data }: { data: any }) => setLatestComp(unwrap(data)));
         //            .then(({ data }: { data: any }) => console.log(unwrap(data).find((competition: CompetitionEntriesRecord) => competition.status === CompetitionStatus.ENDED)));
     }, []);
+    if (!latestComp) return 'Loading...';
     return <Gallery comp={latestComp} />;
 }
 

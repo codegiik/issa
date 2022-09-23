@@ -4,7 +4,7 @@ import Main from 'layouts/Main';
 import { CompetitionsRecord } from 'lib/interfaces';
 import strapi, { getFileUrl } from 'lib/strapi';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import style from 'styles/pages/competition.id.module.css';
 
@@ -22,10 +22,17 @@ export function ScoreboardTab({
 
 export function GalleryTab({
     competition,
+    baseUri,
+    router,
 }: {
     competition: CompetitionsRecord | undefined;
+    baseUri: string;
+    router: NextRouter;
 }) {
-    return <div>Gallery</div>;
+    return;
+    <Link href={`${baseUri}/`}>
+        <div>Gallery</div>
+    </Link>;
 }
 
 export function DescriptionTab({
@@ -37,33 +44,29 @@ export function DescriptionTab({
         <div className={style.details}>
             <p className={style.desc}>{competition?.description}</p>
             <div className={style.attachments}>
-                {competition?.attachments?.data.map(
-                    (attach: any, index: number) => {
-                        const attachUrl = getFileUrl(
-                            competition,
-                            'attachments',
-                            index
-                        );
+                {competition?.attachments?.map((attach: any, index: number) => {
+                    const attachUrl = getFileUrl(
+                        competition,
+                        'attachments',
+                        index
+                    );
 
-                        return (
-                            attachUrl && (
-                                <a href={attachUrl}>
-                                    <div className={style.download} key={index}>
-                                        <div className={style.name}>
-                                            <p>{attach.attributes.name}</p>
-                                            <span>
-                                                {attach.attributes.caption}
-                                            </span>
-                                        </div>
-                                        <span className="material-symbols-sharp">
-                                            file_download
-                                        </span>
+                    return (
+                        attachUrl && (
+                            <a href={attachUrl}>
+                                <div className={style.download} key={index}>
+                                    <div className={style.name}>
+                                        <p>{attach.attributes.name}</p>
+                                        <span>{attach.attributes.caption}</span>
                                     </div>
-                                </a>
-                            )
-                        );
-                    }
-                )}
+                                    <span className="material-symbols-sharp">
+                                        file_download
+                                    </span>
+                                </div>
+                            </a>
+                        )
+                    );
+                })}
             </div>
         </div>
     );
@@ -100,8 +103,8 @@ export default function CompetitionDetailsPage() {
             case 'classifica':
                 return <ScoreboardTab competition={competition} />;
             case 'galleria':
-            case 'gallery':
-                return <GalleryTab competition={competition} />;
+            // case 'gallery':
+            //     return <GalleryTab baseUri={`/competizioni/`} competition={competition} router={router} />;
             default:
                 return <DescriptionTab competition={competition} />;
         }

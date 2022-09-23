@@ -45,15 +45,16 @@ export type CompetitionsRecord = {
 export type CompetitionEntriesRecord = {
     referee: string;
     id: number;
-    name: string;
+    name?: string;
     class: string;
     students: string;
     type: string;
-    score: number;
+    score?: number;
     competition: string;
-    attachment: FileRecordField;
-    attachment_url: string;
+    attachment?: FileRecordField;
+    attachment_url?: string;
     school: SchoolRecord;
+    preview?: FileRecordField;
 } & Record;
 
 export type SchoolRecord = {

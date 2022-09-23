@@ -2,7 +2,7 @@
 import { MainCanvas } from './MainCanvas';
 import { Loader, WorkInfoBox, WorkSelector } from 'components';
 
-import { CompetitionsRecord } from 'lib/interfaces';
+import { CompetitionEntriesRecord, CompetitionsRecord } from 'lib/interfaces';
 
 import strapi, { unwrap } from 'lib/strapi';
 
@@ -58,25 +58,20 @@ export function HelpBox({ competition, active }: HelpBoxProps) {
 export function Gallery({
     className,
     comp,
+    baseUri = '/gallery',
 }: {
     className?: string;
     comp: CompetitionsRecord;
+    baseUri?: string;
 }) {
-    const [clicked, setClicked] = useState<number | null>(null);
-    const [entries, setEntries] = useState<CompetitionsRecord[]>([]);
+    const [clicked, setClicked] = useState<
+        CompetitionEntriesRecord | undefined
+    >(undefined);
+    const [entries, setEntries] = useState<CompetitionEntriesRecord[]>([]);
     const [listOpen, setListOpen] = useState<boolean>(false);
     const router = useRouter();
 
     useEffect(() => {
-        //         const fetchData = async () => {
-        //             const { data, error } = await supabase
-        //                 .from('competition_entries')
-        //                 .select()
-        //                 .eq('competition', comp.id);
-        //             if (error) return message.error(error.message);
-        //             return setEntries(data);
-        //         };
-
         strapi
             .find('competition-entries', {
                 sort: 'createdAt:desc',
@@ -88,8 +83,9 @@ export function Gallery({
     useEffect(() => {
         if (entries && entries.length > 0) {
             const id = router.query?.gallery_id;
-            if (id && !Array.isArray(id)) setClicked(parseInt(id));
-            else setClicked(null);
+            if (id && !Array.isArray(id))
+                setClicked(entries.find((v) => v.id === parseInt(id)));
+            else setClicked(undefined);
         }
 
         console.log(comp);
@@ -98,7 +94,8 @@ export function Gallery({
     const switchByIndexDiff = (diff: any) => {
         if (!diff) return;
         let index =
-            (entries.findIndex((v) => v.id == clicked) + diff) % entries.length;
+            (entries.findIndex((v) => v.id == clicked?.id) + diff) %
+            entries.length;
         if (index == -1) index = entries.length - 1;
 
         router.push(
@@ -115,25 +112,30 @@ export function Gallery({
 
     const switchTo = (id: number) => {
         if (!id) return;
-        router.push(`/gallery?gallery_id=${id}`, undefined, { shallow: true });
+        router.push(`${baseUri}?gallery_id=${id}`, undefined, {
+            shallow: true,
+        });
         setListOpen(false);
     };
 
     return comp ? (
         <section className={[style.main, className].join(' ')} id="gallery">
             <MainCanvas
-                className={style.mainCanvas}
-                data={entries}
                 comp={comp}
+                entries={entries}
+                baseUri={baseUri}
+                className={style.mainCanvas}
             />
-            <WorkInfoBox
-                entry={clicked}
-                className={[
-                    style.workInfoBox,
-                    clicked ? style.active : null,
-                    listOpen ? style.listOpen : null,
-                ].join(' ')}
-            />
+            {clicked && (
+                <WorkInfoBox
+                    entry={clicked}
+                    className={[
+                        style.workInfoBox,
+                        clicked ? style.active : null,
+                        listOpen ? style.listOpen : null,
+                    ].join(' ')}
+                />
+            )}
             <HelpBox active={clicked === null} competition={comp} />
             <WorkSelector
                 active={listOpen}
