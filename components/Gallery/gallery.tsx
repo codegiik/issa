@@ -4,7 +4,7 @@ import { Loader, WorkInfoBox, WorkSelector } from 'components';
 
 import { CompetitionEntry, Competition, Record } from 'lib/interfaces';
 
-import strapi, { getFileUrl, unwrap } from 'lib/strapi';
+import strapi, { unwrap } from 'lib/strapi';
 
 /* Hooks */
 import { useRouter } from 'next/router';
