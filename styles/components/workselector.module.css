@@ -1,6 +1,6 @@
 .workSelector {
     @apply absolute top-0 bottom-0 z-20 w-full pb-2 -left-full transition-all;
-    @apply bg-base-200;
+    @apply bg-base-100;
     overflow-y: auto;
     overflow-x: hidden;
     max-width: 500px;

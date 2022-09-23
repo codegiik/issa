@@ -18,6 +18,7 @@ import { CompetitionEntry, Competition } from 'lib/interfaces';
 // import colors from 'styles/colors';
 import tailwindconfig from 'tailwind.config';
 import useWindowDimensions from 'lib/utils';
+import { getFileUrl } from 'lib/strapi';
 
 const colors = tailwindconfig.daisyui.themes[0].issa;
 
@@ -195,7 +196,10 @@ function Frames({
                         key={entry.id}
                         entry={entry}
                         clicked={clicked}
-                        url={entry.preview}
+                        url={
+                            getFileUrl(entry, 'attachment', 0) ||
+                            '/img/default-cover.png'
+                        }
                         position={[PADDING + i * 2, 0, -2]}
                         rotation={[0, 0, 0]}
                     />

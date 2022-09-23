@@ -22,15 +22,16 @@ export const getFileUrl = (
     index: number = 0,
     format: undefined | string = undefined
 ) => {
-    const data = record[param]?.data;
+    if (!record) return;
+    const data = record[param];
     let url;
 
     if (Array.isArray(data)) {
-        if (format) url = data[index]?.attributes?.formats?.[format]?.url;
-        else url = data[index]?.attributes?.url;
+        if (format) url = data[index]?.formats?.[format]?.url;
+        else url = data[index]?.url;
     } else {
-        if (format) url = data?.attributes?.formats?.[format]?.url;
-        else url = data?.attributes?.url;
+        if (format) url = data?.formats?.[format]?.url;
+        else url = data?.url;
     }
 
     return getCompleteUrl(url);

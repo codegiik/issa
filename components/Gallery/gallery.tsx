@@ -4,7 +4,7 @@ import { Loader, WorkInfoBox, WorkSelector } from 'components';
 
 import { CompetitionEntry, Competition, Record } from 'lib/interfaces';
 
-import strapi, { unwrap } from 'lib/strapi';
+import strapi, { getFileUrl, unwrap } from 'lib/strapi';
 
 /* Hooks */
 import { useRouter } from 'next/router';
@@ -159,7 +159,7 @@ export function Gallery({
                 ].join(' ')}
                 onClick={() => setListOpen(!listOpen)}
             >
-                <span className="material-icons">
+                <span className="material-symbols-sharp">
                     {listOpen ? 'close' : 'list'}
                 </span>
             </div>
