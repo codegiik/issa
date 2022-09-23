@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Podium } from 'components/Competitions/Podium';
 import Main from 'layouts/Main';
-import { CompetitionsRecord } from 'lib/interfaces';
+import { Competition } from 'lib/interfaces';
 import strapi, { getFileUrl } from 'lib/strapi';
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
@@ -11,7 +11,7 @@ import style from 'styles/pages/competition.id.module.css';
 export function ScoreboardTab({
     competition,
 }: {
-    competition: CompetitionsRecord | undefined;
+    competition: Competition | undefined;
 }) {
     return competition ? (
         <div className={style.details}>
@@ -25,7 +25,7 @@ export function GalleryTab({
     baseUri,
     router,
 }: {
-    competition: CompetitionsRecord | undefined;
+    competition: Competition | undefined;
     baseUri: string;
     router: NextRouter;
 }) {
@@ -38,9 +38,9 @@ export function GalleryTab({
 export function DescriptionTab({
     competition,
 }: {
-    competition: CompetitionsRecord | undefined;
+    competition: Competition | undefined;
 }) {
-    return (
+    return competition ? (
         <div className={style.details}>
             <p className={style.desc}>{competition?.description}</p>
             <div className={style.attachments}>
@@ -69,14 +69,14 @@ export function DescriptionTab({
                 })}
             </div>
         </div>
-    );
+    ) : null;
 }
 
 export default function CompetitionDetailsPage() {
     const router = useRouter();
-    const [competition, setCompetition] = useState<
-        CompetitionsRecord | undefined
-    >(undefined);
+    const [competition, setCompetition] = useState<Competition | undefined>(
+        undefined
+    );
 
     useEffect(() => {
         if (router.query.id && router.query.id.length > 0)

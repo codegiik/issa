@@ -2,6 +2,6 @@
     @apply flex flex-col min-h-screen items-center mt-10 gap-3;
 
     .tile {
-        @apply w-full sm:w-10/12;
+        @apply w-11/12;
     }
 }

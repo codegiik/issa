@@ -2,7 +2,7 @@
 import { MainCanvas } from './MainCanvas';
 import { Loader, WorkInfoBox, WorkSelector } from 'components';
 
-import { CompetitionEntriesRecord, CompetitionsRecord } from 'lib/interfaces';
+import { CompetitionEntry, Competition, Record } from 'lib/interfaces';
 
 import strapi, { unwrap } from 'lib/strapi';
 
@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import style from 'styles/pages/gallery.module.css';
 
 type HelpBoxProps = {
-    competition: CompetitionsRecord;
+    competition: Competition;
     active: boolean;
 };
 
@@ -61,23 +61,31 @@ export function Gallery({
     baseUri = '/gallery',
 }: {
     className?: string;
-    comp: CompetitionsRecord;
+    comp: Competition;
     baseUri?: string;
 }) {
-    const [clicked, setClicked] = useState<
-        CompetitionEntriesRecord | undefined
-    >(undefined);
-    const [entries, setEntries] = useState<CompetitionEntriesRecord[]>([]);
+    const [clicked, setClicked] = useState<CompetitionEntry | undefined>(
+        undefined
+    );
+    const [entries, setEntries] = useState<CompetitionEntry[]>([]);
     const [listOpen, setListOpen] = useState<boolean>(false);
     const router = useRouter();
 
     useEffect(() => {
+        const populateKeys: string[] = [
+            'school',
+            'competition',
+            'attachment',
+            'attachment_url',
+        ];
         strapi
-            .find('competition-entries', {
+            .find<Record<CompetitionEntry>[]>('competition-entries', {
                 sort: 'createdAt:desc',
-                populate: '*',
+                populate: populateKeys.join(', '),
             })
-            .then(({ data }: { data: any }) => setEntries(unwrap(data)));
+            .then(({ data }) =>
+                setEntries(unwrap(data, populateKeys) as CompetitionEntry[])
+            );
     }, [comp]);
 
     useEffect(() => {

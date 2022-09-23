@@ -3,6 +3,22 @@
     @apply flex px-4 py-5 md:px-6 lg:px-16 transition-all;
     @apply sticky left-0 right-0 top-0 z-[90];
 
+    &.light {
+        @apply bg-base-200 border-b-[1px] border-primary text-primary;
+
+        svg {
+            @apply text-[#5B1B23];
+        }
+
+        .link {
+            @apply opacity-50 hover:opacity-100 hover:!text-primary;
+
+            &.selected::before {
+                @apply !bg-primary;
+            }
+        }
+    }
+
     & > * {
         transition: all 0.15s ease-out;
     }

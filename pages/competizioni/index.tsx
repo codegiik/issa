@@ -1,14 +1,14 @@
-import { CompetitionTile } from 'components';
+import { CompetitionTile, Heading } from 'components';
 import Main from 'layouts/Main';
-import { CompetitionsRecord } from 'lib/interfaces';
+import { Competition } from 'lib/interfaces';
 import strapi from 'lib/strapi';
 import { useEffect, useState } from 'react';
 import style from 'styles/pages/competitions.module.css';
 
 export default function CompetitionsPage() {
-    const [competitions, setCompetitions] = useState<
-        CompetitionsRecord[] | undefined
-    >(undefined);
+    const [competitions, setCompetitions] = useState<Competition[] | undefined>(
+        undefined
+    );
 
     useEffect(() => {
         strapi
@@ -30,9 +30,14 @@ export default function CompetitionsPage() {
 
     return (
         <section className={style.wrapper}>
+            <Heading>Tutte le Competizioni</Heading>
             {competitions &&
                 competitions.map((comp: any) => (
-                    <CompetitionTile competition={comp} key={comp.id} />
+                    <CompetitionTile
+                        competition={comp}
+                        key={comp.id}
+                        className={style.tile}
+                    />
                 ))}
         </section>
     );

@@ -26,7 +26,7 @@
 }
 
 .mainCanvas {
-    @apply z-10 h-full !bg-base-300 relative;
+    @apply z-10 h-full !bg-base-200 relative;
 }
 
 .main {

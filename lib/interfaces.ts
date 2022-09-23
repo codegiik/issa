@@ -1,5 +1,11 @@
-export type Record = {
+export type Record<T> = {
     id: number;
+    attributes: T;
+};
+
+export type StrapiElement = {
+    id: number;
+    [key: string]: any;
 };
 
 export type FileRecordField = string;
@@ -9,7 +15,7 @@ export type NewsItem = {
     href: string;
     post: FileRecordField;
     title: string;
-} & Record;
+};
 
 export enum CourseTypes {
     A = 'a',
@@ -17,14 +23,14 @@ export enum CourseTypes {
     C = 'c',
 }
 
-export type CoursesRecord = {
+export type Course = {
     attachment: string;
     description: string;
     name: string;
     prof: string;
     type: CourseTypes;
     submodule: FileRecordField;
-} & Record;
+} & StrapiElement;
 
 export enum CompetitionStatus {
     NOT_STARTED = 'not_started',
@@ -32,17 +38,17 @@ export enum CompetitionStatus {
     ENDED = 'ended',
 }
 
-export type CompetitionsRecord = {
+export type Competition = {
     attachments: any;
     edition: number;
     name: string;
     description: string;
     status: CompetitionStatus;
     sponsors: any;
-    type: string;
-} & Record;
+    type: 'gallery' | 'test';
+} & StrapiElement;
 
-export type CompetitionEntriesRecord = {
+export type CompetitionEntry = {
     referee: string;
     id: number;
     name?: string;
@@ -53,21 +59,21 @@ export type CompetitionEntriesRecord = {
     competition: string;
     attachment?: FileRecordField;
     attachment_url?: string;
-    school: SchoolRecord;
+    school: School;
     preview?: FileRecordField;
-} & Record;
+} & StrapiElement;
 
-export type SchoolRecord = {
+export type School = {
     name: string;
     logo?: FileRecordField;
     motto?: string;
-    competition_entries: CompetitionEntriesRecord[];
-};
+    competition_entries: CompetitionEntry[];
+} & StrapiElement;
 
-export type SponsorRecord = {
+export type Sponsor = {
     name: string;
     logo: FileRecordField;
-};
+} & StrapiElement;
 
 export const CompetitionJsonSchema = {
     title: 'Person',

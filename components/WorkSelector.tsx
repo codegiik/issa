@@ -1,22 +1,40 @@
 import { Heading } from 'components';
+import { CompetitionEntry, School } from 'lib/interfaces';
 
 import style from 'styles/components/workselector.module.css';
 
-export function WorkSelector({ onNext, onPrev, active, entries, switchTo }) {
-    const getCroppedTitle = (title) =>
-        title?.length > 20 ? title.substr(0, 15) + '...' : title;
+export type WorkSelectorProps = {
+    active: boolean;
+    entries: CompetitionEntry[];
+    switchTo: Function;
+    onNext: Function;
+    onPrev: Function;
+};
+
+export function WorkSelector({
+    onNext,
+    onPrev,
+    active,
+    entries,
+    switchTo,
+}: WorkSelectorProps) {
+    const _getCroppedTitle = (title: string) =>
+        title.length > 20 ? title.slice(0, 15) + '...' : title;
 
     const getSchoolsList = () => {
         if (!entries) return [];
-        const schools = [];
-        entries.forEach((v) =>
-            schools.includes(v.school_name) ? null : schools.push(v.school_name)
+        const schools: School[] = [];
+        const schoolNames = schools.map((s) => s.name);
+        entries.forEach((entry) =>
+            schoolNames.includes(entry.school.name)
+                ? null
+                : schools.push(entry.school)
         );
         return schools;
     };
 
-    const getWorksBySchool = (school) => {
-        return entries.filter((v) => v.school_name == school);
+    const getSchoolEntries = (s: School) => {
+        return entries.filter((e) => e.school.name === s.name);
     };
 
     return (
@@ -34,14 +52,16 @@ export function WorkSelector({ onNext, onPrev, active, entries, switchTo }) {
                             type="h4"
                             className={style.schoolHeading}
                         >
-                            {v}
+                            {v.name}
                         </Heading>
-                        {getWorksBySchool(v).map((va, ix) => (
+                        {getSchoolEntries(v).map((va, ix) => (
                             <p
                                 className={style.schoolProject}
                                 onClick={() => switchTo(va.id)}
                                 key={ix}
-                            ></p>
+                            >
+                                {va.name}
+                            </p>
                         ))}
                     </div>
                 );

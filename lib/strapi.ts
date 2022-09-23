@@ -1,4 +1,5 @@
 import Strapi from 'strapi-sdk-js';
+import { Record } from 'lib/interfaces';
 
 const BASE_URL =
     process.env.NEXT_PUBLIC_BASE_URL || 'https://issa-strapi.test.codegiik.com';
@@ -35,20 +36,35 @@ export const getFileUrl = (
     return getCompleteUrl(url);
 };
 
-export const unwrap = (data: Record<string, any> | Record<string, any>[]) => {
+function unwrapRecursive(data: Record<any>, recursive: string[]): void {
+    recursive.forEach((key) => {
+        if (!data.attributes[key]) return;
+        data.attributes[key] = unwrap(data.attributes[key].data);
+    });
+}
+
+export function unwrap<StrapiElement>(
+    data?: Record<StrapiElement> | Record<StrapiElement>[],
+    recursive?: string[]
+): StrapiElement | StrapiElement[] | undefined {
     if (!data) return;
 
     if (!Array.isArray(data)) {
+        if (recursive) unwrapRecursive(data, recursive);
         return {
             ...data.attributes,
             id: data.id,
         };
     }
 
-    return data.map((element) => ({
-        ...element.attributes,
-        id: element.id,
-    }));
-};
+    return data.map((el) => {
+        if (recursive) unwrapRecursive(el, recursive);
+
+        return {
+            ...el.attributes,
+            id: el.id,
+        };
+    });
+}
 
 export default strapi;

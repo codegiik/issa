@@ -19,15 +19,19 @@ export type NavbarProps = {
     links?: (CustomLinkProps & {
         label: string;
     })[];
+    theme?: 'light' | 'dark';
 };
 
-export function Navbar({ className, links }: NavbarProps) {
+export function Navbar({ className, links, theme = 'dark' }: NavbarProps) {
     const [menuActive, setMenuActive] = useState<boolean>(false);
     const router = useRouter();
 
     return (
         <>
-            <nav id="mainNavbar" className={clsx(style.navbar, className)}>
+            <nav
+                id="mainNavbar"
+                className={clsx(className, style.navbar, style[theme])}
+            >
                 <div className={style.logo} onClick={() => router.push('/')}>
                     <Image
                         src={LogoIcon}
@@ -58,7 +62,10 @@ export function Navbar({ className, links }: NavbarProps) {
                         </CustomLink>
                     ))}
                     <span
-                        className={clsx('material-icons', style.hamburgerIcon)}
+                        className={clsx(
+                            'material-symbols-sharp',
+                            style.hamburgerIcon
+                        )}
                         onClick={() => setMenuActive((prev) => !prev)}
                     >
                         {menuActive ? 'close' : 'menu'}

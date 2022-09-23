@@ -1,5 +1,5 @@
 /* libs */
-import React from 'react';
+import React, { useState } from 'react';
 
 /* components */
 import { Navbar, Footer } from 'components';
@@ -16,9 +16,18 @@ export type MainProps = {
     children: JSX.Element | JSX.Element[];
     className?: string;
     navbarProps?: NavbarProps;
+    navbarInitialTheme?: 'light' | 'dark';
 };
 
-export default function Main({ children, className, navbarProps }: MainProps) {
+export default function Main({
+    children,
+    className,
+    navbarProps,
+    navbarInitialTheme = 'dark',
+}: MainProps) {
+    const [navbarTheme, setNavbarTheme] = useState<'light' | 'dark'>(
+        navbarInitialTheme
+    );
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
             return React.cloneElement(child);
@@ -31,7 +40,7 @@ export default function Main({ children, className, navbarProps }: MainProps) {
             <Head>
                 <title>ReteISSA</title>
             </Head>
-            <Navbar {...navbarProps} />
+            <Navbar {...navbarProps} theme={navbarTheme} />
             {childrenWithProps}
             <Footer />
         </main>

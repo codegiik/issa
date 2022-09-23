@@ -14,17 +14,18 @@ import {
 } from '@react-three/drei';
 import { NumeralForm, convertNumberToNumeralForm } from 'numerals';
 import { NextRouter, useRouter } from 'next/router';
-import { CompetitionEntriesRecord, CompetitionsRecord } from 'lib/interfaces';
+import { CompetitionEntry, Competition } from 'lib/interfaces';
 // import colors from 'styles/colors';
 import tailwindconfig from 'tailwind.config';
+import useWindowDimensions from 'lib/utils';
 
 const colors = tailwindconfig.daisyui.themes[0].issa;
 
 const GOLDENRATIO = 1.61803398875;
 
 export type MainCanvasProps = {
-    entries: CompetitionEntriesRecord[];
-    comp: CompetitionsRecord;
+    entries: CompetitionEntry[];
+    comp: Competition;
     className: string;
     baseUri: string;
 };
@@ -36,28 +37,15 @@ export function MainCanvas({
     baseUri,
 }: MainCanvasProps) {
     const router = useRouter();
-    const [windowSize, setWindowSize] = useState(1024);
+    const { width: windowSize } = useWindowDimensions();
 
-    useEffect(() => {
-        const textSizeInterval = setInterval(() => {
-            if (!window) return;
-            const windowSize = window.innerWidth;
-            setWindowSize(windowSize);
-        }, 1000);
-
-        return () => clearInterval(textSizeInterval);
-    }, []);
-
-    const getTextSize = () =>
-        windowSize /
-        comp?.name?.length /
-        (windowSize < 1250 ? 65 : windowSize > 2000 ? 180 : 80);
+    const getTextSize = () => windowSize / (windowSize < 1500 ? 3000 : 5000);
     const getTitleOffset = () => {
         if (getTextSize() < 0.2) return 1.75;
         else if (getTextSize() > 0.5) return 2.75;
         return 2.25;
     };
-    const editionIdOffset = getTitleOffset() - getTextSize() * 1.25;
+    const editionIdOffset = getTitleOffset() - getTextSize() - 0.075;
 
     return (
         <Canvas
@@ -66,7 +54,7 @@ export function MainCanvas({
             camera={{ fov: 70, position: [0, 2, 15] }}
             className={className}
         >
-            <color attach="background" args={[colors['base-200']]} />
+            <color attach="background" args={[colors['base-100']]} />
             <fog attach="fog" args={[colors['primary'], 0, 15]} />
             <Suspense fallback={null}>
                 <Environment preset="city" />
@@ -87,8 +75,7 @@ export function MainCanvas({
                     {...({
                         color: colors['primary'],
                         font: '/fonts/LibreBaskerville-Regular.ttf',
-                        fontSize:
-                            getTextSize() * (windowSize > 3250 ? 0.5 : 0.6),
+                        fontSize: (getTextSize() * 3) / 5,
                         anchorX: 'center',
                         anchorY: 'middle',
                         // position={[0, 1.8 + getTextOffset() * 0.32, 0]}
@@ -139,7 +126,7 @@ function Frames({
     p = new THREE.Vector3(),
     q = new THREE.Quaternion(),
 }: {
-    entries: CompetitionEntriesRecord[];
+    entries: CompetitionEntry[];
     router: NextRouter;
     windowSize: number;
     baseUri: string;
@@ -222,7 +209,7 @@ export type FrameProps = {
     url?: string;
     clicked: MutableRefObject<ThreeElements['mesh'] | undefined>;
     c?: THREE.Color;
-    entry: CompetitionEntriesRecord;
+    entry: CompetitionEntry;
     [key: string]: any;
 };
 

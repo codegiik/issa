@@ -1,4 +1,4 @@
-import { CompetitionEntriesRecord } from 'lib/interfaces';
+import { CompetitionEntry } from 'lib/interfaces';
 import { getFileUrl } from 'lib/strapi';
 import style from 'styles/components/workinfobox.module.css';
 
@@ -50,7 +50,7 @@ export function WorkInfoBox({
     entry,
     className,
 }: {
-    entry: CompetitionEntriesRecord;
+    entry: CompetitionEntry;
     className?: string;
 }) {
     return (

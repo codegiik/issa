@@ -1,5 +1,5 @@
 .heading {
-    @apply font-serif text-2xl font-bold md:text-3xl;
+    @apply font-serif text-2xl font-bold md:text-3xl self-start;
 
     &.lineBefore {
         @apply ml-[var(--heading-distance)] sm:ml-[var(--heading-distance-sm)] md:ml-[var(--heading-distance-md)] lg:ml-[var(--heading-distance-lg)];
