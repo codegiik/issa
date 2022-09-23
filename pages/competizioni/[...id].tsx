@@ -45,19 +45,21 @@ export function DescriptionTab({
                             index
                         );
 
-                        console.log(attach);
-
                         return (
                             attachUrl && (
-                                <div className={style.download} key={index}>
-                                    <div className={style.name}>
-                                        <p>{attach.attributes.name}</p>
-                                        <span>{attach.attributes.caption}</span>
+                                <a href={attachUrl}>
+                                    <div className={style.download} key={index}>
+                                        <div className={style.name}>
+                                            <p>{attach.attributes.name}</p>
+                                            <span>
+                                                {attach.attributes.caption}
+                                            </span>
+                                        </div>
+                                        <span className="material-symbols-sharp">
+                                            file_download
+                                        </span>
                                     </div>
-                                    <span className="material-symbols-sharp">
-                                        file_download
-                                    </span>
-                                </div>
+                                </a>
                             )
                         );
                     }
@@ -88,8 +90,6 @@ export default function CompetitionDetailsPage() {
                     ({ error }) => error
                 );
     }, [router]);
-
-    console.log(competition);
 
     const getCurrentTab = () => {
         if (!router.query.id) return null;
