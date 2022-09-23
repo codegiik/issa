@@ -2,7 +2,7 @@ import Strapi from 'strapi-sdk-js';
 import { Record } from 'lib/interfaces';
 
 const BASE_URL =
-    process.env.NEXT_PUBLIC_BASE_URL || 'https://issa-strapi.test.codegiik.com';
+    process.env.NEXT_PUBLIC_STRAPI_BASE_URL || 'http://localhost:1337';
 
 const strapi = new Strapi({
     url: BASE_URL,
