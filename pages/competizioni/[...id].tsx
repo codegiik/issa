@@ -1,8 +1,9 @@
 import clsx from 'clsx';
+import { Gallery } from 'components';
 import { Podium } from 'components/Competitions/Podium';
 import Main from 'layouts/Main';
-import { Competition } from 'lib/interfaces';
-import strapi, { getFileUrl } from 'lib/strapi';
+import type { Competition, Record } from 'lib/interfaces';
+import strapi, { getFileUrl, unwrap } from 'lib/strapi';
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -29,10 +30,11 @@ export function GalleryTab({
     baseUri: string;
     router: NextRouter;
 }) {
-    return;
-    <Link href={`${baseUri}/`}>
-        <div>Gallery</div>
-    </Link>;
+    return (
+        <Link href={`${baseUri}/`}>
+            <div>Gallery</div>
+        </Link>
+    );
 }
 
 export function DescriptionTab({
@@ -56,8 +58,8 @@ export function DescriptionTab({
                             <a href={attachUrl}>
                                 <div className={style.download} key={index}>
                                     <div className={style.name}>
-                                        <p>{attach.attributes.name}</p>
-                                        <span>{attach.attributes.caption}</span>
+                                        <p>{attach.name}</p>
+                                        <span>{attach.caption}</span>
                                     </div>
                                     <span className="material-symbols-sharp">
                                         file_download
@@ -81,18 +83,23 @@ export default function CompetitionDetailsPage() {
     useEffect(() => {
         if (router.query.id && router.query.id.length > 0)
             strapi
-                .findOne('competitions', router.query.id[0], {
-                    populate: '*',
-                })
+                .findOne<Record<Competition>>(
+                    'competitions',
+                    router.query.id[0],
+                    {
+                        populate: '*',
+                    }
+                )
                 .then(
-                    ({ data }: { data: any }) =>
-                        setCompetition({
-                            ...data.attributes,
-                            id: data.id,
-                        }),
+                    ({ data }) =>
+                        setCompetition(
+                            unwrap(data, ['attachments']) as Competition
+                        ),
                     ({ error }) => error
                 );
     }, [router]);
+
+    console.log('attachments', !!competition, competition?.attachments);
 
     const getCurrentTab = () => {
         if (!router.query.id) return null;
@@ -103,8 +110,15 @@ export default function CompetitionDetailsPage() {
             case 'classifica':
                 return <ScoreboardTab competition={competition} />;
             case 'galleria':
-            // case 'gallery':
-            //     return <GalleryTab baseUri={`/competizioni/`} competition={competition} router={router} />;
+            case 'gallery':
+                return (
+                    competition && (
+                        <Gallery
+                            baseUri={`/competizioni/${competition.id}/gallery`}
+                            comp={competition}
+                        />
+                    )
+                );
             default:
                 return <DescriptionTab competition={competition} />;
         }
