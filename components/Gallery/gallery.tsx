@@ -19,7 +19,6 @@ type HelpBoxProps = {
 };
 
 export function HelpBox({ competition, active }: HelpBoxProps) {
-    console.log(competition);
     return (
         <div
             className={[
@@ -36,7 +35,7 @@ export function HelpBox({ competition, active }: HelpBoxProps) {
             >
                 Clicca su uno dei quadri per visionarlo
             </p>
-            {competition?.sponsors && (
+            {competition?.sponsors && competition?.sponsors?.length > 0 && (
                 <div className={style.patronsWrapper}>
                     <p>Patrocinio di</p>
                     <div className={style.patrons}>

@@ -87,7 +87,12 @@ export default function CompetitionDetailsPage() {
                     'competitions',
                     router.query.id[0],
                     {
-                        populate: '*',
+                        populate: {
+                            attachments: '*',
+                            sponsors: {
+                                populate: ['logo'],
+                            },
+                        },
                     }
                 )
                 .then(
