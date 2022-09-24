@@ -5,7 +5,7 @@ RUN npm i -g pnpm
 WORKDIR /app
 COPY . .
 
-RUN pnpm install
+RUN pnpm install --prefer-frozen-lockfile
 
 ARG NEXT_PUBLIC_STRAPI_BASE_URL
 ARG NEXT_PUBLIC_STRAPI_TOKEN 
