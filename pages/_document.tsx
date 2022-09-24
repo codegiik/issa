@@ -37,6 +37,12 @@ export default class CustomDocument extends Document {
                 <body>
                     <Main />
                     <NextScript />
+                    <script
+                        async
+                        defer
+                        data-website-id="d64bb639-aef0-4f53-859a-b149f22e69be"
+                        src="http://umami.dev.reteissa.it/umami.js"
+                    ></script>
                 </body>
             </Html>
         );
