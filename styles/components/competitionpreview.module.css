@@ -1,0 +1,49 @@
+.wrapper {
+    @apply mb-10 grid md:!grid-rows-1 md:!grid-cols-2 h-[65vh];
+    @apply grid-rows-2 grid-cols-1;
+    @apply bg-primary;
+
+    .details {
+        @apply flex flex-col justify-center pl-10 text-primary-content;
+
+        h2 {
+            @apply font-serif text-primary-content text-xl md:text-3xl mb-2;
+        }
+
+        p {
+            @apply opacity-80 text-base md:text-xl w-10/12 font-body;
+
+            span {
+                @apply font-bold cursor-pointer;
+            }
+        }
+
+        .buttons {
+            @apply flex gap-5 mt-5;
+
+            .button {
+                @apply bg-base-100 text-base-content;
+                @apply font-serif text-sm md:text-lg px-8 py-1 border-2;
+                @apply border-primary-content;
+                @apply cursor-pointer;
+
+                &:hover {
+                    @apply bg-primary text-primary-content;
+                }
+            }
+        }
+    }
+
+    .cover {
+        @apply relative;
+
+        .overlay {
+            @apply hidden md:block;
+            @apply absolute inset-0 bg-gradient-to-r from-primary  to-transparent;
+        }
+
+        img {
+            @apply w-full h-full object-cover object-top relative;
+        }
+    }
+}

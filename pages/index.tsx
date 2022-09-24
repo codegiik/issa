@@ -1,4 +1,4 @@
-import { About, Hero, Initiatives } from 'components';
+import { About, CompetitionPreview, Hero, Initiatives } from 'components';
 import Main from 'layouts/Main';
 
 export default function Home() {
@@ -6,6 +6,7 @@ export default function Home() {
         <>
             <Hero />
             <About />
+            <CompetitionPreview />
             <Initiatives />
         </>
     );

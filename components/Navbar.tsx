@@ -110,7 +110,7 @@ Navbar.defaultProps = {
             scrollTo: true,
         },
         {
-            href: '/#gallery',
+            href: '/#premio_issa',
             label: 'Premio ISSA',
             scrollTo: true,
         },

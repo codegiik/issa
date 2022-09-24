@@ -20,3 +20,4 @@ export { CompetitionTile } from './Competitions/CompetitionTile';
 // export { CreatePopup } from './Admin/CreatePopup';
 // export { Login } from './Admin/Login';
 // export { Sidebar } from './Admin/Sidebar';
+export { CompetitionPreview } from './Home/CompetitionPreview';
