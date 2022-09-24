@@ -27,13 +27,25 @@ export function CompetitionPreview() {
             });
     }, []);
 
-    return (
-        competition && (
-            <section id="premio_issa" className={style.wrapper}>
-                <div className={style.details}>
-                    <h2>{competition.name}</h2>
-                    <p>
-                        {competition?.description.substring(0, 200)}...{' '}
+    return competition ? (
+        <section id="premio_issa" className={style.wrapper}>
+            <div className={style.details}>
+                <h2>{competition.name}</h2>
+                <p>
+                    {competition?.description.substring(0, 200)}...{' '}
+                    <Link
+                        href={{
+                            pathname: '/competizioni/[...id]',
+                            query: {
+                                id: [competition.id],
+                            },
+                        }}
+                    >
+                        <span>Continua</span>
+                    </Link>
+                </p>
+                <div className={style.buttons}>
+                    {competition.status !== 'ended' ? (
                         <Link
                             href={{
                                 pathname: '/competizioni/[...id]',
@@ -42,57 +54,43 @@ export function CompetitionPreview() {
                                 },
                             }}
                         >
-                            <span>Continua</span>
+                            <div className={style.button}>Bando</div>
                         </Link>
-                    </p>
-                    <div className={style.buttons}>
-                        {competition.status !== 'ended' ? (
+                    ) : (
+                        <>
                             <Link
                                 href={{
                                     pathname: '/competizioni/[...id]',
                                     query: {
-                                        id: [competition.id],
+                                        // @ts-ignore
+                                        id: [competition.id, 'gallery'],
                                     },
                                 }}
                             >
-                                <div className={style.button}>Bando</div>
+                                <div className={style.button}>Gallery</div>
                             </Link>
-                        ) : (
-                            <>
-                                <Link
-                                    href={{
-                                        pathname: '/competizioni/[...id]',
-                                        query: {
-                                            id: [competition.id, 'gallery'],
-                                        },
-                                    }}
-                                >
-                                    <div className={style.button}>Gallery</div>
-                                </Link>
-                                <Link
-                                    href={{
-                                        pathname: '/competizioni/[...id]',
-                                        query: {
-                                            id: [competition.id, 'classifica'],
-                                        },
-                                    }}
-                                >
-                                    <div className={style.button}>
-                                        Classifica
-                                    </div>
-                                </Link>
-                            </>
-                        )}
-                    </div>
+                            <Link
+                                href={{
+                                    pathname: '/competizioni/[...id]',
+                                    query: {
+                                        // @ts-ignore
+                                        id: [competition.id, 'classifica'],
+                                    },
+                                }}
+                            >
+                                <div className={style.button}>Classifica</div>
+                            </Link>
+                        </>
+                    )}
                 </div>
-                <div className={style.cover}>
-                    <img
-                        src={getFileUrl(competition, 'cover')}
-                        alt={competition.name}
-                    />
-                    <div className={style.overlay} />
-                </div>
-            </section>
-        )
-    );
+            </div>
+            <div className={style.cover}>
+                <img
+                    src={getFileUrl(competition, 'cover')}
+                    alt={competition.name}
+                />
+                <div className={style.overlay} />
+            </div>
+        </section>
+    ) : null;
 }

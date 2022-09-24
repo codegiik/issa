@@ -48,33 +48,31 @@ export function Initiatives() {
             );
     }, []);
 
-    return (
-        initiatives && (
-            <section id="initiatives" className={style.wrapper}>
-                <Heading className={style.heading}>Iniziative</Heading>
-                <div className={style.boxes}>
-                    {initiatives.map((v, i) => (
-                        <div
-                            className={style.box}
-                            key={i}
-                            onClick={() => router.push(v.href)}
+    return initiatives ? (
+        <section id="initiatives" className={style.wrapper}>
+            <Heading className={style.heading}>Iniziative</Heading>
+            <div className={style.boxes}>
+                {initiatives.map((v, i) => (
+                    <div
+                        className={style.box}
+                        key={i}
+                        onClick={() => router.push(v.href)}
+                    >
+                        <h5>{v.title}</h5>
+                        <Divider className={style.divider} />
+                        <p>{v.description}</p>
+                        <svg
+                            width="53"
+                            height="53"
+                            viewBox="0 0 53 53"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={style.triangle}
                         >
-                            <h5>{v.title}</h5>
-                            <Divider className={style.divider} />
-                            <p>{v.description}</p>
-                            <svg
-                                width="53"
-                                height="53"
-                                viewBox="0 0 53 53"
-                                xmlns="http://www.w3.org/2000/svg"
-                                className={style.triangle}
-                            >
-                                <path d="M25 27.5L53 0V53H0L25 27.5Z" />
-                            </svg>
-                        </div>
-                    ))}
-                </div>
-            </section>
-        )
-    );
+                            <path d="M25 27.5L53 0V53H0L25 27.5Z" />
+                        </svg>
+                    </div>
+                ))}
+            </div>
+        </section>
+    ) : null;
 }

@@ -14,7 +14,7 @@ const strapi = new Strapi({
 });
 
 export const getCompleteUrl = (uri: string) =>
-    uri ? new URL(uri, BASE_URL).toString() : null;
+    uri ? new URL(uri, BASE_URL).toString() : undefined;
 
 export const getFileUrl = (
     record: any,
@@ -22,7 +22,7 @@ export const getFileUrl = (
     index: number = 0,
     format: undefined | string = undefined
 ) => {
-    if (!record) return;
+    if (!record) return undefined;
 
     let data = record[param];
 
