@@ -13,7 +13,7 @@ import style from 'styles/components/initiatives.module.css';
 const INITIATIVES_DATA = [
     {
         desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        href: '/courses',
+        href: '/corsi',
         title: 'Corsi',
     },
     {

@@ -1,15 +1,24 @@
 .wrapper {
-    @apply w-full bg-primary flex justify-between text-base-200 py-4;
+    @apply w-full bg-primary flex justify-between text-base-200 py-4 px-6;
 
     .text {
-        @apply w-2/3 ml-8;
-
         .name {
             @apply text-xl font-bold font-serif;
+            @apply flex items-center gap-2;
+
+            .typology {
+                @apply h-6 w-6;
+                @apply flex items-center justify-center;
+                @apply bg-base-300 text-lg text-primary font-bold uppercase;
+            }
         }
 
         .desc {
-            @apply prose text-base-100;
+            @apply prose text-base-100 text-sm mt-2;
+
+            p {
+                @apply m-0;
+            }
         }
 
         .org {
@@ -18,15 +27,22 @@
     }
 
     .icons {
-        @apply h-full my-auto  flex-col justify-center mr-8;
-
-        .typology {
-            @apply mb-4 leading-8 w-[2rem] bg-base-300 text-center text-xl text-primary font-serif font-bold uppercase;
-        }
+        @apply flex flex-col items-end justify-end;
 
         .goTo {
-            @apply mt-4 leading-8 w-[2rem] bg-primary text-center text-xl text-base-300 font-bold cursor-pointer;
+            @apply h-[2rem];
+            @apply flex items-center justify-center;
+            @apply bg-primary text-lg text-base-200 cursor-pointer;
+            @apply px-2 gap-2;
             @apply hover:bg-base-200 hover:text-primary;
+
+            .buttonText {
+                @apply font-serif;
+            }
+
+            span:last-child {
+                @apply text-base;
+            }
         }
     }
 }

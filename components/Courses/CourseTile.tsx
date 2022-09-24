@@ -13,12 +13,16 @@ export type CourseTileProps = {
 export function CourseTile({ course }: CourseTileProps) {
     const router = useRouter();
 
-    const getProfName = (course: Course) => 'Nome non Registrato';
+    const getProfName = (course: Course) =>
+        course?.author || 'Nome non Registrato';
 
     return (
         <div className={style.wrapper}>
             <div className={style.text}>
-                <p className={style.name}>{course.name}</p>
+                <p className={style.name}>
+                    <div className={style.typology}>{course.type}</div>
+                    {course.name}
+                </p>
                 <div
                     className={style.desc}
                     dangerouslySetInnerHTML={{
@@ -28,7 +32,6 @@ export function CourseTile({ course }: CourseTileProps) {
                 <p className={style.org}>A cura di: {getProfName(course)}</p>
             </div>
             <div className={style.icons}>
-                <div className={style.typology}>{course.type}</div>
                 {course.attachment && (
                     <div
                         className={style.goTo}
@@ -40,8 +43,9 @@ export function CourseTile({ course }: CourseTileProps) {
                             );
                         }}
                     >
+                        <span className={style.buttonText}>Iscriviti</span>
                         <span className="material-symbols-sharp">
-                            file_download
+                            edit_document
                         </span>
                     </div>
                 )}

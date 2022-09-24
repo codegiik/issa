@@ -1,5 +1,5 @@
 /* lib */
-import strapi from 'lib/strapi';
+import strapi, { unwrap } from 'lib/strapi';
 
 /* comp */
 import { CourseTile, Heading } from 'components';
@@ -12,24 +12,19 @@ import { useEffect, useState } from 'react';
 import style from 'styles/pages/courses.module.css';
 
 /* @types */
-import type { Course } from 'lib/interfaces';
+import type { Course, Record } from 'lib/interfaces';
 
 export default function Courses() {
     const [courses, setCourses] = useState<Course[]>([]);
 
     useEffect(() => {
         strapi
-            .find('courses', {
+            .find<Record<Course>[]>('courses', {
                 sort: 'createdAt:desc',
                 populate: '*',
             })
-            .then(({ data }: { data: any }) =>
-                setCourses(
-                    data.map((course: any) => ({
-                        ...course.attributes,
-                        id: course.id,
-                    }))
-                )
+            .then(({ data }) =>
+                setCourses(unwrap(data, ['attachment']) as Course[])
             );
     }, []);
 
