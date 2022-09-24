@@ -25,7 +25,7 @@ export default function ArticlePage() {
         <div className={style.wrapper}>
             <h2>{page?.title}</h2>
             <div
-                className="prose prose-zinc"
+                className="prose prose-zinc min-w-full"
                 dangerouslySetInnerHTML={{
                     __html: page?.body,
                 }}
