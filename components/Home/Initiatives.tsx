@@ -42,7 +42,9 @@ export function Initiatives() {
 
     useEffect(() => {
         strapi
-            .find<Record<InitiativesType>[]>('initiatives')
+            .find<Record<InitiativesType>[]>('initiatives', {
+                sort: 'id:asc',
+            })
             .then(({ data }) =>
                 setInitiatives(unwrap(data) as InitiativesType[])
             );
