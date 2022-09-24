@@ -1,6 +1,10 @@
 .wrapper {
     @apply flex flex-col min-h-screen items-center mt-10 gap-3;
 
+    .heading {
+        @apply mb-5;
+    }
+
     .tile {
         @apply w-11/12;
     }

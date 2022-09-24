@@ -10,7 +10,7 @@ module.exports = {
         fontFamily: {
             sans: [...defaultTheme.fontFamily.sans],
             serif: ['Libre Baskerville', ...defaultTheme.fontFamily.serif],
-            body: ['EB Garmond', ...defaultTheme.fontFamily.serif],
+            body: ['EB Garamond', ...defaultTheme.fontFamily.serif],
             mono: [...defaultTheme.fontFamily.mono],
             'libre-baskerville': 'Libre Baskerville',
             'eb-garmond': 'EB Garamond',

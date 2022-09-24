@@ -23,7 +23,11 @@ export const getFileUrl = (
     format: undefined | string = undefined
 ) => {
     if (!record) return;
-    const data = record[param];
+
+    let data = record[param];
+
+    if (record[param]?.data) data = unwrap(record[param]?.data);
+
     let url;
 
     if (Array.isArray(data)) {

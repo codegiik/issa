@@ -4,7 +4,7 @@ import { Loader, WorkInfoBox, WorkSelector } from 'components';
 
 import { CompetitionEntry, Competition, Record, Sponsor } from 'lib/interfaces';
 
-import strapi, { unwrap } from 'lib/strapi';
+import strapi, { getFileUrl, unwrap } from 'lib/strapi';
 
 /* Hooks */
 import { useRouter } from 'next/router';
@@ -44,12 +44,11 @@ export function HelpBox({ competition, active }: HelpBoxProps) {
                             <div key={`sponsor-${i}`}>
                                 <img
                                     className={style.patron}
-                                    src={v.image}
+                                    src={getFileUrl(v, 'logo')}
                                     alt={v.name}
                                     title={v.name}
                                     key={i}
                                 />
-                                {v.name}
                             </div>
                         ))}
                     </div>

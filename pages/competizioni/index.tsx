@@ -30,7 +30,7 @@ export default function CompetitionsPage() {
 
     return (
         <section className={style.wrapper}>
-            <Heading>Tutte le Competizioni</Heading>
+            <Heading className={style.heading}>Tutte le Competizioni</Heading>
             {competitions &&
                 competitions.map((comp: any) => (
                     <CompetitionTile

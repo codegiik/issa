@@ -9,13 +9,14 @@
     .patronsWrapper {
         p {
             @apply mb-2 font-bold text-primary;
+            @apply font-body;
         }
 
         .patrons {
             @apply flex items-center justify-center gap-4;
 
             .patron {
-                @apply w-12 h-12;
+                @apply w-12 h-12 object-fill;
             }
         }
     }
@@ -30,7 +31,7 @@
 }
 
 .main {
-    height: calc(100vh - 51px - 2.5rem) !important;
+    height: calc(100vh - 40px - 2.5rem) !important;
     @apply relative bg-base-300 transition-all overflow-y-auto md:overflow-hidden;
 }
 

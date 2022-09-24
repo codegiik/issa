@@ -93,7 +93,10 @@ export default function CompetitionDetailsPage() {
                 .then(
                     ({ data }) =>
                         setCompetition(
-                            unwrap(data, ['attachments']) as Competition
+                            unwrap(data, [
+                                'attachments',
+                                'sponsors',
+                            ]) as Competition
                         ),
                     ({ error }) => error
                 );

@@ -8,20 +8,24 @@ export default function GalleryPage() {
     const [latestComp, setLatestComp] = useState<Competition | null>(null);
 
     useEffect(() => {
-        const populateKeys = ['sponsors', 'attachments'];
         strapi
             .find<Record<Competition>[]>('competitions', {
                 sort: 'createdAt:desc',
-                populate: populateKeys.join(', '),
+                populate: {
+                    sponsors: {
+                        populate: '*',
+                    },
+                    attachments: '*',
+                },
             })
             .then((response) => {
                 const record = response.data.find(
                     (comp) => comp.attributes.type === 'gallery'
                 );
-                const comp = unwrap<Competition>(
-                    record,
-                    populateKeys
-                ) as Competition;
+                const comp = unwrap<Competition>(record, [
+                    'sponsors',
+                    'attachments',
+                ]) as Competition;
                 if (comp) setLatestComp(comp);
             });
     }, []);

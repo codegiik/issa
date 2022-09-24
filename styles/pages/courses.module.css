@@ -1,8 +1,8 @@
 .wrapper {
-    @apply min-h-[80vh];
+    @apply min-h-screen;
 
     .heading {
-        @apply my-5;
+        @apply mb-5 mt-10;
     }
 
     .tiles {

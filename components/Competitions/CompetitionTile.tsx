@@ -13,6 +13,20 @@ export function CompetitionTile({
     competition,
     className,
 }: CompetitionTileProps) {
+    const getStatus = () => {
+        if (!competition) return;
+        switch (competition.status) {
+            case 'in_progress':
+                return 'In Corso';
+            case 'ended':
+                return 'Termitata';
+            case 'not_started':
+                return 'Non ancora iniziata';
+            default:
+                return 'Non definito';
+        }
+    };
+
     return (
         <Link
             href={{
@@ -30,7 +44,8 @@ export function CompetitionTile({
                     {convertNumberToNumeralForm(
                         competition?.edition,
                         NumeralForm.Roman
-                    )}
+                    )}{' '}
+                    - Stato: {getStatus()}
                 </p>
             </div>
         </Link>
