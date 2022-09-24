@@ -85,7 +85,7 @@ export function MainCanvas({
                 >
                     Premio ISSA - Edizione{' '}
                     {convertNumberToNumeralForm(
-                        comp?.id,
+                        comp?.edition || 1,
                         NumeralForm.Roman,
                         (NumeralForm as any).English
                     )}
@@ -169,13 +169,9 @@ function Frames({
     });
 
     const setLocation = (id?: string) => {
-        router.push(
-            id ? `${baseUri}?gallery_id=${id}` : '/gallery',
-            undefined,
-            {
-                shallow: true,
-            }
-        );
+        router.push(id ? `${baseUri}?gallery_id=${id}` : baseUri, undefined, {
+            shallow: true,
+        });
     };
 
     return router ? (

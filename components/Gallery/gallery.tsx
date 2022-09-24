@@ -19,6 +19,8 @@ type HelpBoxProps = {
 };
 
 export function HelpBox({ competition, active }: HelpBoxProps) {
+    console.log(competition);
+    return null;
     return (
         <div
             className={[
