@@ -2,7 +2,7 @@
     @apply pb-6;
 
     .infoWrapper {
-        @apply overflow-y-auto;
+        @apply overflow-y-auto pt-4 px-2;
     }
 
     .workTitle {

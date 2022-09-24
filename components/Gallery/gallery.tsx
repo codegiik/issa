@@ -2,7 +2,7 @@
 import { MainCanvas } from './MainCanvas';
 import { Loader, WorkInfoBox, WorkSelector } from 'components';
 
-import { CompetitionEntry, Competition, Record } from 'lib/interfaces';
+import { CompetitionEntry, Competition, Record, Sponsor } from 'lib/interfaces';
 
 import strapi, { unwrap } from 'lib/strapi';
 
@@ -20,7 +20,6 @@ type HelpBoxProps = {
 
 export function HelpBox({ competition, active }: HelpBoxProps) {
     console.log(competition);
-    return null;
     return (
         <div
             className={[
@@ -41,14 +40,17 @@ export function HelpBox({ competition, active }: HelpBoxProps) {
                 <div className={style.patronsWrapper}>
                     <p>Patrocinio di</p>
                     <div className={style.patrons}>
-                        {competition?.sponsors.map((v: any, i: number) => (
-                            <img
-                                className={style.patron}
-                                src={v.image}
-                                alt={v.name}
-                                title={v.name}
-                                key={i}
-                            />
+                        {competition?.sponsors.map((v: Sponsor, i: number) => (
+                            <div key={`sponsor-${i}`}>
+                                <img
+                                    className={style.patron}
+                                    src={v.image}
+                                    alt={v.name}
+                                    title={v.name}
+                                    key={i}
+                                />
+                                {v.name}
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -85,9 +87,13 @@ export function Gallery({
                 sort: 'createdAt:desc',
                 populate: populateKeys.join(', '),
             })
-            .then(({ data }) =>
-                setEntries(unwrap(data, populateKeys) as CompetitionEntry[])
-            );
+            .then(({ data }) => {
+                const result = unwrap(data, populateKeys) as CompetitionEntry[];
+                console.log(result);
+                setEntries(
+                    result.filter((e) => e.competition?.name === comp.name)
+                );
+            });
     }, [comp]);
 
     useEffect(() => {
@@ -146,7 +152,7 @@ export function Gallery({
                     ].join(' ')}
                 />
             )}
-            <HelpBox active={clicked === null} competition={comp} />
+            <HelpBox active={clicked === undefined} competition={comp} />
             <WorkSelector
                 active={listOpen}
                 entries={entries}

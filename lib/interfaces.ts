@@ -63,7 +63,7 @@ export type CompetitionEntry = {
     students: string;
     type: string;
     score?: number;
-    competition: string;
+    competition: Competition;
     attachment?: FileRecordField;
     attachment_url?: string;
     school: School;

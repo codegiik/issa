@@ -25,16 +25,17 @@ export function WorkSelector({
         if (!entries) return [];
         const schools: School[] = [];
         const schoolNames = schools.map((s) => s.name);
-        entries.forEach((entry) =>
+        entries.forEach((entry) => {
+            if (!entry.school) return;
             schoolNames.includes(entry.school.name)
                 ? null
-                : schools.push(entry.school)
-        );
+                : schools.push(entry.school);
+        });
         return schools;
     };
 
     const getSchoolEntries = (s: School) => {
-        return entries.filter((e) => e.school.name === s.name);
+        return entries.filter((e) => e.school?.name === s.name);
     };
 
     return (

@@ -56,18 +56,23 @@ export function WorkInfoBox({
     return (
         <div className={[style.workInfoBox, className].join(' ')}>
             <>
-                <div className={style.reactPlayerWrapper}>
-                    <Embed
-                        className={style.reactPlayer}
-                        url={
-                            entry.attachment
-                                ? (getFileUrl(entry, 'attachment') as string)
-                                : entry.attachment_url || 'Nothing here'
-                        }
-                        width="100%"
-                        height="100%"
-                    />
-                </div>
+                {(entry.attachment_url || entry.attachment) && (
+                    <div className={style.reactPlayerWrapper}>
+                        <Embed
+                            className={style.reactPlayer}
+                            url={
+                                entry.attachment
+                                    ? (getFileUrl(
+                                          entry,
+                                          'attachment'
+                                      ) as string)
+                                    : (entry.attachment_url as string)
+                            }
+                            width="100%"
+                            height="100%"
+                        />
+                    </div>
+                )}
                 <div className={style.infoWrapper}>
                     <h2 className={style.workTitle}>{entry.name}</h2>
                     <p className={style.workAuthor}>
