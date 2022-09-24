@@ -128,3 +128,9 @@ export type FooterLink = {
 export type AboutInfo = {
     about_content: string;
 } & StrapiElement;
+
+export type Initiatives = {
+    title: string;
+    description: string;
+    href: string;
+} & StrapiElement;
