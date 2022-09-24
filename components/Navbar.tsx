@@ -1,7 +1,6 @@
 /* assets */
-import Image from 'next/image';
 import LogoText from 'assets/svg/LogoText';
-import LogoIcon from 'assets/png/LogoIcon.png';
+import LogoIcon from 'assets/svg/LogoIcon';
 
 /* hooks */
 import { useRouter } from 'next/router';
@@ -33,9 +32,7 @@ export function Navbar({ className, links, theme = 'dark' }: NavbarProps) {
                 className={clsx(className, style.navbar, style[theme])}
             >
                 <div className={style.logo} onClick={() => router.push('/')}>
-                    <Image
-                        src={LogoIcon}
-                        alt="Veliero"
+                    <LogoIcon
                         width={50}
                         height={50}
                         className={style.logoVeliero}
@@ -123,4 +120,5 @@ Navbar.defaultProps = {
             scrollTo: true,
         },
     ],
+    theme: 'dark',
 };

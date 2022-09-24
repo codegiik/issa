@@ -6,12 +6,12 @@
     &.light {
         @apply bg-base-200 border-b-[1px] border-primary text-primary;
 
-        svg {
+        .logo svg {
             @apply text-[#5B1B23];
         }
 
         .link {
-            @apply opacity-50 hover:opacity-100 hover:!text-primary;
+            @apply opacity-50 hover:opacity-100 !text-primary;
 
             &.selected::before {
                 @apply !bg-primary;
@@ -28,6 +28,7 @@
 
         .logoVeliero {
             @apply !h-10 !w-10 object-cover;
+            @apply text-white;
         }
 
         .logoText {
@@ -64,7 +65,7 @@
     @apply fixed top-0 z-50 w-screen h-screen bg-primary md:hidden;
     right: calc(-100% - 40px);
     @apply flex flex-col justify-center px-12 gap-6;
-    @apply text-base-300;
+    @apply text-base-200;
     transition: all 0.5s ease-in-out;
 
     &.open {

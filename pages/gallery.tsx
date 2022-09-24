@@ -29,6 +29,4 @@ export default function GalleryPage() {
     return <Gallery comp={latestComp} />;
 }
 
-GalleryPage.getLayout = (page: any) => (
-    <Main navbarInitialTheme="light">{page}</Main>
-);
+GalleryPage.getLayout = (page: any) => <Main navbarTheme="light">{page}</Main>;

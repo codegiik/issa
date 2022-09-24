@@ -16,33 +16,27 @@ export type MainProps = {
     children: JSX.Element | JSX.Element[];
     className?: string;
     navbarProps?: NavbarProps;
-    navbarInitialTheme?: 'light' | 'dark';
+    navbarTheme?: 'light' | 'dark';
 };
 
 export default function Main({
     children,
     className,
     navbarProps,
-    navbarInitialTheme = 'dark',
+    navbarTheme,
 }: MainProps) {
-    const [navbarTheme, setNavbarTheme] = useState<'light' | 'dark'>(
-        navbarInitialTheme
-    );
-    const childrenWithProps = React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-            return React.cloneElement(child);
-        }
-        return child;
-    });
-
     return (
         <main id="mainWrapper" className={clsx(style.mainWrapper, className)}>
             <Head>
                 <title>ReteISSA</title>
             </Head>
             <Navbar {...navbarProps} theme={navbarTheme} />
-            {childrenWithProps}
+            {children}
             <Footer />
         </main>
     );
 }
+
+Main.defaultProps = {
+    navbarTheme: 'dark',
+};

@@ -11,4 +11,4 @@ export default function Home() {
     );
 }
 
-Home.getLayout = (page: JSX.Element) => <Main>{page}</Main>;
+Home.getLayout = (page: JSX.Element) => <Main navbarTheme="dark">{page}</Main>;
