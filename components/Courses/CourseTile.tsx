@@ -14,7 +14,9 @@ export function CourseTile({ course }: CourseTileProps) {
     const router = useRouter();
 
     const getProfName = (course: Course) =>
-        course?.author || 'Nome non Registrato';
+        course?.author
+            ? course?.author?.prefix + ' ' + course?.author?.name
+            : 'Nome non Registrato';
 
     return (
         <div className={style.wrapper}>

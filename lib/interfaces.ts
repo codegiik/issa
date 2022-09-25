@@ -129,6 +129,11 @@ export type AboutInfo = {
     about_content: string;
 } & StrapiElement;
 
+export type CoursesInfo = {
+    description: string;
+    attachments: any;
+} & StrapiElement;
+
 export type Initiatives = {
     title: string;
     description: string;

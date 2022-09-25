@@ -1,5 +1,5 @@
 /* lib */
-import strapi, { unwrap } from 'lib/strapi';
+import strapi, { getFileUrl, unwrap } from 'lib/strapi';
 
 /* comp */
 import { CourseTile, Heading } from 'components';
@@ -12,9 +12,10 @@ import { useEffect, useState } from 'react';
 import style from 'styles/pages/courses.module.css';
 
 /* @types */
-import type { Course, Record } from 'lib/interfaces';
+import type { Course, CoursesInfo, Record } from 'lib/interfaces';
 
 export default function Courses() {
+    const [coursesInfo, setCoursesInfo] = useState<CoursesInfo | undefined>();
     const [courses, setCourses] = useState<Course[]>([]);
 
     useEffect(() => {
@@ -24,7 +25,15 @@ export default function Courses() {
                 populate: '*',
             })
             .then(({ data }) =>
-                setCourses(unwrap(data, ['attachment']) as Course[])
+                setCourses(unwrap(data, ['attachment', 'author']) as Course[])
+            );
+
+        strapi
+            .find<Record<CoursesInfo>>('courses-info', {
+                populate: ['attachments'],
+            })
+            .then(({ data }) =>
+                setCoursesInfo(unwrap(data, ['attachments']) as CoursesInfo)
             );
     }, []);
 
@@ -33,6 +42,48 @@ export default function Courses() {
             <Heading type="h1" className={style.heading}>
                 Corsi
             </Heading>
+            {coursesInfo && (
+                <div className={style.coursesInfo}>
+                    <div
+                        className={style.desc}
+                        dangerouslySetInnerHTML={{
+                            __html: coursesInfo.description,
+                        }}
+                    ></div>
+                    <div className={style.attachments}>
+                        {coursesInfo?.attachments?.map(
+                            (attach: any, index: number) => {
+                                const attachUrl = getFileUrl(
+                                    coursesInfo,
+                                    'attachments',
+                                    index
+                                );
+
+                                return (
+                                    attachUrl && (
+                                        <a href={attachUrl}>
+                                            <div
+                                                className={style.download}
+                                                key={index}
+                                            >
+                                                <div className={style.name}>
+                                                    <p>{attach.name}</p>
+                                                    <span>
+                                                        {attach.caption}
+                                                    </span>
+                                                </div>
+                                                <span className="material-symbols-sharp">
+                                                    file_download
+                                                </span>
+                                            </div>
+                                        </a>
+                                    )
+                                );
+                            }
+                        )}
+                    </div>
+                </div>
+            )}
             <div className={style.tiles}>
                 {courses.map((course) => (
                     <CourseTile course={course} key={course.id} />
