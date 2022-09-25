@@ -1,8 +1,8 @@
 /* libs */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 /* components */
-import { Navbar, Footer } from 'components';
+import { Navbar, Footer, Loader } from 'components';
 import Head from 'next/head';
 
 /* style */
@@ -25,11 +25,20 @@ export default function Main({
     navbarProps,
     navbarTheme,
 }: MainProps) {
+    const [loaderVisible, setLoaderVisible] = useState<boolean>(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoaderVisible(false);
+        }, 500);
+    }, []);
+
     return (
         <main id="mainWrapper" className={clsx(style.mainWrapper, className)}>
             <Head>
                 <title>ReteISSA</title>
             </Head>
+            <Loader visible={loaderVisible} />
             <Navbar {...navbarProps} theme={navbarTheme} />
             {children}
             <Footer />
