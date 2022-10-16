@@ -42,18 +42,18 @@ export function DescriptionTab({
 }: {
     competition: Competition | undefined;
 }) {
-    const [urlActive, setUrlActive] = useState<boolean>(false);
+    const [urlActive, setUrlActive] = useState<boolean>(true);
 
     return competition ? (
         <div className={style.details}>
-            <p className={style.desc}>{competition?.description}</p>
             {competition?.url && (
                 <Collapse
+                    isHidden={false}
                     callback={() => setUrlActive(!urlActive)}
                     className="max-h-[800px]"
                     titleClassname="hover:bg-primary hover:text-base-200"
                     wrapperClassname={[
-                        urlActive ? 'max-w-full' : 'max-w-[250px]',
+                        urlActive ? 'max-w-full h-[400px]' : 'max-w-[250px]',
                         style.collapse,
                     ].join(' ')}
                     title="Visualizza il Vecchio Portale"
@@ -61,6 +61,7 @@ export function DescriptionTab({
                     <iframe src={competition?.url} />
                 </Collapse>
             )}
+            <p className={style.desc}>{competition?.description}</p>
             <div className={style.attachments}>
                 {competition?.attachments?.map((attach: any, index: number) => {
                     const attachUrl = getFileUrl(
