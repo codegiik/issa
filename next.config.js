@@ -4,8 +4,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const ContentSecurityPolicy = `
-    default-src 'self' *.reteissa.it;
-    frame-src 'self' *.reteissa.it;
+    default-src 'self' blob *.reteissa.it digitaloceanspaces.com;
+    frame-src 'self' blob *.reteissa.it;
 `;
 
 const securityHeaders = [
