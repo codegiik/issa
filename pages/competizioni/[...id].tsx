@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Gallery } from 'components';
+import { Gallery, Collapse } from 'components';
 import { Podium } from 'components/Competitions/Podium';
 import Main from 'layouts/Main';
 import type { Competition, Record } from 'lib/interfaces';
@@ -42,9 +42,25 @@ export function DescriptionTab({
 }: {
     competition: Competition | undefined;
 }) {
+    const [urlActive, setUrlActive] = useState<boolean>(false);
+
     return competition ? (
         <div className={style.details}>
             <p className={style.desc}>{competition?.description}</p>
+            {competition?.url && (
+                <Collapse
+                    callback={() => setUrlActive(!urlActive)}
+                    className="max-h-[800px]"
+                    titleClassname="hover:bg-primary hover:text-base-200"
+                    wrapperClassname={[
+                        urlActive ? 'max-w-full' : 'max-w-[250px]',
+                        style.collapse,
+                    ].join(' ')}
+                    title="Visualizza il Vecchio Portale"
+                >
+                    <iframe src={competition?.url} />
+                </Collapse>
+            )}
             <div className={style.attachments}>
                 {competition?.attachments?.map((attach: any, index: number) => {
                     const attachUrl = getFileUrl(

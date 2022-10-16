@@ -24,6 +24,21 @@
     .details {
         @apply px-4 md:px-6 lg:px-16 py-5;
 
+        .collapse {
+            @apply h-[400px] mt-2;
+            transition: max-width 0.5s ease-out;
+
+            iframe {
+                @apply w-full h-[350px];
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
         .attachments {
             @apply flex gap-5 mt-5;
 

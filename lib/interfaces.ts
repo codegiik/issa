@@ -53,6 +53,7 @@ export type Competition = {
     status: CompetitionStatus;
     sponsors: any;
     type: 'gallery' | 'test';
+    url?: string;
 } & StrapiElement;
 
 export type CompetitionEntry = {

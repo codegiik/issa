@@ -1,0 +1,13 @@
+.title {
+    @apply flex justify-between items-center p-2 border-primary border-2 cursor-pointer;
+}
+
+.children {
+    height: auto;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.collapsed {
+    @apply max-h-0;
+}

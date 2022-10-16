@@ -21,3 +21,4 @@ export { CompetitionTile } from './Competitions/CompetitionTile';
 // export { Login } from './Admin/Login';
 // export { Sidebar } from './Admin/Sidebar';
 export { CompetitionPreview } from './Home/CompetitionPreview';
+export { Collapse } from './Collapse';
