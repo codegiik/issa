@@ -4,7 +4,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const ContentSecurityPolicy = `
-    default-src 'self' blob: *.gstatic.com *.googleapis.com *.reteissa.it *.realcounter.eu *.digitaloceanspaces.com;
     frame-src 'self' blob: *.reteissa.it;
 `;
 
