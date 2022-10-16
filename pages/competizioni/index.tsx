@@ -13,7 +13,7 @@ export default function CompetitionsPage() {
     useEffect(() => {
         strapi
             .find('competitions', {
-                sort: 'createdAt:desc',
+                sort: 'edition:desc',
                 populate: '*',
             })
             .then(
