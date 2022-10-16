@@ -27,6 +27,14 @@ const nextConfig = withBundleAnalyzer({
 
         return headers;
     },
+    async rewrites() {
+        return [
+            {
+                source: '/uploads/:path*',
+                destination: `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/uploads/:path*`,
+            },
+        ];
+    },
     async redirects() {
         return [
             {
