@@ -53,7 +53,7 @@ export function DescriptionTab({
                     className="max-h-[800px]"
                     titleClassname="hover:bg-primary hover:text-base-200"
                     wrapperClassname={[
-                        urlActive ? 'max-w-full h-[400px]' : 'max-w-[250px]',
+                        urlActive ? 'max-w-full h-[650px]' : 'max-w-[250px]',
                         style.collapse,
                     ].join(' ')}
                     title="Visualizza il Vecchio Portale"
@@ -61,7 +61,10 @@ export function DescriptionTab({
                     <iframe src={competition?.url} />
                 </Collapse>
             )}
-            <p className={style.desc}>{competition?.description}</p>
+            <div
+                className={style.desc}
+                dangerouslySetInnerHTML={{ __html: competition?.description }}
+            />
             <div className={style.attachments}>
                 {competition?.attachments?.map((attach: any, index: number) => {
                     const attachUrl = getFileUrl(
