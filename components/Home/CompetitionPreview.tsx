@@ -12,7 +12,7 @@ export function CompetitionPreview() {
     useEffect(() => {
         strapi
             .find<Record<Competition>[]>('competitions', {
-                sort: 'createdAt:desc',
+                sort: 'edition:desc',
                 populate: '*',
             })
             .then((response) => {
