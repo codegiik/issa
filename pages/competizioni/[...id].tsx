@@ -50,10 +50,10 @@ export function DescriptionTab({
                 <Collapse
                     isHidden={false}
                     callback={() => setUrlActive(!urlActive)}
-                    className="max-h-[800px]"
+                    className="max-h-[85vh]"
                     titleClassname="hover:bg-primary hover:text-base-200"
                     wrapperClassname={[
-                        urlActive ? 'max-w-full h-[650px]' : 'max-w-[250px]',
+                        urlActive ? 'max-w-full h-[85vh]' : 'max-w-[250px]',
                         style.collapse,
                     ].join(' ')}
                     title="Visualizza il Vecchio Portale"
