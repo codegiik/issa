@@ -110,14 +110,18 @@ Navbar.defaultProps = {
             scrollTo: true,
         },
         {
-            href: '/#premio_issa',
+            href: '/#initiatives',
+            label: 'Iniziative',
+            scrollTo: true,
+        },
+        {
+            href: '/competizioni',
             label: 'Premio ISSA',
             scrollTo: true,
         },
         {
-            href: '/#initiatives',
-            label: 'Iniziative',
-            scrollTo: true,
+            href: '/corsi',
+            label: 'Corsi',
         },
     ],
     theme: 'dark',
