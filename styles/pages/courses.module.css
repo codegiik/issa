@@ -30,6 +30,6 @@
 
     .tiles {
         @apply w-full px-2 lg:px-10;
-        @apply flex justify-center items-center;
+        @apply flex justify-center items-center flex-col gap-2;
     }
 }
