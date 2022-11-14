@@ -30,6 +30,13 @@ export enum CourseTypes {
     C = 'c',
 }
 
+export type Seminar = {
+    attachments: any;
+    description: string;
+    date: string;
+    title: string;
+} & StrapiElement;
+
 export type Course = {
     attachment: string;
     description: string;
@@ -133,6 +140,10 @@ export type AboutInfo = {
 export type CoursesInfo = {
     description: string;
     attachments: any;
+} & StrapiElement;
+
+export type SeminarsInfo = {
+    description: string;
 } & StrapiElement;
 
 export type Initiatives = {

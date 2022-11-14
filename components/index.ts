@@ -22,3 +22,4 @@ export { CompetitionTile } from './Competitions/CompetitionTile';
 // export { Sidebar } from './Admin/Sidebar';
 export { CompetitionPreview } from './Home/CompetitionPreview';
 export { Collapse } from './Collapse';
+export { SeminarTile } from './Seminars/SeminarTile';

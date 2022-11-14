@@ -1,0 +1,36 @@
+.wrapper {
+    @apply min-h-screen;
+
+    .heading {
+        @apply mt-10;
+    }
+
+    .seminarsInfo {
+        @apply my-5 px-2 lg:px-10;
+
+        .desc {
+            @apply prose text-primary text-lg;
+            @apply max-w-5xl;
+        }
+
+        .attachments {
+            @apply flex gap-5 mt-5;
+
+            .download {
+                @apply flex bg-primary items-center justify-center text-primary-content px-2 py-1;
+                @apply cursor-pointer hover:bg-base-300 hover:text-primary transition-all gap-3;
+
+                .name {
+                    span {
+                        @apply text-xs opacity-80;
+                    }
+                }
+            }
+        }
+    }
+
+    .tiles {
+        @apply w-full px-2 lg:px-10 mt-5;
+        @apply flex justify-center items-center flex-col gap-2;
+    }
+}

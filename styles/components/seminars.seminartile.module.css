@@ -1,0 +1,63 @@
+.wrapper {
+    @apply w-full bg-primary flex justify-between text-base-200 py-4 px-6;
+
+    .text {
+        .name {
+            @apply text-xl font-bold font-serif;
+            @apply flex items-center gap-2;
+
+            .typology {
+                @apply h-6 w-6;
+                @apply flex items-center justify-center;
+                @apply bg-base-300 text-lg text-primary font-bold uppercase;
+            }
+        }
+
+        .desc {
+            @apply prose text-base-100 text-sm mt-2;
+
+            p {
+                @apply m-0;
+            }
+        }
+
+        .org {
+            @apply mt-2 text-xs;
+        }
+    }
+
+    .icons {
+        @apply flex flex-col items-end justify-end;
+
+        .goTo {
+            @apply h-[2rem];
+            @apply flex items-center justify-center;
+            @apply bg-primary text-lg text-base-200 cursor-pointer;
+            @apply px-2 gap-2;
+            @apply hover:bg-base-200 hover:text-primary;
+
+            .buttonText {
+                @apply font-serif;
+            }
+
+            span:last-child {
+                @apply text-base;
+            }
+        }
+    }
+
+    .attachments {
+        @apply flex gap-5 mt-auto;
+
+        .download {
+            @apply flex bg-base-300 items-center justify-center text-primary px-2 py-1;
+            @apply cursor-pointer hover:bg-primary-focus hover:text-primary-content transition-all gap-3;
+
+            .name {
+                span {
+                    @apply text-xs opacity-80;
+                }
+            }
+        }
+    }
+}
