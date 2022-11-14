@@ -2,7 +2,19 @@
     @apply min-h-[80vh];
 
     .topBar {
-        @apply bg-primary-focus text-primary-content px-4 md:px-6 lg:px-16 pt-10;
+        @apply bg-primary-focus text-primary-content px-4 md:px-6 lg:px-16 pt-10 relative;
+
+        .previewImage {
+            @apply absolute right-0 inset-y-0;
+
+            img {
+                @apply h-full object-cover;
+            }
+
+            .overlay {
+                @apply absolute inset-0 bg-gradient-to-r from-primary-focus to-transparent;
+            }
+        }
 
         .title {
             @apply text-primary-content text-4xl font-serif;

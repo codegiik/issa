@@ -109,6 +109,7 @@ export default function CompetitionDetailsPage() {
                     {
                         populate: {
                             attachments: '*',
+                            cover: '*',
                             sponsors: {
                                 populate: ['logo'],
                             },
@@ -126,8 +127,6 @@ export default function CompetitionDetailsPage() {
                     ({ error }) => error
                 );
     }, [router]);
-
-    console.log('attachments', !!competition, competition?.attachments);
 
     const getCurrentTab = () => {
         if (!router.query.id) return null;
@@ -160,6 +159,15 @@ export default function CompetitionDetailsPage() {
     return competition ? (
         <section className={style.wrapper}>
             <div className={style.topBar}>
+                {competition?.cover?.data && (
+                    <div className={style.previewImage}>
+                        <img
+                            src={getFileUrl(competition, 'cover')}
+                            alt="preview"
+                        />
+                        <div className={style.overlay} />
+                    </div>
+                )}
                 <h1 className={style.title}>{competition.name}</h1>
                 <nav className={style.tabSelector}>
                     <Link href={`/competizioni/${competition.id}/`}>

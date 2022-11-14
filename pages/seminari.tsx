@@ -1,8 +1,8 @@
 /* lib */
-import strapi, { getFileUrl, unwrap } from 'lib/strapi';
+import strapi, { unwrap } from 'lib/strapi';
 
 /* comp */
-import { CourseTile, Heading, SeminarTile } from 'components';
+import { Heading, SeminarTile } from 'components';
 
 /* layout */
 import Main from 'layouts/Main';
