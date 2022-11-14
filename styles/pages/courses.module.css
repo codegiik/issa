@@ -10,6 +10,7 @@
 
         .desc {
             @apply prose text-primary text-lg;
+            @apply max-w-5xl;
         }
 
         .attachments {

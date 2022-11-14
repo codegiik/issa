@@ -20,7 +20,7 @@
         }
 
         .text {
-            @apply text-xl md:text-2xl;
+            @apply text-xl md:text-2xl text-justify prose max-w-full;
             @apply w-11/12 lg:w-1/2 lg:ml-28;
             @apply my-5 lg:my-10;
         }

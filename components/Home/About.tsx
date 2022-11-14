@@ -30,7 +30,14 @@ export function About() {
         <section id="about" className={style.wrapper}>
             <Heading className={style.heading}>Chi siamo?</Heading>
             <div className={style.content}>
-                {content && <p className={style.text}>{content}</p>}
+                {content && (
+                    <div
+                        className={style.text}
+                        dangerouslySetInnerHTML={{
+                            __html: content,
+                        }}
+                    ></div>
+                )}
                 <LogoIcon className={style.veliero} />
             </div>
         </section>
