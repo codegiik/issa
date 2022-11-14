@@ -37,8 +37,6 @@ export default function Courses() {
             .then(({ data }) => setSeminarsInfo(unwrap(data) as SeminarsInfo));
     }, []);
 
-    console.log(seminarsInfo);
-
     return (
         <section className={style.wrapper}>
             <Heading type="h1" className={style.heading}>
