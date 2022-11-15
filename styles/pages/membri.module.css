@@ -33,7 +33,7 @@
         @apply mt-8;
 
         .restrictedContent {
-            @apply prose px-12 pb-20;
+            @apply prose px-12 pb-20 max-w-full overflow-x-auto;
         }
     }
 }

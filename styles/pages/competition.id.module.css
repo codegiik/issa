@@ -36,6 +36,10 @@
     .details {
         @apply px-4 md:px-6 lg:px-16 py-5;
 
+        .desc {
+            @apply prose max-w-full break-words;
+        }
+
         .collapse {
             @apply mb-2;
             transition: max-width 0.5s ease-out;
