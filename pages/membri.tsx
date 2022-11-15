@@ -33,8 +33,10 @@ export default function Membri() {
                     <h1>Area Riservata</h1>
                     {membersContent == 'Unauthorized' && (
                         <p className={style.error}>
-                            <span class="material-symbols-sharp">error</span> La
-                            password inserita non è valida
+                            <span className="material-symbols-sharp">
+                                error
+                            </span>{' '}
+                            La password inserita non è valida
                         </p>
                     )}
                     <form
