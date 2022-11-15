@@ -1,0 +1,39 @@
+.wrapper {
+    @apply min-h-[80vh];
+
+    .login {
+        @apply flex flex-col items-center justify-center min-h-[80vh];
+
+        h1 {
+            @apply font-libre-baskerville text-4xl text-center text-primary mb-1;
+        }
+
+        .error {
+            @apply my-2 italic bg-red-600 bg-opacity-50 px-2;
+
+            span {
+                @apply text-xs;
+            }
+        }
+
+        form {
+            @apply flex flex-col mt-2;
+
+            input.pass {
+                @apply w-80 h-10 mb-5 px-4 border-[1px] border-primary focus:border-primary-focus;
+            }
+
+            input.submit {
+                @apply w-80 h-10 px-4 bg-primary text-primary-content hover:bg-primary-focus cursor-pointer;
+            }
+        }
+    }
+
+    .restricted {
+        @apply mt-8;
+
+        .restrictedContent {
+            @apply prose px-12 pb-20;
+        }
+    }
+}
