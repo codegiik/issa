@@ -1,10 +1,30 @@
 .wrapper {
-    @apply mb-10 grid md:!grid-rows-1 md:!grid-cols-2 h-[65vh];
-    @apply grid-rows-2 grid-cols-1;
+    @apply md:h-[65vh] mb-10;
+    @apply flex flex-col items-center justify-center md:flex-row;
     @apply bg-primary;
 
     .details {
-        @apply flex flex-col justify-center pl-10 text-primary-content;
+        @apply flex flex-col justify-center lg:pl-[7rem] text-primary-content max-w-full py-10 md:py-0 md:px-0 px-5;
+
+        .descWrapper {
+            @apply max-h-[200px] overflow-hidden relative;
+
+            .desc {
+                @apply max-h-full;
+
+                * {
+                    @apply !text-primary-content;
+                }
+            }
+
+            .descOverlay {
+                @apply absolute inset-0 bg-gradient-to-t from-primary to-transparent;
+            }
+        }
+
+        span.continue {
+            @apply font-bold cursor-pointer -mt-3 z-10 text-xl;
+        }
 
         h2 {
             @apply font-serif text-primary-content text-xl md:text-3xl mb-2;
@@ -12,10 +32,6 @@
 
         p {
             @apply opacity-80 text-base md:text-xl w-10/12 font-body;
-
-            span {
-                @apply font-bold cursor-pointer;
-            }
         }
 
         .buttons {
@@ -35,7 +51,7 @@
     }
 
     .cover {
-        @apply relative;
+        @apply relative h-auto w-full md:h-full md:w-auto md:max-w-[50vw];
 
         .overlay {
             @apply hidden md:block;

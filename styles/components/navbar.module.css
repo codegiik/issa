@@ -32,24 +32,31 @@
         }
 
         .logoText {
-            @apply fill-current text-base-100;
+            @apply fill-current text-base-100 hidden;
             @apply w-auto h-6;
+
+            @media (min-width: 250px) {
+                @apply block;
+            }
         }
     }
 
     .links {
         @apply flex items-center gap-8;
 
-        .link {
-            @apply text-xl text-base-200 hover:text-base-100;
+        .linkWrapper {
             @apply hidden cursor-pointer md:block;
 
-            &.selected {
-                @apply relative;
+            .link {
+                @apply text-xl text-base-200 hover:text-base-100;
 
-                &::before {
-                    @apply absolute left-0 w-full h-1 bg-base-100 -bottom-1;
-                    content: '';
+                &.selected {
+                    @apply relative;
+
+                    &::before {
+                        @apply absolute left-0 w-full h-1 bg-base-100 -bottom-1;
+                        content: '';
+                    }
                 }
             }
         }

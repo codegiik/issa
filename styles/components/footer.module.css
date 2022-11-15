@@ -12,7 +12,7 @@
         }
 
         .linksSection {
-            @apply md:px-24 md:mx-0 w-full mx-10 py-5 md:py-0;
+            @apply md:px-20 md:mx-0 w-full mx-10 py-5 md:py-0;
 
             .title {
                 @apply font-serif text-secondary-content uppercase;

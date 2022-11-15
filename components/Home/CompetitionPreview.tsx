@@ -31,19 +31,25 @@ export function CompetitionPreview() {
         <section id="premio_issa" className={style.wrapper}>
             <div className={style.details}>
                 <h2>{competition.name}</h2>
-                <p>
-                    {competition?.description.substring(0, 200)}...{' '}
-                    <Link
-                        href={{
-                            pathname: '/competizioni/[...id]',
-                            query: {
-                                id: [competition.id],
-                            },
+                <div className={style.descWrapper}>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: competition.description,
                         }}
-                    >
-                        <span>Continua</span>
-                    </Link>
-                </p>
+                        className={style.desc}
+                    />
+                    <div className={style.descOverlay} />
+                </div>
+                <Link
+                    href={{
+                        pathname: '/competizioni/[...id]',
+                        query: {
+                            id: [competition.id],
+                        },
+                    }}
+                >
+                    <span className={style.continue}>Continua</span>
+                </Link>
                 <div className={style.buttons}>
                     {competition.status !== 'ended' ? (
                         <Link
@@ -54,7 +60,7 @@ export function CompetitionPreview() {
                                 },
                             }}
                         >
-                            <div className={style.button}>Bando</div>
+                            <div className={style.button}>Vai al Bando</div>
                         </Link>
                     ) : (
                         <>
@@ -84,13 +90,15 @@ export function CompetitionPreview() {
                     )}
                 </div>
             </div>
-            <div className={style.cover}>
-                <img
-                    src={getFileUrl(competition, 'cover')}
-                    alt={competition.name}
-                />
-                <div className={style.overlay} />
-            </div>
+            {competition?.cover && (
+                <div className={style.cover}>
+                    <img
+                        src={getFileUrl(competition, 'cover')}
+                        alt={competition.name}
+                    />
+                    <div className={style.overlay} />
+                </div>
+            )}
         </section>
     ) : null;
 }

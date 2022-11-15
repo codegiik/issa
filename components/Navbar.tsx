@@ -41,7 +41,11 @@ export function Navbar({ className, links, theme = 'dark' }: NavbarProps) {
                 </div>
                 <div className={style.links}>
                     {links?.map((link) => (
-                        <CustomLink {...link} key={link.label}>
+                        <CustomLink
+                            {...link}
+                            key={link.label}
+                            className={style.linkWrapper}
+                        >
                             <p
                                 className={clsx(
                                     style.link,
