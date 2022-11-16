@@ -25,6 +25,10 @@ export async function getServerSideProps(ctx: NextPageContext) {
                     $eqi: slug,
                 },
             },
+            pagination: {
+                page: 1,
+                pageSize: 1,
+            },
         })
         .catch((err) => console.error(err));
 

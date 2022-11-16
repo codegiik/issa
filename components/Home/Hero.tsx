@@ -28,13 +28,15 @@ export function Hero({ className }: HeroProps) {
             .find<Record<NewsItem>[]>('posts', {
                 sort: 'createdAt:desc',
                 populate: 'cover',
+                publicationState: 'live',
+                filters: {
+                    visible: {
+                        $eq: 'true',
+                    },
+                },
             })
             .then(({ data }: { data: any }) =>
-                setNews(
-                    (unwrap(data) as NewsItem[]).filter(
-                        (el) => el.title !== 'Statuto'
-                    )
-                )
+                setNews(unwrap(data) as NewsItem[])
             );
     }, []);
 

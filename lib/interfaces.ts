@@ -22,6 +22,7 @@ export type NewsItem = {
     href: string;
     post: FileRecordField;
     title: string;
+    visible: boolean;
 } & StrapiElement;
 
 export enum CourseTypes {
