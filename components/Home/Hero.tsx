@@ -14,7 +14,6 @@ import clsx from 'clsx';
 
 /* @types */
 import type { NewsItem, Record } from 'lib/interfaces';
-import { titleToSlug } from 'lib/utils';
 
 export type HeroProps = {
     className?: string;
@@ -44,7 +43,7 @@ export function Hero({ className }: HeroProps) {
             {
                 pathname: '/articolo/[slug]',
                 query: {
-                    slug: titleToSlug(post.title),
+                    slug: post.slug,
                 },
             },
             undefined,
