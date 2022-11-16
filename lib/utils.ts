@@ -24,3 +24,11 @@ export default function useWindowDimensions() {
 
     return windowDimensions;
 }
+
+export const slugToTitle = (slug: string) => {
+    return slug.split('-').join(' ').toLowerCase();
+};
+
+export const titleToSlug = (title: string) => {
+    return title.split(' ').join('-').toLowerCase();
+};

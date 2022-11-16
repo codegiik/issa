@@ -151,3 +151,11 @@ export type Initiatives = {
     description: string;
     href: string;
 } & StrapiElement;
+
+export type Post = {
+    id: number;
+    title: string;
+    body: string;
+    cover: FileRecordField;
+    author: any;
+};

@@ -14,6 +14,7 @@ import clsx from 'clsx';
 
 /* @types */
 import type { NewsItem, Record } from 'lib/interfaces';
+import { titleToSlug } from 'lib/utils';
 
 export type HeroProps = {
     className?: string;
@@ -30,16 +31,20 @@ export function Hero({ className }: HeroProps) {
                 populate: 'cover',
             })
             .then(({ data }: { data: any }) =>
-                setNews(unwrap(data) as NewsItem[])
+                setNews(
+                    (unwrap(data) as NewsItem[]).filter(
+                        (el) => el.title !== 'Statuto'
+                    )
+                )
             );
     }, []);
 
-    const pushLink = (post: any) => {
+    const pushLink = (post: NewsItem) => {
         router.push(
             {
-                pathname: '/articolo/[id]',
+                pathname: '/articolo/[slug]',
                 query: {
-                    id: post.id,
+                    slug: titleToSlug(post.title),
                 },
             },
             undefined,
