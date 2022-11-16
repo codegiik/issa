@@ -4,7 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const ContentSecurityPolicy = `
-    frame-src 'self' blob: *.reteissa.it;
+    frame-src 'self' blob: *.reteissa.it reteissa.it;
 `;
 
 const securityHeaders = [
@@ -44,7 +44,7 @@ const nextConfig = withBundleAnalyzer({
             },
             {
                 source: '/statuto',
-                destination: '/articolo/2',
+                destination: '/articolo/statuto',
                 permanent: true,
             },
         ];
